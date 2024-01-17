@@ -1,0 +1,95 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.PackageManager;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ItemActionController : MonoBehaviour
+{
+    [SerializeField]
+    private float range;
+
+    private bool pickupActivated = false;
+
+    private RaycastHit hitInfo;
+
+    [SerializeField]
+    private LayerMask layerMask;
+
+    [SerializeField]
+    private Text actionText;
+
+    [SerializeField]
+    private RectTransform scrollRect;
+    [SerializeField]
+    private Text scrollNameText;
+    [SerializeField]
+    private Text scrollDescText;
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckItem();
+        TryAction();
+    }
+
+    private void TryAction()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            CheckItem();
+            CanPickUp();
+        }
+    }
+
+    private void CanPickUp()
+    {
+        if(pickupActivated)
+        {
+            if(hitInfo.transform != null)
+            {
+                Debug.Log("획득");
+                hitInfo.transform.gameObject.SetActive(false);
+                InfoDisAppear();
+            }
+        }
+    }
+
+    //아이템 체크
+    private void CheckItem()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
+        {
+            if (hitInfo.transform.tag == "Scroll")
+            {
+                Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
+                scrollNameText.text = scroll.scrollData.scrollName;
+                scrollDescText.text = string.Format(scroll.scrollData.scrollDesc, scroll.scrollData.baseDamage * 10);
+                ItemInfoAppear();
+            }
+        }
+        else
+        {
+            InfoDisAppear();
+        }
+    }
+
+    //텍스트,UI 활성화
+    private void ItemInfoAppear()
+    {
+        pickupActivated = true;
+        scrollRect.localScale = Vector3.one;
+        actionText.gameObject.SetActive(true);
+        actionText.text = "획득하기 " + "<color=red>" + "(F)" + "</color>";
+    }
+
+    //텍스트,UI 비활성화
+    private void InfoDisAppear()
+    {
+        pickupActivated = false;
+        scrollRect.localScale = Vector3.zero;
+        actionText.gameObject.SetActive(false);
+    }
+
+}

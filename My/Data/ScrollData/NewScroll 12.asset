@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f2d38e852f66d409e08ab3549133a3, type: 3}
+  m_Name: NewScroll 12
+  m_EditorClassIdentifier: 
+  scrollName: "\uB354 \uC918! \uB610 \uC918!"
+  scrollDesc: "\uC0C1\uC810\uC758 \uC0C8\uB85C\uACE0\uCE68 \uD69F\uC218 +{0}"
+  baseDamage: 0.1
