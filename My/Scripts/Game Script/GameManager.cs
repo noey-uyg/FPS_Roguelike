@@ -14,6 +14,16 @@ public class GameManager : MonoBehaviour
     public float playerGold = 0;
     public float playerCrystal = 0;
     public float playerMaxCrystal = 25000;
+    public float playerLevel = 1;
+    public float playerCriticalPer = 5;
+    public float playerCriticalDam = 1.5f;
+    public float playerDamage;
+    public float playerWalkSpeed = 8;
+    public float playerRunSpeed = 20;
+    public float playerCrouchSpeed = 3;
+    public float playerJumpForce = 7;
+
+
     private void Awake()
     {
         Instance = this;

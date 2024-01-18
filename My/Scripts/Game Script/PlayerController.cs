@@ -5,15 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField]
     private float walkSpeed;
-    [SerializeField]
     private float runSpeed;
-    [SerializeField]
     private float crouchSpeed;
-    [SerializeField]
     private float jumpForce;
-    [SerializeField]
     private float currentSpeed;
 
     private Rigidbody myRigid;
@@ -44,6 +39,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitPlayerInfo();
+
         myRigid = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         theGunController = FindAnyObjectByType<GunController>();
@@ -64,6 +61,14 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
+    }
+
+    private void InitPlayerInfo()
+    {
+        walkSpeed = GameManager.Instance.playerWalkSpeed;
+        runSpeed = GameManager.Instance.playerRunSpeed;
+        crouchSpeed = GameManager.Instance.playerCrouchSpeed;
+        jumpForce = GameManager.Instance.playerJumpForce;
     }
 
     private void FixedUpdate()

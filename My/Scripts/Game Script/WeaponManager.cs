@@ -59,11 +59,19 @@ public class WeaponManager : MonoBehaviour
         {
             axeDic.Add(axes[i].closeWeaponName, axes[i]);
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentWeaponType == "")
+        {
+            WeaponChange("HAND", "¸Ç¼Õ");
+            currentWeaponType = "HAND";
+            HandController.isActivate = true;
+        }
+
         if (!isChangeWeapon)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -96,7 +104,6 @@ public class WeaponManager : MonoBehaviour
 
         yield return new WaitForSeconds(changeWeaponEndDelayTime);
 
-
         currentWeaponType = type;
         isChangeWeapon = false;
     }
@@ -124,10 +131,20 @@ public class WeaponManager : MonoBehaviour
     private void WeaponChange(string type, string name)
     {
         if(type == "GUN")
+        {
             theGunController.GunChange(gunDic[name]);
+            GameManager.Instance.playerDamage = gunDic[name].damage;
+        }
         else if(type == "HAND")
+        {
             theHandController.CloseWeaponChange(handDic[name]);
+            GameManager.Instance.playerDamage = handDic[name].damage;
+        }
         else if (type == "AXE")
+        {
             theAxeController.CloseWeaponChange(axeDic[name]);
+            GameManager.Instance.playerDamage = axeDic[name].damage;
+        }
+            
     }
 }

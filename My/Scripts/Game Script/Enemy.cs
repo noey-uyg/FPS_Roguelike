@@ -18,8 +18,14 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private GameObject targetPlayer;
-    private float targetDelay = 0.5f;
 
+    [Header("Attack")]
+    [SerializeField]
+    private GameObject attackPoint;
+    [SerializeField]
+    private int attackCount;
+    private float maxAttackDelay = 5f;
+    private float curAttackDelay = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,28 +51,25 @@ public class Enemy : MonoBehaviour
     {
         if(targetPlayer != null)
         {
-            float maxDelay = 0.5f;
-            targetDelay += Time.deltaTime;
-            if (targetDelay < maxDelay)
-            {
-                return;
-            }
             agent.destination = targetPlayer.transform.position;
             transform.LookAt(targetPlayer.transform.position);
 
             bool isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
+            curAttackDelay += Time.deltaTime;
 
-            /* 공격모션 넣기
+            //공격
             if (isRange)
             {
-
+                if(curAttackDelay >= maxAttackDelay)
+                {
+                    StartCoroutine(EnemyAttackCoroutine());
+                    curAttackDelay = 0f;
+                }
             }
-            */
-
-            targetDelay = 0;
         }
-        
+
     }
+
     private void InitEnemyHP()
     {
         enemyCurrentHP = maxHP;
@@ -86,12 +89,33 @@ public class Enemy : MonoBehaviour
         agent.speed = 0;
         
         yield return new WaitForSeconds(0.4f);
+
         ExpDrop();
         HPDrop();
         ScrollDrop();
         GoldDrop();
         CrystalDrop();
+
         gameObject.SetActive(false);
+    }
+
+    IEnumerator EnemyAttackCoroutine()
+    {
+        for (int i = 0; i < attackCount; i++)
+        {
+            EnemyAttack();
+
+            yield return new WaitForSeconds(1f);
+        }
+        
+    }
+
+    private void EnemyAttack()
+    {
+        Vector3 aim = (targetPlayer.transform.position - attackPoint.transform.position).normalized;
+        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(25, 27));
+        eA.transform.position = attackPoint.transform.position;
+        eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }
 
     void ExpDrop()

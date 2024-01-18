@@ -11,7 +11,9 @@ public class CloseWeapon : MonoBehaviour
     public bool isAxe;
 
     public float range;
-    public int damage;
+    public float damage;
+    public float criticalPer;
+    public float criticalDamage;
     public float workSpeed;
     public float attackDelay; // 공격 딜레이
     public float attackDelayA; // 공격 활성화 시점

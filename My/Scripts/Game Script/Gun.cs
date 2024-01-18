@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     public float retroActionFineSightForce;
 
     public int damage;
+    public float criticalPer;
+    public float criticalDamage;
     public int reloadBulletCount;
     public int currentBulletCount;
     public int maxBulletCount;
