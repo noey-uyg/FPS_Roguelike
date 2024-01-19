@@ -41,11 +41,13 @@ public class UserInfoUI : MonoBehaviour
 
     void Show()
     {
+        GameManager.Instance.isOpenTab = true;
         rect.localScale = Vector3.one;
     }
 
     void Hide()
     {
+        GameManager.Instance.isOpenTab = false;
         rect.localScale = Vector3.zero;
     }
 }

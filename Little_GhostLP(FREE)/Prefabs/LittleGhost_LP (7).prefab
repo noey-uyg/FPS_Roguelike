@@ -200,9 +200,9 @@ GameObject:
   - component: {fileID: 958745142335686072}
   - component: {fileID: 958745142335686073}
   - component: {fileID: 958745142335686075}
-  - component: {fileID: 958745142335686052}
   - component: {fileID: -4148931423780694219}
   - component: {fileID: -7363132242110572975}
+  - component: {fileID: -3274117796413121740}
   m_Layer: 8
   m_Name: LittleGhost_LP (7)
   m_TagString: Enemy
@@ -261,7 +261,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -277,30 +277,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!136 &958745142335686052
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958745142335686053}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.145118
-  m_Height: 0.73960495
-  m_Direction: 1
-  m_Center: {x: -0.0075883865, y: 0.33836842, z: 0.00768137}
+  m_CollisionDetection: 1
 --- !u!114 &-4148931423780694219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +295,7 @@ MonoBehaviour:
   targetPlayer: {fileID: 0}
   attackPoint: {fileID: 5237207986203466458}
   attackCount: 3
+  monsterRange: 7
 --- !u!195 &-7363132242110572975
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -332,7 +310,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 7
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -340,6 +318,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &-3274117796413121740
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958745142335686053}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.75, z: 0.3}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1 &958745142755947411
 GameObject:
   m_ObjectHideFlags: 0

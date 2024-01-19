@@ -8,6 +8,8 @@ public class AxeController : CloseWeaponController
     public static bool isActivate = false;
 
 
+    Enemy enemy;
+
     private void Start()
     {
         WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
@@ -29,6 +31,13 @@ public class AxeController : CloseWeaponController
             if (CheckObject())
             {
                 isSwing = false;
+
+                enemy = hitInfo.collider.GetComponent<Enemy>();
+
+                if (enemy != null && enemy.enemyCurrentHP > 0)
+                {
+                    enemy.enemyCurrentHP -= currentCloseWeapon.damage;
+                }
             }
             yield return null;
         }

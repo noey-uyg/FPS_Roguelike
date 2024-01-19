@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     private int attackCount;
     private float maxAttackDelay = 5f;
     private float curAttackDelay = 0f;
+    [SerializeField]
+    private float monsterRange;
 
     // Start is called before the first frame update
     void Start()
@@ -51,23 +53,32 @@ public class Enemy : MonoBehaviour
     {
         if(targetPlayer != null)
         {
-            agent.destination = targetPlayer.transform.position;
-            transform.LookAt(targetPlayer.transform.position);
-
-            bool isRange = Vector3.Distance(transform.position, targetPlayer.transform.position) <= agent.stoppingDistance;
             curAttackDelay += Time.deltaTime;
 
+            agent.destination = targetPlayer.transform.position;
+
+            float distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
+            bool isRange = distance <= monsterRange;
+
+            if(distance > agent.stoppingDistance)
+            {
+                transform.LookAt(targetPlayer.transform.position);
+            }
             //АјАн
             if (isRange)
             {
+                agent.isStopped = true;
                 if(curAttackDelay >= maxAttackDelay)
                 {
                     StartCoroutine(EnemyAttackCoroutine());
                     curAttackDelay = 0f;
                 }
             }
+            else
+            {
+                agent.isStopped = false;
+            }
         }
-
     }
 
     private void InitEnemyHP()
@@ -101,6 +112,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator EnemyAttackCoroutine()
     {
+
         for (int i = 0; i < attackCount; i++)
         {
             EnemyAttack();

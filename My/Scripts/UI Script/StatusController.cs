@@ -32,7 +32,7 @@ public class StatusController : MonoBehaviour
 
     private float EXPGauge()
     {
-        float maxEXP = GameManager.Instance.playerMaxEXP;
+        float maxEXP = GameManager.Instance.playerNextEXP;
         float currentEXP = GameManager.Instance.playerCurEXP;
 
         return currentEXP / maxEXP;

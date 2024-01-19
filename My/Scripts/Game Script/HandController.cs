@@ -7,6 +7,8 @@ public class HandController : CloseWeaponController
     //활성화 여부
     public static bool isActivate = false;
 
+    Enemy enemy;
+
     // Update is called once per frame
     void Update()
     {
@@ -22,7 +24,13 @@ public class HandController : CloseWeaponController
             if (CheckObject())
             {
                 isSwing = false;
-                Debug.Log(hitInfo.transform.name);
+
+                enemy = hitInfo.collider.GetComponent<Enemy>();
+
+                if (enemy != null && enemy.enemyCurrentHP > 0)
+                {
+                    enemy.enemyCurrentHP -= currentCloseWeapon.damage;
+                }
             }
             yield return null;
         }

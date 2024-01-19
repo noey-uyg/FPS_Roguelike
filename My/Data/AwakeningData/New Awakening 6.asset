@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1716e1261c1574e42a9318462d5f195c, type: 3}
+  m_Name: New Awakening 6
+  m_EditorClassIdentifier: 
+  awakeningName: "\uD30C\uB3D9"
+  awakeningType: 0
+  awakeningDesc: "\uC8FC\uBA39\uC73C\uB85C \uACF5\uACA9 \uC2DC \uD30C\uB3D9\uC744
+    \uC0DD\uC131\uD574 \uD53C\uACA9\uB2F9\uD55C \uC801\uC758 \uB4A4\uC5D0 \uC788\uB294
+    \uC801\uB4E4\uC5D0\uAC8C {0}%\uC758 \uB370\uBBF8\uC9C0\uB97C \uC785\uD78C\uB2E4."
+  awakeningID: 6
+  level: 0
+  damage:
+  - 2
+  - 3.5
+  - 5
