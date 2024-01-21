@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int playerLevel = 1;
     public float playerCriticalPer = 5;
     public float playerCriticalDam = 1.5f;
-    public float playerDamage;
+    public float playerCurDamage;
     public float playerWalkSpeed = 8;
     public float playerRunSpeed = 20;
     public float playerCrouchSpeed = 3;
@@ -26,18 +26,50 @@ public class GameManager : MonoBehaviour
     public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
         231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
 
+    [Header("AxeAwakening")]
+    public float axeExtraDamage = 0;
+    public bool axeBleeding = false;
+    public float axeBleedingDamage = 0;
+    public bool axeFear = false;
+    public float axeFearDamage = 0;
+
+    [Header("GunAwakening")]
+    public bool gunLightning = false;
+    public float gunLightningCount = 0;
+    public float gunSpeed = 0;
+    public float gunExtraDamage = 0;
+
+    [Header("HandAwakening")]
+    public bool handWave = false;
+    public float handWaveDamage = 0;
+    public float handStackDamage = 0;
+    public float handExtraDamage = 0;
+
+    [Header("CommonAwakening")]
+    public float extraRange = 0;
+    public float extraSpeed = 0;
+    public float extraCriticalPer = 0;
+    public float extraCriticalDamage = 0;
+    public float extraFinalDamage = 0;
+    public float extraHP = 0;
+
+    [Header("ETC")]
     public bool canPlayerMove = true;
     public bool isOpenTab = false;
+
+    [Header("UI")]
+    public LevelUPUI levelUpUi;
 
     private void Awake()
     {
         Instance = this;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Start()
     {        
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         playerNextEXP = playerExp[0];
         playerCurHP = playerMaxHP;
     }
@@ -71,8 +103,9 @@ public class GameManager : MonoBehaviour
     public void LevelUP()
     {
         playerCurEXP = 0;
-        playerNextEXP = playerExp[playerLevel];
+        playerNextEXP = playerExp[Mathf.Min(playerLevel, playerExp.Length)];
         playerLevel += 1;
+        levelUpUi.Show();
     }
 
     public void GetHP()

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakeningName: "\uC0AC\uACA9\uC18D\uB3C4"
   awakeningType: 1
+  weaponType: 1
   awakeningDesc: "\uCD1D\uC73C\uB85C \uC0AC\uACA9\uD560 \uB54C \uC0AC\uACA9\uC18D\uB3C4\uAC00
-    {0}%\uC99D\uAC00\uD55C\uB2E4.(\uCD5C\uB300 3\uC2A4\uD0DD, \uC7AC\uC7A5\uC804
-    \uC2DC \uCD08\uAE30\uD654)"
+    {0}%\uC99D\uAC00\uD55C\uB2E4.(\uCD5C\uB300 3\uC2A4\uD0DD, 3\uCD08\uB9C8\uB2E4
+    1\uC2A4\uD0DD \uAC10\uC18C)"
   awakeningID: 4
   level: 0
   damage:

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakeningName: "\uB3C4\uB07C \uAE30\uBCF8 \uB370\uBBF8\uC9C0"
   awakeningType: 2
+  weaponType: 2
   awakeningDesc: "\uB3C4\uB07C\uC758 \uAE30\uBCF8 \uB370\uBBF8\uC9C0\uAC00 {0}% \uC99D\uAC00\uD55C\uB2E4."
   awakeningID: 2
   level: 0

@@ -51,7 +51,7 @@ public abstract class CloseWeaponController : MonoBehaviour
     //피격 정보
     protected bool CheckObject()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentCloseWeapon.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentCloseWeapon.range+(currentCloseWeapon.range * GameManager.Instance.extraRange)))
         {
             return true;
         }

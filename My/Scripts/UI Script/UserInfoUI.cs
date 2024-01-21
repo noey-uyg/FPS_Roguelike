@@ -30,7 +30,7 @@ public class UserInfoUI : MonoBehaviour
     {
         levelText.text = string.Format("Lv." + GameManager.Instance.playerLevel);
         texts[0].text = GameManager.Instance.playerMaxHP.ToString();
-        texts[1].text = GameManager.Instance.playerDamage.ToString();
+        texts[1].text = GameManager.Instance.playerCurDamage.ToString();
         texts[2].text = GameManager.Instance.playerCriticalPer.ToString();
         texts[3].text = GameManager.Instance.playerCriticalDam.ToString();
         texts[4].text = GameManager.Instance.playerWalkSpeed.ToString();

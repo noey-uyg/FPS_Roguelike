@@ -67,9 +67,9 @@ public class PlayerController : MonoBehaviour
 
     private void InitPlayerInfo()
     {
-        walkSpeed = GameManager.Instance.playerWalkSpeed;
-        runSpeed = GameManager.Instance.playerRunSpeed;
-        crouchSpeed = GameManager.Instance.playerCrouchSpeed;
+        walkSpeed = (GameManager.Instance.playerWalkSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
+        runSpeed = (GameManager.Instance.playerRunSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
+        crouchSpeed = (GameManager.Instance.playerCrouchSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
         jumpForce = GameManager.Instance.playerJumpForce;
     }
 

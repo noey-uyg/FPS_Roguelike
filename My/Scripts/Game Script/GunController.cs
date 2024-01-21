@@ -118,7 +118,7 @@ public class GunController : MonoBehaviour
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         0)
-            , out hitInfo, currentGun.range))
+            , out hitInfo, (currentGun.range) + (currentGun.range * GameManager.Instance.extraRange)))
         {
             if(hitInfo.transform.tag == "Enemy")
             {
@@ -129,7 +129,17 @@ public class GunController : MonoBehaviour
 
                 if(enemy != null && enemy.enemyCurrentHP > 0)
                 {
-                    enemy.enemyCurrentHP -= currentGun.damage;
+                    int cri = Random.Range(0, 100);
+                    int criPer = (int)(currentGun.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
+                    float cridam = currentGun.criticalDamage + (GameManager.Instance.extraCriticalDamage);
+                    float damage = currentGun.damage + (currentGun.damage * GameManager.Instance.gunExtraDamage);
+
+                    if (cri < criPer)
+                    {
+                        enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
+                    }
+
+                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
                 }
                 
             }

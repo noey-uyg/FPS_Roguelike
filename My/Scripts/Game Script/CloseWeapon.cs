@@ -14,7 +14,6 @@ public class CloseWeapon : MonoBehaviour
     public float damage;
     public float criticalPer;
     public float criticalDamage;
-    public float workSpeed;
     public float attackDelay; // 공격 딜레이
     public float attackDelayA; // 공격 활성화 시점
     public float attackDelayB; // 공격 비활성화 시점
