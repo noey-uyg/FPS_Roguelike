@@ -1501,7 +1501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &198456314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1520,9 +1520,9 @@ RectTransform:
   - {fileID: 1919312513}
   m_Father: {fileID: 1055429918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 675, y: -100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198456315
@@ -7283,10 +7283,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 1253866165}
+  currentFireRate: 0
   theCam: {fileID: 148115044}
   hitEffect_Prefab: {fileID: 19448968638858431, guid: 42f23f4b3d249734f8018e4b87a7e682, type: 3}
   Fire_Sound: SubMachineGun_Fire
   playerController: {fileID: 1765087236}
+  gunShootingStack: 0
+  gunShootingSpeed: 0
 --- !u!114 &902289514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8975,6 +8978,7 @@ MonoBehaviour:
   - {fileID: 2770552887111729635, guid: 5910045d8fd265647ab80d1bcc680527, type: 3}
   - {fileID: 7624496878921423553, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
   - {fileID: 947250871755532473, guid: 473d079eb020ad24184a63656bf54144, type: 3}
+  - {fileID: 178460, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
 --- !u!4 &1209693672
 Transform:
   m_ObjectHideFlags: 0
@@ -10010,6 +10014,7 @@ MonoBehaviour:
   axeFearDamage: 0
   gunLightning: 0
   gunLightningCount: 0
+  gunIsSpeed: 0
   gunSpeed: 0
   gunExtraDamage: 0
   handWave: 0

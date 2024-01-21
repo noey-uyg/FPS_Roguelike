@@ -1,5 +1,8 @@
+using DigitalRuby.LightningBolt;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -11,6 +14,7 @@ public class GunController : MonoBehaviour
     private Gun currentGun;
 
     //연사 속도
+    [SerializeField]
     private float currentFireRate;
 
     //상태 변수
@@ -36,6 +40,10 @@ public class GunController : MonoBehaviour
     private PlayerController playerController;
 
     private Enemy enemy;
+    [SerializeField]
+    private int gunShootingStack = 0;
+    [SerializeField]
+    private float gunShootingSpeed = 0;
 
     private void Start()
     {
@@ -54,7 +62,6 @@ public class GunController : MonoBehaviour
         GunFireRateCalc();
         TryFire();
         TryReload();
-        TryFineSight();
     }
 
     //연사 속도 재계산
@@ -86,7 +93,6 @@ public class GunController : MonoBehaviour
             }
             else
             {
-                CancelFineSight();
                 StartCoroutine(ReloadCoroutine());
             }
         }
@@ -98,16 +104,22 @@ public class GunController : MonoBehaviour
     {
         if (playerController.GetPlayerIsRun()) return;
 
+        if (GameManager.Instance.gunIsSpeed)
+        {
+            if (gunShootingStack < 3) gunShootingStack++;
+        }
+
+        gunShootingSpeed = gunShootingStack * GameManager.Instance.gunSpeed;
+
         theCrosshair.FireAnim();
         currentGun.currentBulletCount--;
-        currentFireRate = currentGun.fireRate;
+        currentFireRate = (currentGun.fireRate)-(currentGun.fireRate * gunShootingSpeed);
         SoundManager.instance.PlaySE(Fire_Sound);
         currentGun.muzzleFlash.Play();
 
         Hit();
 
-        //총기 반동
-        StopAllCoroutines();
+        StopCoroutine(ReloadCoroutine());
         StartCoroutine(RetroActionCoroutine());
     }
 
@@ -130,20 +142,44 @@ public class GunController : MonoBehaviour
                 if(enemy != null && enemy.enemyCurrentHP > 0)
                 {
                     int cri = Random.Range(0, 100);
+                    float damage = currentGun.damage + (currentGun.damage * GameManager.Instance.gunExtraDamage);
                     int criPer = (int)(currentGun.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentGun.criticalDamage + (GameManager.Instance.extraCriticalDamage);
-                    float damage = currentGun.damage + (currentGun.damage * GameManager.Instance.gunExtraDamage);
+
 
                     if (cri < criPer)
                     {
                         enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
                     }
+                    else
+                    {
+                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
+                    }
 
-                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
-                }
-                
+                    //연쇄 번개
+                    if (GameManager.Instance.gunLightning)
+                    {
+                        Collider[] colliders = Physics.OverlapSphere(hitInfo.point, 15f, LayerMask.GetMask("Enemy"))
+                            .Where(collider => collider.gameObject != hitInfo.collider.gameObject)
+                            .ToArray();
+
+                        int bounceCount = (int)Mathf.Ceil(GameManager.Instance.gunLightningCount * 100);
+
+                        for (int i = 0; i < Mathf.Min(bounceCount, colliders.Length); i++)
+                        {
+                            Enemy nearbyEnemy = colliders[i].GetComponent<Enemy>();
+                            string attackPoint = "AttackPoint";
+                            StartCoroutine(ShowLightning(enemy.transform.Find(attackPoint).gameObject, nearbyEnemy.transform.Find(attackPoint).gameObject));
+
+                            if (nearbyEnemy != null && nearbyEnemy.enemyCurrentHP > 0)
+                            {
+                                nearbyEnemy.enemyCurrentHP -= damage;
+                            }
+                        }
+                    }
+
+                }  
             }
-            
         }
     }
 
@@ -152,7 +188,7 @@ public class GunController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
         {
-            CancelFineSight();
+            gunShootingStack = 0;
             StartCoroutine(ReloadCoroutine());
         }
     }
@@ -162,7 +198,8 @@ public class GunController : MonoBehaviour
     {
         if (isReload)
         {
-            StopAllCoroutines();
+            StopCoroutine(RetroActionCoroutine());
+            StopCoroutine(ReloadCoroutine());
             isReload = false;
         }
     }
@@ -196,65 +233,6 @@ public class GunController : MonoBehaviour
         else
         {
             Debug.Log("소유 총알 없음");
-        }
-    }
-
-    //정조준 시도
-    private void TryFineSight()
-    {
-        if (Input.GetButtonDown("Fire2") && !isReload)
-        {
-            FineSight();
-        }
-    }
-
-    //정조준 취소
-    public void CancelFineSight()
-    {
-        if (isFineSightMode)
-        {
-            FineSight();
-        }
-    }
-
-    //정조준
-    private void FineSight()
-    {
-        isFineSightMode = !isFineSightMode;
-        currentGun.anim.SetBool("FineSightMode", isFineSightMode);
-        theCrosshair.FineSightAnim(isFineSightMode);
-
-        if (isFineSightMode)
-        {
-            StopAllCoroutines();
-            StartCoroutine(FineSightActivateCoroutine());
-        }
-        else
-        {
-            StopAllCoroutines();
-            StartCoroutine(FineSightDeActivateCoroutine());
-        }
-    }
-
-    //정조준 활성화
-    IEnumerator FineSightActivateCoroutine()
-    {
-        while(currentGun.transform.localPosition != currentGun.fineSightOriginPos)
-        {
-            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos, 0.2f);
-
-            yield return null;
-        }
-    }
-
-    //정조준 비활성화
-    IEnumerator FineSightDeActivateCoroutine()
-    {
-        while (currentGun.transform.localPosition != originPos)
-        {
-            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.2f);
-
-            yield return null;
         }
     }
 
@@ -296,6 +274,21 @@ public class GunController : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    //연쇄 번개 이펙트
+    IEnumerator ShowLightning(GameObject start, GameObject end)
+    {
+        GameObject hitLightEfffect = PoolManager.instance.ActivateObj(27);
+        hitLightEfffect.transform.position = hitInfo.point;
+        LightningBoltScript light = hitLightEfffect.GetComponent<LightningBoltScript>();
+
+        light.StartObject = start;
+        light.EndObject = end;
+
+        yield return new WaitForSeconds(0.5f);
+
+        hitLightEfffect.SetActive(false);
     }
 
     public Gun GetGun()

@@ -34,9 +34,22 @@ public class AxeController : CloseWeaponController
 
                 enemy = hitInfo.collider.GetComponent<Enemy>();
 
+
                 if (enemy != null && enemy.enemyCurrentHP > 0)
                 {
-                    enemy.enemyCurrentHP -= currentCloseWeapon.damage;
+                    int cri = Random.Range(0, 100);
+                    int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
+                    float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
+                    float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.gunExtraDamage);
+
+                    if (cri < criPer)
+                    {
+                        enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
+                    }
+                    else
+                    {
+                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
+                    } 
                 }
             }
             yield return null;

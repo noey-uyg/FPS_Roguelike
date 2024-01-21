@@ -175,9 +175,6 @@ public class PlayerController : MonoBehaviour
     //´Þ¸®±â
     private void Running()
     {
-
-        theGunController.CancelFineSight();
-
         isRun = true;
         theCrosshair.RunningAnim(isRun);
         currentSpeed = runSpeed;

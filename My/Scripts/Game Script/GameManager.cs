@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [Header("GunAwakening")]
     public bool gunLightning = false;
     public float gunLightningCount = 0;
+    public bool gunIsSpeed = false;
     public float gunSpeed = 0;
     public float gunExtraDamage = 0;
 

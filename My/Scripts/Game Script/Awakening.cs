@@ -16,6 +16,7 @@ public class Awakening : MonoBehaviour
     private void Start()
     {
         Text[] texts = GetComponentsInChildren<Text>();
+        data.level = 0;
         textName = texts[0];
         textType = texts[1];
         textDesc = texts[2];
@@ -61,6 +62,7 @@ public class Awakening : MonoBehaviour
                 data.level++;
                 break;
             case 4:
+                if (data.level == 0) GameManager.Instance.gunIsSpeed = true;
                 GameManager.Instance.gunSpeed = data.damage[data.level];
                 data.level++;
                 break;
@@ -102,7 +104,8 @@ public class Awakening : MonoBehaviour
                 data.level++;
                 break;
             case 14:
-                GameManager.Instance.extraHP = data.damage[data.level];
+                GameManager.Instance.playerMaxHP += GameManager.Instance.extraHP * data.damage[data.level];
+                GameManager.Instance.playerCurHP = GameManager.Instance.playerMaxHP;
                 data.level++;
                 break;
         }

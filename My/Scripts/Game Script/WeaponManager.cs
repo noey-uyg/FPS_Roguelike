@@ -114,7 +114,6 @@ public class WeaponManager : MonoBehaviour
         switch (currentWeaponType)
         {
             case "GUN":
-                theGunController.CancelFineSight();
                 theGunController.CancelReload();
                 GunController.isActivate = false;
                 break;

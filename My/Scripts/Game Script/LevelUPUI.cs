@@ -15,7 +15,7 @@ public class LevelUPUI : MonoBehaviour
 
     public void Show()
     {
-        Next();
+        //Next();
         rect.localScale = Vector3.one;
         GameManager.Instance.isOpenTab = true;
     }
