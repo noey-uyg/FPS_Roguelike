@@ -80,6 +80,7 @@ public class Awakening : MonoBehaviour
                 data.level++;
                 break;
             case 8:
+                if (data.level == 0) GameManager.Instance.handIsStack = true;
                 GameManager.Instance.handExtraDamage = data.damage[data.level];
                 data.level++;
                 break;
@@ -104,7 +105,8 @@ public class Awakening : MonoBehaviour
                 data.level++;
                 break;
             case 14:
-                GameManager.Instance.playerMaxHP += GameManager.Instance.extraHP * data.damage[data.level];
+                GameManager.Instance.extraHP = data.damage[data.level];
+                GameManager.Instance.playerMaxHP += (GameManager.Instance.playerMaxHP * GameManager.Instance.extraHP);
                 GameManager.Instance.playerCurHP = GameManager.Instance.playerMaxHP;
                 data.level++;
                 break;

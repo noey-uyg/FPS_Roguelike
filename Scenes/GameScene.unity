@@ -8979,6 +8979,7 @@ MonoBehaviour:
   - {fileID: 7624496878921423553, guid: 7ba892263bec55a45b3073eb74e7dc9a, type: 3}
   - {fileID: 947250871755532473, guid: 473d079eb020ad24184a63656bf54144, type: 3}
   - {fileID: 178460, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
+  - {fileID: 8460667080445658512, guid: a3e2c3406e02f2c4ba86cfb1604277bd, type: 3}
 --- !u!4 &1209693672
 Transform:
   m_ObjectHideFlags: 0
@@ -10008,8 +10009,8 @@ MonoBehaviour:
   - 518
   - 553
   axeExtraDamage: 0
-  axeBleeding: 0
-  axeBleedingDamage: 0
+  axeBleeding: 1
+  axeBleedingDamage: 0.15
   axeFear: 0
   axeFearDamage: 0
   gunLightning: 0

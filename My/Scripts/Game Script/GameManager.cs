@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     [Header("HandAwakening")]
     public bool handWave = false;
     public float handWaveDamage = 0;
+    public bool handIsStack = false;
     public float handStackDamage = 0;
     public float handExtraDamage = 0;
 

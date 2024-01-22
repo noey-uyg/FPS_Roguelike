@@ -156,27 +156,7 @@ public class GunController : MonoBehaviour
                         enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
                     }
 
-                    //¿¬¼â ¹ø°³
-                    if (GameManager.Instance.gunLightning)
-                    {
-                        Collider[] colliders = Physics.OverlapSphere(hitInfo.point, 15f, LayerMask.GetMask("Enemy"))
-                            .Where(collider => collider.gameObject != hitInfo.collider.gameObject)
-                            .ToArray();
-
-                        int bounceCount = (int)Mathf.Ceil(GameManager.Instance.gunLightningCount * 100);
-
-                        for (int i = 0; i < Mathf.Min(bounceCount, colliders.Length); i++)
-                        {
-                            Enemy nearbyEnemy = colliders[i].GetComponent<Enemy>();
-                            string attackPoint = "AttackPoint";
-                            StartCoroutine(ShowLightning(enemy.transform.Find(attackPoint).gameObject, nearbyEnemy.transform.Find(attackPoint).gameObject));
-
-                            if (nearbyEnemy != null && nearbyEnemy.enemyCurrentHP > 0)
-                            {
-                                nearbyEnemy.enemyCurrentHP -= damage;
-                            }
-                        }
-                    }
+                    LightningAttack(damage);
 
                 }  
             }
@@ -272,6 +252,31 @@ public class GunController : MonoBehaviour
             {
                 currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos, 0.1f);
                 yield return null;
+            }
+        }
+    }
+
+    //¿¬¼â °ø°Ý ½Ãµµ
+    private void LightningAttack(float damage)
+    {
+        if (GameManager.Instance.gunLightning)
+        {
+            Collider[] colliders = Physics.OverlapSphere(hitInfo.point, 15f, LayerMask.GetMask("Enemy"))
+                .Where(collider => collider.gameObject != hitInfo.collider.gameObject)
+                .ToArray();
+
+            int bounceCount = (int)Mathf.Ceil(GameManager.Instance.gunLightningCount * 100);
+
+            for (int i = 0; i < Mathf.Min(bounceCount, colliders.Length); i++)
+            {
+                Enemy nearbyEnemy = colliders[i].GetComponent<Enemy>();
+                string attackPoint = "AttackPoint";
+                StartCoroutine(ShowLightning(enemy.transform.Find(attackPoint).gameObject, nearbyEnemy.transform.Find(attackPoint).gameObject));
+
+                if (nearbyEnemy != null && nearbyEnemy.enemyCurrentHP > 0)
+                {
+                    nearbyEnemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
+                }
             }
         }
     }
