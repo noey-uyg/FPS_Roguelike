@@ -51,7 +51,7 @@ public class ItemActionController : MonoBehaviour
             if(hitInfo.transform != null)
             {
                 Debug.Log("È¹µæ");
-                userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>());
+                userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>().scrollData);
                 hitInfo.transform.gameObject.SetActive(false);
                 InfoDisAppear();
             }

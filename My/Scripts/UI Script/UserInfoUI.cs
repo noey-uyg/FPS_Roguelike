@@ -30,12 +30,16 @@ public class UserInfoUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            InfoTextUpdate();
-            Show();
-        }
-        else if(Input.GetKeyUp(KeyCode.Tab))
-        {
-            Hide();
+            if (!GameManager.Instance.isOpenTab)
+            {
+                InfoTextUpdate();
+                Show();
+            }
+            else
+            {
+                Hide();
+            }
+
         }
     }
 
@@ -71,7 +75,7 @@ public class UserInfoUI : MonoBehaviour
             slots[i].gameObject.SetActive(false);
         }
     }
-    public void AcquireScroll(Scroll addScroll)
+    public void AcquireScroll(ScrollData addScroll)
     {
         for(int i = 0; i < slots.Length; i++)
         {
