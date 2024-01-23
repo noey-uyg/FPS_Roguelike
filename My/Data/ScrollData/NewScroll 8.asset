@@ -15,4 +15,5 @@ MonoBehaviour:
   scrollName: "\uC5D8\uB9AC\uD2B8 \uD0AC\uB7EC"
   scrollDesc: "\uC5D8\uB9AC\uD2B8 \uBAAC\uC2A4\uD130 \uCC98\uCE58 \uC2DC\uB9C8\uB2E4
     \uB370\uBBF8\uC9C0+{0}%"
+  haveScroll: 0
   baseDamage: 1

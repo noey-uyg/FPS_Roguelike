@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
     private void EnemyAttack()
     {
         Vector3 aim = (targetPlayer.transform.position - attackPoint.transform.position).normalized;
-        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(25, 27));
+        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13, 15));
         eA.transform.position = attackPoint.transform.position;
         eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }
@@ -148,10 +148,12 @@ public class Enemy : MonoBehaviour
 
     void ScrollDrop()
     {
-        int hpRandom = Random.Range(0, 1000);
-        if (hpRandom < 1000)
+        int scrollRandom = Random.Range(0, 1000);
+        if (scrollRandom < 1000)
         {
-            GameObject scroll = PoolManager.instance.ActivateObj(Random.Range(12,25));
+            GameObject scroll = PoolManager.instance.ActivateObj(12);
+            scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
+            scroll.GetComponent<Scroll>().DeleteHaveScroll();
             scroll.transform.position = gameObject.transform.position;
         }
     }

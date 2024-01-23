@@ -284,7 +284,7 @@ public class GunController : MonoBehaviour
     //¿¬¼â ¹ø°³ ÀÌÆåÆ®
     IEnumerator ShowLightning(GameObject start, GameObject end)
     {
-        GameObject hitLightEfffect = PoolManager.instance.ActivateObj(27);
+        GameObject hitLightEfffect = PoolManager.instance.ActivateObj(15);
         hitLightEfffect.transform.position = hitInfo.point;
         LightningBoltScript light = hitLightEfffect.GetComponent<LightningBoltScript>();
 

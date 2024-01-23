@@ -56,7 +56,7 @@ public class HandController : CloseWeaponController
 
                     if (GameManager.Instance.handWave)
                     {
-                        GameObject hitEfffect = PoolManager.instance.ActivateObj(28);
+                        GameObject hitEfffect = PoolManager.instance.ActivateObj(16);
                         hitEfffect.transform.position = hitInfo.point;
                         hitEfffect.transform.rotation = hitInfo.transform.rotation;
                         HandWaveAttack(damage);
@@ -67,6 +67,7 @@ public class HandController : CloseWeaponController
         }
     }
 
+    //파동공격
     private void HandWaveAttack(float damage)
     {
         Collider[] colliders = Physics.OverlapSphere(hitInfo.point, 20f, LayerMask.GetMask("Enemy"))
@@ -87,6 +88,7 @@ public class HandController : CloseWeaponController
         }
     }
 
+    //피격당한 적 뒤의 몬스터 탐지(원뿔형태)
     private bool TargetInRange(Transform caster, Transform target)
     {
         float angleRange = 120f;

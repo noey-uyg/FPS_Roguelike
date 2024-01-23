@@ -25,7 +25,8 @@ public class ItemActionController : MonoBehaviour
     private Text scrollNameText;
     [SerializeField]
     private Text scrollDescText;
-
+    [SerializeField]
+    private UserInfoUI userInfoUI;
 
     // Update is called once per frame
     void Update()
@@ -50,6 +51,7 @@ public class ItemActionController : MonoBehaviour
             if(hitInfo.transform != null)
             {
                 Debug.Log("È¹µæ");
+                userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>());
                 hitInfo.transform.gameObject.SetActive(false);
                 InfoDisAppear();
             }

@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     [Header("ETC")]
     public bool canPlayerMove = true;
     public bool isOpenTab = false;
+    public bool scrollisInitialized = false;
 
     [Header("UI")]
     public LevelUPUI levelUpUi;
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
     {        
         playerNextEXP = playerExp[0];
         playerCurHP = playerMaxHP;
+        
     }
 
     private void Update()

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollName: "\uB354 \uC918! \uB610 \uC918!"
   scrollDesc: "\uC0C1\uC810\uC758 \uC0C8\uB85C\uACE0\uCE68 \uD69F\uC218 +{0}"
+  haveScroll: 0
   baseDamage: 0.1

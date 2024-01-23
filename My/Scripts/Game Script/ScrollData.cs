@@ -9,6 +9,7 @@ public class ScrollData : ScriptableObject
     public string scrollName;
     [TextArea]
     public string scrollDesc;
+    public bool haveScroll = false;
 
     [Header("# Level Data")]
     public float baseDamage;
