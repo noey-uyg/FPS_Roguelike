@@ -5,29 +5,40 @@ using Unity.Services.Analytics.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    private float maxHP = 100;
+    [SerializeField]
+    private float maxHP;
     public float enemyCurrentHP = 0;
 
     [SerializeField]
     private Slider HPBar;
 
-    private NavMeshAgent agent;
-
     [SerializeField]
     private GameObject targetPlayer;
+    private NavMeshAgent agent;
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private bool isReinforced = false;
+    [SerializeField]
+    private bool isElite = false;
 
     [Header("Attack")]
+    [SerializeField]
+    private float monsterRange;
+    [SerializeField]
+    private float attackDamaage;
     [SerializeField]
     private GameObject attackPoint;
     [SerializeField]
     private int attackCount;
+    [SerializeField]
     private float maxAttackDelay = 5f;
     private float curAttackDelay = 0f;
-    [SerializeField]
-    private float monsterRange;
 
     // Start is called before the first frame update
     void Start()
@@ -44,13 +55,26 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPBar.value = enemyCurrentHP / maxHP;
-        FollowTarget();
-        EnemyDie();
+        if(GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum)
+        {
+            DisableObject();
+        }
+        else
+        {
+            HPBar.value = enemyCurrentHP / maxHP;
+
+            if (agent != null && targetPlayer != null)
+            {
+                FollowTarget();
+            }
+            EnemyDie();
+        }
     }
 
     private void FollowTarget()
     {
+        if (!agent.isOnNavMesh) return;
+
         if(targetPlayer != null)
         {
             curAttackDelay += Time.deltaTime;
@@ -64,13 +88,21 @@ public class Enemy : MonoBehaviour
             {
                 transform.LookAt(targetPlayer.transform.position);
             }
+
             //АјАн
             if (isRange)
             {
                 agent.isStopped = true;
                 if(curAttackDelay >= maxAttackDelay)
                 {
-                    StartCoroutine(EnemyAttackCoroutine());
+                    if (isElite)
+                    {
+                        animator.SetTrigger("Attack1");
+                    }
+                    else
+                    {
+                        StartCoroutine(EnemyAttackCoroutine());
+                    }
                     curAttackDelay = 0f;
                 }
             }
@@ -81,9 +113,48 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void IsReinforced()
+    {
+        if (isElite) return;
+
+        int ranNum = Random.Range(0, 100);
+
+        if(ranNum < 10)
+        {
+            isReinforced = true;
+        }
+    }
+
+    private void SetObjectScale(Vector3 newScale)
+    {
+        gameObject.transform.localScale = newScale;
+    }
+
     private void InitEnemyHP()
     {
+        Vector3 newScale;
+        IsReinforced();
+
+        if (isReinforced)
+        {
+            newScale = new Vector3(5f, 5f, 5f);
+            SetObjectScale(newScale);
+            maxHP *= 5;
+        }
+        else
+        {
+            newScale = new Vector3(3f, 3f, 3f);
+            SetObjectScale(newScale);
+            
+        }
         enemyCurrentHP = maxHP;
+    }
+
+    private void DisableObject()
+    {
+        if (isElite) return;
+
+        gameObject.SetActive(false);
     }
 
     private void EnemyDie()
@@ -107,25 +178,25 @@ public class Enemy : MonoBehaviour
         GoldDrop();
         CrystalDrop();
 
+        GameManager.Instance.enemyKilledNum++;
         gameObject.SetActive(false);
     }
 
     IEnumerator EnemyAttackCoroutine()
     {
-
         for (int i = 0; i < attackCount; i++)
         {
             EnemyAttack();
 
             yield return new WaitForSeconds(1f);
         }
-        
     }
 
     private void EnemyAttack()
     {
         Vector3 aim = (targetPlayer.transform.position - attackPoint.transform.position).normalized;
         GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13, 15));
+        eA.GetComponent<EnemyAttackManager>().InitBulletDamage(attackDamaage);
         eA.transform.position = attackPoint.transform.position;
         eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }

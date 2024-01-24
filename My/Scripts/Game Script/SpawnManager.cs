@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,23 +10,43 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private Transform[] spawnPoint;
 
-    //[SerializeField]
-    //private GameObject[] enemys;
+    private float spawnTime = 0f;
+    private float spawnmaxTime = 2.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        StartCoroutine(EnemySpawn());
+        if (!GameManager.Instance.gameIsStart) return;
+
+        spawnTime += Time.deltaTime;
+
+        if(spawnTime >= spawnmaxTime)
+        {
+            SpawnEnemy();
+        }
+
+        if (GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum)
+        {
+            if (GameManager.Instance.eliteSpawnCount > 0)
+            {
+                StartCoroutine(EliteSpawnCoroutine());
+                GameManager.Instance.eliteSpawnCount--;
+            }
+        }
     }
 
-
-    IEnumerator EnemySpawn()
+    private void SpawnEnemy()
     {
         GameObject enemy = PoolManager.instance.ActivateObj(Random.Range(0, 7));
         enemy.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
 
-        yield return new WaitForSeconds(2.5f);
+        spawnTime = 0f;
+    }
+    
+    IEnumerator EliteSpawnCoroutine()
+    {
+        GameObject elite = PoolManager.instance.ActivateObj(Random.Range(0, 7));
+        elite.transform.position = spawnPoint[Random.Range(0,spawnPoint.Length)].position;
 
-        StartCoroutine(EnemySpawn());
+        yield return new WaitForSeconds(3f);
     }
 }

@@ -11,6 +11,7 @@ public class EnemyAttackManager : MonoBehaviour
 
     private float destroyAttack;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +22,11 @@ public class EnemyAttackManager : MonoBehaviour
         {
             DestroyBullet();
         }
+    }
+
+    public void InitBulletDamage(float damage)
+    {
+        attackDamage = damage;
     }
 
     private void AttackMove()

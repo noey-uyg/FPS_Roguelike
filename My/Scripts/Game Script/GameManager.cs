@@ -55,6 +55,19 @@ public class GameManager : MonoBehaviour
     public float extraFinalDamage = 0;
     public float extraHP = 0;
 
+    [Header("GameElements")]
+    public bool gameIsStart = false;
+    public float maxGameStartPushTime = 1f;
+    public float curGameStartPushTime = 0f;
+
+    [Header("Wave")]
+    public int enemyKilledNum = 0;
+    public int maxEnemyKilledNum = 0;
+    public int eliteEnemyKilledNum = 0;
+    public int maxEliteEnemyKilledNum = 0;
+    public int eliteSpawnCount = 3;
+    public int wave = 0;
+
     [Header("ETC")]
     public bool canPlayerMove = true;
     public bool isOpenTab = false;
@@ -91,6 +104,38 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             canPlayerMove = true;
+        }
+        GameStart();
+    }
+
+    public void GameStart()
+    {
+        if(!gameIsStart)
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                curGameStartPushTime += Time.deltaTime;
+
+                if(curGameStartPushTime >= maxGameStartPushTime)
+                {
+                    gameIsStart = true;
+                    curGameStartPushTime = 0f;
+                    enemyKilledNum = 0;
+                }
+            }
+            if(Input.GetKeyUp(KeyCode.F))
+            {
+                curGameStartPushTime = 0f;
+            }
+        }
+    }
+
+    public void EneWave()
+    {
+        if (eliteEnemyKilledNum >= maxEliteEnemyKilledNum)
+        {
+            gameIsStart = false;
+            eliteEnemyKilledNum = 0;
         }
     }
 

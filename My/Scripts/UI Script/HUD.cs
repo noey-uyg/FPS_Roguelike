@@ -19,12 +19,16 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private Text text_Crystal;
 
+    [SerializeField]
+    private Text text_Start;
+
     // Update is called once per frame
     void Update()
     {
         CheckBullet();
         CheckGold();
         CheckCrystal();
+        PressItStart();
     }
 
     private void CheckBullet()
@@ -43,5 +47,19 @@ public class HUD : MonoBehaviour
     private void CheckCrystal()
     {
         text_Crystal.text = GameManager.Instance.playerCrystal.ToString();
+    }
+
+    private void PressItStart()
+    {
+        if (!GameManager.Instance.gameIsStart)
+        {
+            text_Start.gameObject.SetActive(true);
+            text_Start.text = "웨이브 시작하기" + "<color=red> (F) </color>" + GameManager.Instance.curGameStartPushTime + "/" + GameManager.Instance.maxGameStartPushTime;
+        }
+        else
+        {
+            text_Start.gameObject.SetActive(false);
+        }
+
     }
 }
