@@ -19,7 +19,7 @@ public class AxeController : CloseWeaponController
     // Update is called once per frame
     void Update()
     {
-        if (!isActivate)
+        if (!isActivate || GameManager.Instance.isOpenTab)
             return;
         TryAttack();
     }

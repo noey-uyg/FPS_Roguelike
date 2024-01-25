@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     [Header("GameElements")]
     public bool gameIsStart = false;
+    public bool isShop = true;
     public float maxGameStartPushTime = 1f;
     public float curGameStartPushTime = 0f;
 
@@ -75,6 +76,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public LevelUPUI levelUpUi;
+
+    public static event System.Action OnWaveStart;
 
     private void Awake()
     {
@@ -106,8 +109,10 @@ public class GameManager : MonoBehaviour
             canPlayerMove = true;
         }
         GameStart();
+        EneWave();
     }
 
+    //웨이브시작하기
     public void GameStart()
     {
         if(!gameIsStart)
@@ -118,9 +123,11 @@ public class GameManager : MonoBehaviour
 
                 if(curGameStartPushTime >= maxGameStartPushTime)
                 {
+                    OnWaveStart?.Invoke();
                     gameIsStart = true;
                     curGameStartPushTime = 0f;
-                    enemyKilledNum = 0;
+                    maxEliteEnemyKilledNum = eliteSpawnCount;
+                    wave++;
                 }
             }
             if(Input.GetKeyUp(KeyCode.F))
@@ -130,12 +137,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //웨이브 끝내기
     public void EneWave()
     {
         if (eliteEnemyKilledNum >= maxEliteEnemyKilledNum)
         {
             gameIsStart = false;
             eliteEnemyKilledNum = 0;
+            enemyKilledNum = 0;
+            eliteSpawnCount = 3;
         }
     }
 

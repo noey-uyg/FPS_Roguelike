@@ -55,20 +55,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isOpenTab)
+        {
+            agent.isStopped = true;
+            return;
+        }
+
         if(GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum)
         {
             DisableObject();
         }
-        else
-        {
-            HPBar.value = enemyCurrentHP / maxHP;
+        HPBar.value = enemyCurrentHP / maxHP;
 
-            if (agent != null && targetPlayer != null)
-            {
-                FollowTarget();
-            }
-            EnemyDie();
-        }
+        FollowTarget();
+        EnemyDie();
     }
 
     private void FollowTarget()
@@ -150,6 +150,7 @@ public class Enemy : MonoBehaviour
         enemyCurrentHP = maxHP;
     }
 
+    //몬스터 웨이브 다 잡을 시 모두 비활성화
     private void DisableObject()
     {
         if (isElite) return;
@@ -179,6 +180,11 @@ public class Enemy : MonoBehaviour
         CrystalDrop();
 
         GameManager.Instance.enemyKilledNum++;
+        if (isElite)
+        {
+            GameManager.Instance.eliteEnemyKilledNum++;
+        }
+        
         gameObject.SetActive(false);
     }
 

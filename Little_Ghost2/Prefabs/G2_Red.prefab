@@ -94,7 +94,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25901200661331521}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 2.5
@@ -132,6 +132,7 @@ MonoBehaviour:
   attackDamaage: 20
   attackPoint: {fileID: 0}
   attackCount: 0
+  maxAttackDelay: 5
 --- !u!1 &656418654785517845
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,10 +50,17 @@ public class ItemActionController : MonoBehaviour
         {
             if(hitInfo.transform != null)
             {
-                Debug.Log("획득");
-                userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>().scrollData);
-                hitInfo.transform.gameObject.SetActive(false);
-                InfoDisAppear();
+                if (hitInfo.transform.tag == "Scroll")
+                {
+                    Debug.Log("획득");
+                    userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>().scrollData);
+                    hitInfo.transform.gameObject.SetActive(false);
+                    InfoDisAppear();
+                }
+                if (hitInfo.transform.tag == "Shop")
+                {
+                    return;
+                }
             }
         }
     }
@@ -70,6 +77,11 @@ public class ItemActionController : MonoBehaviour
                 scrollDescText.text = string.Format(scroll.scrollData.scrollDesc, scroll.scrollData.baseDamage * 10);
                 ItemInfoAppear();
             }
+            if (hitInfo.transform.tag == "Shop")
+            {
+                Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
+                ShopAppear();
+            }
         }
         else
         {
@@ -77,13 +89,22 @@ public class ItemActionController : MonoBehaviour
         }
     }
 
-    //텍스트,UI 활성화
+    //스크롤 텍스트,UI 활성화
     private void ItemInfoAppear()
     {
         pickupActivated = true;
         scrollRect.localScale = Vector3.one;
         actionText.gameObject.SetActive(true);
-        actionText.text = "획득하기 " + "<color=red>" + "(F)" + "</color>";
+        actionText.text = "획득하기 <color=red> (F) </color>";
+    }
+    
+    //상점 텍스트,UI 활성화
+    private void ShopAppear()
+    {
+        pickupActivated = true;
+        scrollRect.localScale = Vector3.one;
+        actionText.gameObject.SetActive(true);
+        actionText.text = "상점 이용하기 <color=red> (F) </color>";
     }
 
     //텍스트,UI 비활성화

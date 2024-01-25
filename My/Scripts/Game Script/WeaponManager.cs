@@ -65,6 +65,8 @@ public class WeaponManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isOpenTab) return;
+
         if (currentWeaponType == "")
         {
             WeaponChange("HAND", "¸Ç¼Õ");

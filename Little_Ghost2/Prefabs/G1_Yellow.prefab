@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0796c4cfcd5a684abc0071ab2e24028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1500
+  maxHP: 50
   enemyCurrentHP: 0
   HPBar: {fileID: 977434205460926648}
   targetPlayer: {fileID: 0}
