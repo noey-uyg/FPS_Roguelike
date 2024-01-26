@@ -43,7 +43,7 @@ public class HandController : CloseWeaponController
                     int cri = Random.Range(0, 100);
                     int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
-                    float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * handStackDamage) + (currentCloseWeapon.damage * GameManager.Instance.handExtraDamage);
+                    float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.extraDamage) + (currentCloseWeapon.damage * handStackDamage) + (currentCloseWeapon.damage * GameManager.Instance.handExtraDamage);
 
                     if (cri < criPer)
                     {

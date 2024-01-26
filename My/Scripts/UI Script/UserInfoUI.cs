@@ -75,6 +75,7 @@ public class UserInfoUI : MonoBehaviour
             slots[i].gameObject.SetActive(false);
         }
     }
+
     public void AcquireScroll(ScrollData addScroll)
     {
         for(int i = 0; i < slots.Length; i++)

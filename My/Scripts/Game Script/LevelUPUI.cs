@@ -7,6 +7,7 @@ public class LevelUPUI : MonoBehaviour
 {
     RectTransform rect;
     Awakening[] awakenings;
+
     private void Start()
     {
         rect = GetComponent<RectTransform>();
@@ -15,7 +16,7 @@ public class LevelUPUI : MonoBehaviour
 
     public void Show()
     {
-        //Next();
+        Next();
         rect.localScale = Vector3.one;
         GameManager.Instance.isOpenTab = true;
     }
@@ -47,8 +48,14 @@ public class LevelUPUI : MonoBehaviour
             {
                 rand[i] = Random.Range(0, awakenings.Length);
             }
-            //awakenings[rand[0]].data.level!= awakenings[rand[0]].data.damage.Length &&
-            if (rand[0] != rand[1] && rand[0] != rand[2] && rand[1] != rand[2])
+
+            bool isMaxLevel = awakenings[rand[0]].data.level != awakenings[rand[0]].data.damage.Length &&
+                awakenings[rand[1]].data.level != awakenings[rand[1]].data.damage.Length &&
+                awakenings[rand[2]].data.level != awakenings[rand[2]].data.damage.Length;
+
+            bool isDiff = rand[0] != rand[1] && rand[0] != rand[2] && rand[1] != rand[2];
+
+            if (isMaxLevel && isDiff)
             {
                 break;
             }

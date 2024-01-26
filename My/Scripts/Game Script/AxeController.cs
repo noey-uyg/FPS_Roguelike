@@ -47,7 +47,7 @@ public class AxeController : CloseWeaponController
                 int cri = Random.Range(0, 100);
                 int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                 float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
-                float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.axeExtraDamage);
+                float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.extraDamage) + (currentCloseWeapon.damage * GameManager.Instance.axeExtraDamage);
 
                 if (GameManager.Instance.axeFear)
                 {

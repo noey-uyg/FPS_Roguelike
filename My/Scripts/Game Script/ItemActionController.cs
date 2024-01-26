@@ -22,6 +22,8 @@ public class ItemActionController : MonoBehaviour
     [SerializeField]
     private RectTransform scrollRect;
     [SerializeField]
+    private GameObject shopRect;
+    [SerializeField]
     private Text scrollNameText;
     [SerializeField]
     private Text scrollDescText;
@@ -59,7 +61,14 @@ public class ItemActionController : MonoBehaviour
                 }
                 if (hitInfo.transform.tag == "Shop")
                 {
-                    return;
+                    if (!GameManager.Instance.isOpenTab)
+                    {
+                        ShopAppear();
+                    }
+                    else
+                    {
+                        ShopDisAppear();    
+                    }
                 }
             }
         }
@@ -79,8 +88,8 @@ public class ItemActionController : MonoBehaviour
             }
             if (hitInfo.transform.tag == "Shop")
             {
-                Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
-                ShopAppear();
+                //Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
+                ShopTextAppear();
             }
         }
         else
@@ -97,15 +106,6 @@ public class ItemActionController : MonoBehaviour
         actionText.gameObject.SetActive(true);
         actionText.text = "획득하기 <color=red> (F) </color>";
     }
-    
-    //상점 텍스트,UI 활성화
-    private void ShopAppear()
-    {
-        pickupActivated = true;
-        scrollRect.localScale = Vector3.one;
-        actionText.gameObject.SetActive(true);
-        actionText.text = "상점 이용하기 <color=red> (F) </color>";
-    }
 
     //텍스트,UI 비활성화
     private void InfoDisAppear()
@@ -115,4 +115,24 @@ public class ItemActionController : MonoBehaviour
         actionText.gameObject.SetActive(false);
     }
 
+    //상점 텍스트 활성화
+    private void ShopTextAppear()
+    {
+        pickupActivated = true;
+        actionText.gameObject.SetActive(true);
+        actionText.text = "상점 이용하기 <color=red> (F) </color>";
+    }
+
+    private void ShopAppear()
+    {
+        GameManager.Instance.isOpenTab = true;
+        pickupActivated = false;
+        shopRect.SetActive(true);
+    }
+
+    private void ShopDisAppear()
+    {
+        GameManager.Instance.isOpenTab = false;
+        shopRect.SetActive(false);
+    }
 }

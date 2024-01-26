@@ -32,12 +32,6 @@ public class Awakening : MonoBehaviour
         textLevel.text = string.Format("Lv." + data.level).ToString();
     }
 
-    //private void OnEnable()
-    //{
-    //    textDesc.text = string.Format(data.awakeningDesc, data.damage[data.level] * 100);
-    //    textLevel.text = data.level.ToString();
-    //}
-
     public void OnClick()
     {
         switch (data.awakeningID)

@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     [Header("CommonAwakening")]
     public float extraRange = 0;
+    public float extraDamage = 0;
     public float extraSpeed = 0;
     public float extraCriticalPer = 0;
     public float extraCriticalDamage = 0;
