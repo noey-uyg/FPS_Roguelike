@@ -2819,7 +2819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.4999084, y: 607671.2}
+  m_AnchoredPosition: {x: 2.4999084, y: 672328.75}
   m_SizeDelta: {x: 425, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319383763
@@ -3631,6 +3631,7 @@ GameObject:
   - component: {fileID: 379326413}
   - component: {fileID: 379326415}
   - component: {fileID: 379326414}
+  - component: {fileID: 379326416}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
@@ -3699,6 +3700,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379326412}
   m_CullTransparentMesh: 1
+--- !u!114 &379326416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379326412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e617d5a66ac145f4882b2e0ff79907b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shops:
+  - {fileID: 1168245695}
+  - {fileID: 1131423947}
+  - {fileID: 415518464}
+  - {fileID: 1130955057}
+  refreshBtn: {fileID: 1465557262}
 --- !u!1 &393054832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,7 +3890,6 @@ GameObject:
   - component: {fileID: 415518464}
   - component: {fileID: 415518465}
   - component: {fileID: 415518467}
-  - component: {fileID: 415518466}
   m_Layer: 5
   m_Name: AwakeRefresh
   m_TagString: Untagged
@@ -3952,8 +3970,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopType: 2
   myButton: {fileID: 0}
+  myImage: {fileID: 445959781}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
+  count: 1
 --- !u!114 &415518465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4010,19 +4030,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &415518466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415518460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e1b3e1e2996ac4080fab9e5aa43314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
 --- !u!114 &415518467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8727,7 +8734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da24c8d2814d554e98fb704b89e3143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeaponType: 
   changeWeaponDelayTime: 0.1
   changeWeaponEndDelayTime: 0.1
   guns:
@@ -10487,8 +10493,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopType: 3
   myButton: {fileID: 0}
+  myImage: {fileID: 752851488}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
+  count: 2
 --- !u!114 &1130955058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10639,8 +10647,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopType: 1
   myButton: {fileID: 0}
+  myImage: {fileID: 1218132114}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
+  count: 1
 --- !u!114 &1131423948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11359,8 +11369,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopType: 0
   myButton: {fileID: 0}
+  myImage: {fileID: 2141917470}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
+  count: 1
 --- !u!114 &1168245696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13134,6 +13146,22 @@ MonoBehaviour:
   isShop: 0
   maxGameStartPushTime: 1
   curGameStartPushTime: 0
+  awakeDatas:
+  - {fileID: 11400000, guid: 39a0a1011c6a7274d8d047420b19b045, type: 2}
+  - {fileID: 11400000, guid: 595501458f5b83544aa4e74c437f4efb, type: 2}
+  - {fileID: 11400000, guid: 6a26e5e65f23b9a49bbbbd5343901abf, type: 2}
+  - {fileID: 11400000, guid: d63eca41a2ef88a4994218802184af78, type: 2}
+  - {fileID: 11400000, guid: 7238f271e588f4d439817aa4be0b9978, type: 2}
+  - {fileID: 11400000, guid: 7aed23422ef7db24a976e41af3f74bf2, type: 2}
+  - {fileID: 11400000, guid: 617f782769c13df42aca7b5a4384a8a3, type: 2}
+  - {fileID: 11400000, guid: dd9acdc2062feb74285a93dfc183c596, type: 2}
+  - {fileID: 11400000, guid: a808e785f1798e243836def3ff017cdc, type: 2}
+  - {fileID: 11400000, guid: 5da12828f4e2aa34b85095f13d387bb4, type: 2}
+  - {fileID: 11400000, guid: 8a4043471622a924392944368e8b430e, type: 2}
+  - {fileID: 11400000, guid: 3f775b3d36d960d4e94fb73dbcea0470, type: 2}
+  - {fileID: 11400000, guid: 1d370e94e28a52249b1970dc813197e1, type: 2}
+  - {fileID: 11400000, guid: d93c91804f096d34ab1a1a21f46f32b5, type: 2}
+  - {fileID: 11400000, guid: 70bdb021b5adb434d9c65ff59c0bd400, type: 2}
   enemyKilledNum: 0
   maxEnemyKilledNum: 0
   eliteEnemyKilledNum: 0
@@ -14184,7 +14212,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1465557263}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 379326416}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: OnRefresh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1465557263
 MonoBehaviour:
   m_ObjectHideFlags: 0

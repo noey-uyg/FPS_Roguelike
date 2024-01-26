@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     string descText;
 
     public Button myButton;
+    public Image myImage;
 
     [SerializeField]
     private UserInfoUI userInfoUI;
@@ -25,6 +27,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Text shopDescText;
     private bool isMouseOverSlot = false;
 
+    public int count;
 
     private void Start()
     {
@@ -32,6 +35,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         shopNameText = texts[0];
         shopDescText = texts[1];
+
     }
 
     private void Update()
@@ -39,6 +43,17 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (isMouseOverSlot)
         {
             UpdateDescPosition();
+        }
+
+        if (count <= 0)
+        {
+            myButton.interactable = false;
+            SetAlpha(0.5f);
+        }
+        else
+        {
+            myButton.interactable = true;
+            SetAlpha(1f);
         }
     }
 
@@ -63,23 +78,25 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             case ShopType.Heal:
                 GameManager.Instance.GetHP();
-                myButton.interactable = false;
+                count--;
+
                 break;
             case ShopType.Scroll:
                 userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
                 gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
                 gameObject.GetComponent<Scroll>().DeleteHaveScroll();
-                myButton.interactable = false;
+                count--;
+
                 break;
             case ShopType.Awake:
-                AwakeningData data = gameObject.GetComponent<RandomAwakening>().data;
-                gameObject.gameObject.GetComponent<Awakening>().data = data;
-                gameObject.gameObject.GetComponent<Awakening>().OnClick();
-                myButton.interactable = false;
+                gameObject.GetComponent<RandomAwakening>().AwakeUpgrade();
+                count--;
+
                 break;
             case ShopType.Upgrade:
                 GameManager.Instance.extraDamage += 0.1f;
-                myButton.interactable = false;
+                count--;
+
                 break;
         }
     }
@@ -99,7 +116,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 descText = "랜덤한 스크롤을 하나 얻게 됩니다.";
                 break;
             case ShopType.Awake:
-                nameText = "각성 새로고침";
+                nameText = "각성";
                 descText = "랜덤한 각성을 하나 얻게 됩니다.";
                 break;
             case ShopType.Upgrade:
@@ -111,7 +128,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         shopNameText.text = nameText;
         shopDescText.text = descText;
 
-        if (isMouseOverSlot)
+        if (isMouseOverSlot || myButton.interactable)
         {
             Vector3 mousePosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(descRect.parent as RectTransform, mousePosition, null, out Vector2 localMousePosition);
@@ -123,5 +140,12 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             descRect.localScale = Vector3.zero;
         }
+    }
+
+    public void SetAlpha(float alphaValue)
+    {
+        Color newColor = myImage.color;
+        newColor.a = alphaValue;
+        myImage.color = newColor;
     }
 }

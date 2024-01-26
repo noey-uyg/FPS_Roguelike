@@ -16,7 +16,7 @@ public class Awakening : MonoBehaviour
     private void Start()
     {
         Text[] texts = GetComponentsInChildren<Text>();
-        data.level = 0;
+
         textName = texts[0];
         textType = texts[1];
         textDesc = texts[2];
@@ -34,6 +34,7 @@ public class Awakening : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log(data.awakeningName + "°­È­");
         switch (data.awakeningID)
         {
             case 0:

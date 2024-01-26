@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
     public bool isShop = true;
     public float maxGameStartPushTime = 1f;
     public float curGameStartPushTime = 0f;
+    public AwakeningData[] awakeDatas;
 
     [Header("Wave")]
     public int enemyKilledNum = 0;
@@ -86,13 +88,14 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        InitAwake();
     }
 
     private void Start()
     {        
         playerNextEXP = playerExp[0];
-        playerCurHP = playerMaxHP;
-        
+        playerCurHP = playerMaxHP; 
     }
 
     private void Update()
@@ -111,6 +114,15 @@ public class GameManager : MonoBehaviour
         }
         GameStart();
         EneWave();
+    }
+
+    //각성 초기화
+    public void InitAwake()
+    {
+        for (int i = 0; i < awakeDatas.Length; i++)
+        {
+            awakeDatas[i].level = 0;
+        }
     }
 
     //웨이브시작하기

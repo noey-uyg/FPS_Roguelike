@@ -255,6 +255,7 @@ public class Enemy : MonoBehaviour
 
     void BulletDrop()
     {
-
+        if (WeaponManager.currentWeaponType != "GUN") return;
+        
     }
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Awakening 10
   m_EditorClassIdentifier: 
   awakeningName: "\uC2A4\uD53C\uB4DC\uB7EC\uB108"
-  awakeningType: 3
-  weaponType: 3
+  awakeningType: 0
+  weaponType: 0
   awakeningDesc: "\uC774\uB3D9\uC18D\uB3C4\uAC00 {0}% \uC99D\uAC00\uD55C\uB2E4."
   awakeningID: 10
   level: 0

@@ -13,7 +13,7 @@ public class WeaponManager : MonoBehaviour
 
     //현재 무기 타입
     [SerializeField]
-    private string currentWeaponType;
+    public static string currentWeaponType;
 
 
     //무기 교체 딜레이
@@ -44,7 +44,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private AxeController theAxeController;
 
-    // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < guns.Length; i++)
@@ -67,9 +66,9 @@ public class WeaponManager : MonoBehaviour
     {
         if (GameManager.Instance.isOpenTab) return;
 
-        if (currentWeaponType == "")
+        if (currentWeaponType == null)
         {
-            WeaponChange("HAND", "맨손");
+            StartCoroutine(ChangeWeaponCoroutine("HAND", "맨손"));
             currentWeaponType = "HAND";
             HandController.isActivate = true;
         }
