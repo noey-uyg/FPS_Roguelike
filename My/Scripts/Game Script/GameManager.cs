@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     [Header("GameElements")]
     public bool gameIsStart = false;
-    public bool isShop = true;
     public float maxGameStartPushTime = 1f;
     public float curGameStartPushTime = 0f;
     public AwakeningData[] awakeDatas;

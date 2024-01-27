@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelUPUI : MonoBehaviour
 {
     RectTransform rect;
+    [SerializeField]
     Awakening[] awakenings;
 
     private void Start()
@@ -30,6 +31,10 @@ public class LevelUPUI : MonoBehaviour
     public void Select(int index)
     {
         awakenings[index].OnClick();
+        foreach (Awakening awake in awakenings)
+        {
+            awake.gameObject.SetActive(false);
+        }
     }
 
     //각성 랜덤 등장

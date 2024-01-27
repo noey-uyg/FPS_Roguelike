@@ -8,6 +8,12 @@ public class ShopManager : MonoBehaviour
     public Shop[] shops;
 
     public Button refreshBtn;
+
+    private void OnEnable()
+    {
+        refreshBtn.interactable = true;
+    }
+
     public void OnRefresh()
     {
         refreshBtn.interactable = false;
@@ -22,6 +28,12 @@ public class ShopManager : MonoBehaviour
                     break;
                 case Shop.ShopType.Upgrade:
                     shop.count = 2;
+                    break;
+                case Shop.ShopType.Scroll:
+                    shop.count = 0;
+                    break;
+                case Shop.ShopType.Awake:
+                    shop.count = 0;
                     break;
             }
         }

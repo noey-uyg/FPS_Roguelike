@@ -27,6 +27,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Text shopDescText;
     private bool isMouseOverSlot = false;
 
+    GameObject shopObject;
     public int count;
 
     private void Start()
@@ -60,16 +61,43 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // 스크롤에 마우스를 가져다 대면
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isMouseOverSlot = true;
         Debug.Log("마우스가" + shopType + "에 있습니다.");
         UpdateDescPosition();
+        isMouseOverSlot = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isMouseOverSlot = false;
         Debug.Log("마우스가" + shopType + "를 벗어났습니다.");
         UpdateDescPosition();
+        isMouseOverSlot = false;
+    }
+
+    public void OnEnable()
+    {
+        if (shopObject == null)
+        {
+            shopObject = GameObject.FindWithTag("Shop");
+        }
+        switch (shopType)
+        {
+            case ShopType.Heal:
+                count = shopObject.GetComponent<ShopObject>().healCount;
+                Debug.Log(count);
+                break;
+            case ShopType.Upgrade:
+                count = shopObject.GetComponent<ShopObject>().upgradeCount;
+                Debug.Log(count);
+                break;
+            case ShopType.Scroll:
+                count = shopObject.GetComponent<ShopObject>().scrollCount;
+                Debug.Log(count);
+                break;
+            case ShopType.Awake:
+                count = shopObject.GetComponent<ShopObject>().awakeCount;
+                Debug.Log(count);
+                break;
+        }
     }
 
     public void OnClick()
@@ -79,24 +107,20 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case ShopType.Heal:
                 GameManager.Instance.GetHP();
                 count--;
-
                 break;
             case ShopType.Scroll:
                 userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
                 gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
                 gameObject.GetComponent<Scroll>().DeleteHaveScroll();
                 count--;
-
                 break;
             case ShopType.Awake:
                 gameObject.GetComponent<RandomAwakening>().AwakeUpgrade();
                 count--;
-
                 break;
             case ShopType.Upgrade:
                 GameManager.Instance.extraDamage += 0.1f;
                 count--;
-
                 break;
         }
     }
@@ -128,7 +152,12 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         shopNameText.text = nameText;
         shopDescText.text = descText;
 
-        if (isMouseOverSlot || myButton.interactable)
+        if (!myButton.interactable)
+        {
+            descRect.localScale = Vector3.zero;
+        }
+
+        if (isMouseOverSlot)
         {
             Vector3 mousePosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(descRect.parent as RectTransform, mousePosition, null, out Vector2 localMousePosition);

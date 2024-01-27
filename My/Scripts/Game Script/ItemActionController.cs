@@ -88,7 +88,6 @@ public class ItemActionController : MonoBehaviour
             }
             if (hitInfo.transform.tag == "Shop")
             {
-                //Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
                 ShopTextAppear();
             }
         }
@@ -133,6 +132,7 @@ public class ItemActionController : MonoBehaviour
     private void ShopDisAppear()
     {
         GameManager.Instance.isOpenTab = false;
+        hitInfo.transform.gameObject.SetActive(false);
         shopRect.SetActive(false);
     }
 }

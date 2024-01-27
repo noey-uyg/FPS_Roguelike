@@ -28,7 +28,7 @@ public class Awakening : MonoBehaviour
     private void LateUpdate()
     {
         textType.text = string.Format(data.awakeningType.ToString());
-        textDesc.text = string.Format(data.awakeningDesc, data.damage[data.level] * 100);
+        textDesc.text = string.Format(data.awakeningDesc, data.damage[Mathf.Min(data.damage.Length,data.level)] * 100);
         textLevel.text = string.Format("Lv." + data.level).ToString();
     }
 

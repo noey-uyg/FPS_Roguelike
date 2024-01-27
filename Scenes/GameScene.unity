@@ -1652,14 +1652,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 198456315}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2819,7 +2819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.4999084, y: 672328.75}
+  m_AnchoredPosition: {x: 2.4999084, y: 726554.56}
   m_SizeDelta: {x: 425, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319383763
@@ -3169,14 +3169,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 349258694}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3416,14 +3416,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 356245311}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 14
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3973,7 +3973,8 @@ MonoBehaviour:
   myImage: {fileID: 445959781}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  count: 1
+  shopObject: {fileID: 0}
+  count: 0
 --- !u!114 &415518465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5736,10 +5737,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 585164712}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7264,14 +7265,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 762502787}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 13
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7542,14 +7543,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 782535208}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 12
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8008,14 +8009,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 880640782}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8275,14 +8276,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 893406237}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8601,14 +8602,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 901719744}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9634,14 +9635,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1008469297}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10496,7 +10497,8 @@ MonoBehaviour:
   myImage: {fileID: 752851488}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  count: 2
+  shopObject: {fileID: 0}
+  count: 0
 --- !u!114 &1130955058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10650,7 +10652,8 @@ MonoBehaviour:
   myImage: {fileID: 1218132114}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  count: 1
+  shopObject: {fileID: 0}
+  count: 0
 --- !u!114 &1131423948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10847,14 +10850,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131668933}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11372,7 +11375,8 @@ MonoBehaviour:
   myImage: {fileID: 2141917470}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  count: 1
+  shopObject: {fileID: 0}
+  count: 0
 --- !u!114 &1168245696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13081,8 +13085,8 @@ MonoBehaviour:
   playerJumpForce: 7
   playerExp:
   - 1
-  - 19
-  - 28
+  - 1
+  - 1
   - 42
   - 56
   - 63
@@ -13143,7 +13147,6 @@ MonoBehaviour:
   extraFinalDamage: 0
   extraHP: 0
   gameIsStart: 0
-  isShop: 0
   maxGameStartPushTime: 1
   curGameStartPushTime: 0
   awakeDatas:
@@ -14375,14 +14378,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1472980308}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -15004,6 +15007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b5d7c25a3023e49bcf38bfefbe9d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  awakenings: []
 --- !u!1 &1536097793
 GameObject:
   m_ObjectHideFlags: 0
@@ -17933,14 +17937,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1810322335}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -19702,14 +19706,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1988131212}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -20094,14 +20098,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2019380610}
-        m_TargetAssemblyTypeName: Awakening, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
+      - m_Target: {fileID: 1535221143}
+        m_TargetAssemblyTypeName: LevelUPUI, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
