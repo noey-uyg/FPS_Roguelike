@@ -31,7 +31,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float monsterRange;
     [SerializeField]
-    private float attackDamaage;
+    private float monsterAdditionalRange;
+    [SerializeField]
+    private float attackDamage;
     [SerializeField]
     private GameObject attackPoint;
     [SerializeField]
@@ -92,12 +94,19 @@ public class Enemy : MonoBehaviour
             //공격
             if (isRange)
             {
-                agent.isStopped = true;
                 if(curAttackDelay >= maxAttackDelay)
                 {
+                    agent.isStopped = true;
                     if (isElite)
                     {
-                        animator.SetTrigger("Attack1");
+                        if(distance < monsterAdditionalRange)
+                        {
+                            animator.SetTrigger("Attack2");
+                        }
+                        else
+                        {
+                            animator.SetTrigger("Attack1");
+                        }    
                     }
                     else
                     {
@@ -110,6 +119,22 @@ public class Enemy : MonoBehaviour
             {
                 agent.isStopped = false;
             }
+        }
+    }
+
+    // 플레이어가 공격 범위에 들어왔는지 확인하는 함수
+    private bool IsPlayerInAttackRange()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.transform.position);
+        return distanceToPlayer <= monsterRange;
+    }
+
+    //플레이어 데미지 입히기
+    public void DamageToPlayer()
+    {
+        if(IsPlayerInAttackRange())
+        {
+            GameManager.Instance.playerCurHP -= attackDamage;
         }
     }
 
@@ -202,7 +227,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 aim = (targetPlayer.transform.position - attackPoint.transform.position).normalized;
         GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13, 15));
-        eA.GetComponent<EnemyAttackManager>().InitBulletDamage(attackDamaage);
+        eA.GetComponent<EnemyAttackManager>().InitBulletDamage(attackDamage);
         eA.transform.position = attackPoint.transform.position;
         eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
     }

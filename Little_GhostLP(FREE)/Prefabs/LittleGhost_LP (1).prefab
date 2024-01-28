@@ -143,6 +143,7 @@ MonoBehaviour:
   attackDamaage: 3
   attackPoint: {fileID: 1457667856731752382}
   attackCount: 1
+  maxAttackDelay: 5
 --- !u!195 &-6682749923284481538
 NavMeshAgent:
   m_ObjectHideFlags: 0

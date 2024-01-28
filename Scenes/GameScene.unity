@@ -2819,7 +2819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.4999084, y: 726554.56}
+  m_AnchoredPosition: {x: 2.4999084, y: 1060189}
   m_SizeDelta: {x: 425, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319383763
@@ -3973,7 +3973,6 @@ MonoBehaviour:
   myImage: {fileID: 445959781}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  shopObject: {fileID: 0}
   count: 0
 --- !u!114 &415518465
 MonoBehaviour:
@@ -10497,7 +10496,6 @@ MonoBehaviour:
   myImage: {fileID: 752851488}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  shopObject: {fileID: 0}
   count: 0
 --- !u!114 &1130955058
 MonoBehaviour:
@@ -10652,7 +10650,6 @@ MonoBehaviour:
   myImage: {fileID: 1218132114}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  shopObject: {fileID: 0}
   count: 0
 --- !u!114 &1131423948
 MonoBehaviour:
@@ -11375,7 +11372,6 @@ MonoBehaviour:
   myImage: {fileID: 2141917470}
   userInfoUI: {fileID: 1634304540}
   descRect: {fileID: 302944370}
-  shopObject: {fileID: 0}
   count: 0
 --- !u!114 &1168245696
 MonoBehaviour:
