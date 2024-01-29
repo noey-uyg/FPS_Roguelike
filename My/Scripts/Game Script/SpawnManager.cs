@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnTime += Time.deltaTime;
 
-            if (GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum)
+            if (GameManager.Instance.isElite)
             {
                 if (GameManager.Instance.eliteSpawnCount > 0)
                 {
@@ -47,6 +47,8 @@ public class SpawnManager : MonoBehaviour
     //일반 몬스터 스폰
     private void SpawnEnemy()
     {
+        if (GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum) return;
+
         GameObject enemy = PoolManager.instance.ActivateObj(Random.Range(0, 7));
         enemy.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
 

@@ -205,6 +205,7 @@ public class Enemy : MonoBehaviour
         CrystalDrop();
 
         GameManager.Instance.enemyKilledNum++;
+
         if (isElite)
         {
             GameManager.Instance.eliteEnemyKilledNum++;

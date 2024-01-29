@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -64,12 +65,14 @@ public class GameManager : MonoBehaviour
     public AwakeningData[] awakeDatas;
 
     [Header("Wave")]
+    public int[] waveMaxKill = { 1000, 3000, 5000, 0 }; 
     public int enemyKilledNum = 0;
     public int maxEnemyKilledNum = 0;
     public int eliteEnemyKilledNum = 0;
     public int maxEliteEnemyKilledNum = 0;
     public int eliteSpawnCount = 3;
     public int wave = 0;
+    public bool isElite = false;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
@@ -112,6 +115,7 @@ public class GameManager : MonoBehaviour
             canPlayerMove = true;
         }
         GameStart();
+        EliteTime();
         EneWave();
     }
 
@@ -138,6 +142,7 @@ public class GameManager : MonoBehaviour
                     OnWaveStart?.Invoke();
                     gameIsStart = true;
                     curGameStartPushTime = 0f;
+                    maxEnemyKilledNum = waveMaxKill[wave];
                     maxEliteEnemyKilledNum = eliteSpawnCount;
                     wave++;
                 }
@@ -149,11 +154,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EliteTime()
+    {
+        if(enemyKilledNum >= maxEnemyKilledNum)
+        {
+            isElite = true;
+        }
+    }
+
     //웨이브 끝내기
     public void EneWave()
     {
         if (eliteEnemyKilledNum >= maxEliteEnemyKilledNum)
         {
+            isElite = false;
             gameIsStart = false;
             eliteEnemyKilledNum = 0;
             enemyKilledNum = 0;
