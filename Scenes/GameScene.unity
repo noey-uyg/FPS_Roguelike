@@ -2819,7 +2819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.4999084, y: 1060189}
+  m_AnchoredPosition: {x: 2.4999084, y: 1173525.2}
   m_SizeDelta: {x: 425, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319383763
@@ -11728,6 +11728,7 @@ MonoBehaviour:
   - {fileID: 4581718618250850183, guid: 8146374d820c3ac45baeed5014144363, type: 3}
   - {fileID: 466174982370493815, guid: 7577e3de9babd604d9880ded032d1752, type: 3}
   - {fileID: 6489961540263086545, guid: 77bfe4477ab0a0d4b9718e9f2e259075, type: 3}
+  - {fileID: 1000012964112300, guid: 8306882d88a96b64291460c8d7664f4d, type: 3}
 --- !u!4 &1209693672
 Transform:
   m_ObjectHideFlags: 0
@@ -12876,7 +12877,7 @@ MonoBehaviour:
   criticalDamage: 1.5
   reloadBulletCount: 30
   currentBulletCount: 30
-  maxBulletCount: 150
+  maxBulletCount: 600
   carryBulletCount: 123
   fineSightOriginPos: {x: 0.55, y: 0.33, z: -0.59}
   anim: {fileID: 1253866166}
@@ -13161,16 +13162,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1d370e94e28a52249b1970dc813197e1, type: 2}
   - {fileID: 11400000, guid: d93c91804f096d34ab1a1a21f46f32b5, type: 2}
   - {fileID: 11400000, guid: 70bdb021b5adb434d9c65ff59c0bd400, type: 2}
+  waveMaxKill: e8030000b80b00008813000000000000
   enemyKilledNum: 0
   maxEnemyKilledNum: 0
   eliteEnemyKilledNum: 0
   maxEliteEnemyKilledNum: 0
   eliteSpawnCount: 3
   wave: 0
+  isEliteWave: 0
   canPlayerMove: 1
   isOpenTab: 0
   scrollisInitialized: 0
   levelUpUi: {fileID: 1535221143}
+  currentGun: {fileID: 1253866165}
 --- !u!4 &1317187955
 Transform:
   m_ObjectHideFlags: 0

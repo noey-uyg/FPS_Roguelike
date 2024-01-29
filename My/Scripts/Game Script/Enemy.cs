@@ -220,6 +220,7 @@ public class Enemy : MonoBehaviour
         ScrollDrop();
         GoldDrop();
         CrystalDrop();
+        BulletDrop();
 
         GameManager.Instance.enemyKilledNum++;
 
@@ -259,7 +260,7 @@ public class Enemy : MonoBehaviour
     void HPDrop()
     {
         int hpRandom = Random.Range(0, 100);
-        if(hpRandom < 1000)
+        if(hpRandom < 50)
         {
             GameObject hp = PoolManager.instance.ActivateObj(9);
             hp.transform.position = gameObject.transform.position;
@@ -269,7 +270,7 @@ public class Enemy : MonoBehaviour
     void ScrollDrop()
     {
         int scrollRandom = Random.Range(0, 1000);
-        if (scrollRandom < 1000)
+        if (scrollRandom < 5)
         {
             GameObject scroll = PoolManager.instance.ActivateObj(12);
             scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
@@ -300,5 +301,10 @@ public class Enemy : MonoBehaviour
     {
         if (WeaponManager.currentWeaponType != "GUN") return;
         
+        for(int i = 0; i < Random.Range(1, 3); i++)
+        {
+            GameObject bullet = PoolManager.instance.ActivateObj(20);
+            bullet.transform.position = gameObject.transform.position;
+        }
     }
 }

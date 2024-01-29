@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 
     //JSON으로 변환할 것.
     [Header("Player Data")]
-    public float playerMaxHP=120;
-    public float playerCurHP=0;
+    public float playerMaxHP = 120;
+    public float playerCurHP = 0;
     public float playerNextEXP = 0;
     public float playerCurEXP = 0;
     public float playerGold = 0;
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     public AwakeningData[] awakeDatas;
 
     [Header("Wave")]
-    public int[] waveMaxKill = { 1000, 3000, 5000, 0 }; 
+    public int[] waveMaxKill = { 1000, 3000, 5000, 0 };
     public int enemyKilledNum = 0;
     public int maxEnemyKilledNum = 0;
     public int eliteEnemyKilledNum = 0;
@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     public LevelUPUI levelUpUi;
 
     public static event System.Action OnWaveStart;
+    public Gun currentGun;
 
     private void Awake()
     {
@@ -95,14 +96,14 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         playerNextEXP = playerExp[0];
-        playerCurHP = playerMaxHP; 
+        playerCurHP = playerMaxHP;
     }
 
     private void Update()
     {
-        if(isOpenTab)
+        if (isOpenTab)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -131,13 +132,13 @@ public class GameManager : MonoBehaviour
     //웨이브시작하기
     public void GameStart()
     {
-        if(!gameIsStart)
+        if (!gameIsStart)
         {
             if (Input.GetKey(KeyCode.F))
             {
                 curGameStartPushTime += Time.deltaTime;
 
-                if(curGameStartPushTime >= maxGameStartPushTime)
+                if (curGameStartPushTime >= maxGameStartPushTime)
                 {
                     OnWaveStart?.Invoke();
                     gameIsStart = true;
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
                     wave++;
                 }
             }
-            if(Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.F))
             {
                 curGameStartPushTime = 0f;
             }
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void EliteTime()
     {
-        if(enemyKilledNum >= maxEnemyKilledNum)
+        if (enemyKilledNum >= maxEnemyKilledNum)
         {
             isEliteWave = true;
         }
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
     {
         playerCurEXP += 1;
 
-        if(playerCurEXP >= playerNextEXP)
+        if (playerCurEXP >= playerNextEXP)
         {
             LevelUP();
         }
@@ -212,5 +213,15 @@ public class GameManager : MonoBehaviour
     {
         if (playerCrystal >= playerMaxCrystal) return;
         playerCrystal += 1;
+    }
+
+    public void GetBullet()
+    {
+        currentGun.carryBulletCount += 30;
+
+        if(currentGun.carryBulletCount >= currentGun.maxBulletCount)
+        {
+            currentGun.carryBulletCount = currentGun.maxBulletCount;
+        }
     }
 }

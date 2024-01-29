@@ -18,7 +18,8 @@ public class Item : ScriptableObject
         HP,
         Gold,
         Crystal,
-        Scroll
+        Scroll,
+        Bullet
     }
 
 }

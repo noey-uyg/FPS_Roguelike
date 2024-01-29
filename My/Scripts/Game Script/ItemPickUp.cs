@@ -64,6 +64,10 @@ public class ItemPickUp : MonoBehaviour
                     GameManager.Instance.GetGold();
                     gameObject.SetActive(false);
                     break;
+                case Item.ItemType.Bullet:
+                    GameManager.Instance.GetBullet();
+                    gameObject.SetActive(false);
+                    break;
             }
         }
     }

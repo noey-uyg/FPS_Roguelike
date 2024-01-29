@@ -53,7 +53,6 @@ public class UserInfoUI : MonoBehaviour
         userInfoTexts[4].text = GameManager.Instance.playerWalkSpeed.ToString();
         userInfoTexts[5].text = GameManager.Instance.playerRunSpeed.ToString();
         userInfoTexts[6].text = GameManager.Instance.playerCrouchSpeed.ToString();
-
     }
 
     void Show()
