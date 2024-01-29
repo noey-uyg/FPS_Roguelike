@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnTime += Time.deltaTime;
 
-            if (GameManager.Instance.isElite)
+            if (GameManager.Instance.isEliteWave)
             {
                 if (GameManager.Instance.eliteSpawnCount > 0)
                 {
@@ -35,7 +35,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                if (spawnTime >= spawnmaxTime)
+                if (spawnTime >= SpawnTime())
                 {
                     SpawnEnemy();
                 }
@@ -43,6 +43,12 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //웨이브 별 스폰 시간
+    private float SpawnTime()
+    {
+        spawnmaxTime /= GameManager.Instance.wave;
+        return spawnmaxTime;
+    }
 
     //일반 몬스터 스폰
     private void SpawnEnemy()

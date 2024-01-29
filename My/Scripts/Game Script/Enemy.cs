@@ -140,14 +140,25 @@ public class Enemy : MonoBehaviour
 
     private void IsReinforced()
     {
-        if (isElite) return;
+        if (isElite || GameManager.Instance.wave < 2) return;
 
         int ranNum = Random.Range(0, 100);
 
-        if(ranNum < 10)
+        if(GameManager.Instance.wave == 2)
         {
-            isReinforced = true;
+            if (ranNum < 5)
+            {
+                isReinforced = true;
+            }
         }
+        else if(GameManager.Instance.wave == 3)
+        {
+            if (ranNum < 20)
+            {
+                isReinforced = true;
+            }
+        }
+
     }
 
     private void SetObjectScale(Vector3 newScale)
@@ -166,13 +177,19 @@ public class Enemy : MonoBehaviour
             SetObjectScale(newScale);
             maxHP *= 5;
         }
+        else if (isElite)
+        {
+            newScale = new Vector3(3f, 3f, 3f);
+            SetObjectScale(newScale);
+            maxHP *= 10;
+        }
         else
         {
             newScale = new Vector3(3f, 3f, 3f);
             SetObjectScale(newScale);
-            
         }
-        enemyCurrentHP = maxHP;
+
+        enemyCurrentHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerLevel) / 2);
     }
 
     //몬스터 웨이브 다 잡을 시 모두 비활성화

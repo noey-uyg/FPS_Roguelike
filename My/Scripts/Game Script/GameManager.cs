@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public int maxEliteEnemyKilledNum = 0;
     public int eliteSpawnCount = 3;
     public int wave = 0;
-    public bool isElite = false;
+    public bool isEliteWave = false;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     {
         if(enemyKilledNum >= maxEnemyKilledNum)
         {
-            isElite = true;
+            isEliteWave = true;
         }
     }
 
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
     {
         if (eliteEnemyKilledNum >= maxEliteEnemyKilledNum)
         {
-            isElite = false;
+            isEliteWave = false;
             gameIsStart = false;
             eliteEnemyKilledNum = 0;
             enemyKilledNum = 0;
