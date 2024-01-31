@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
     public int enemyKilledNum = 0;
     public int maxEnemyKilledNum = 0;
     public int eliteEnemyKilledNum = 0;
-    public int maxEliteEnemyKilledNum = 0;
     public int eliteSpawnCount = 3;
     public int wave = 0;
     public bool isEliteWave = false;
@@ -83,6 +82,8 @@ public class GameManager : MonoBehaviour
     public LevelUPUI levelUpUi;
 
     public static event System.Action OnWaveStart;
+    public static event System.Action OnBossWave;
+    public static event System.Action OnEliteWave;
     public Gun currentGun;
 
     private void Awake()
@@ -140,12 +141,19 @@ public class GameManager : MonoBehaviour
 
                 if (curGameStartPushTime >= maxGameStartPushTime)
                 {
-                    OnWaveStart?.Invoke();
                     gameIsStart = true;
                     curGameStartPushTime = 0f;
                     maxEnemyKilledNum = waveMaxKill[wave];
-                    maxEliteEnemyKilledNum = eliteSpawnCount;
                     wave++;
+
+                    if (wave == 4)
+                    {
+                        OnBossWave?.Invoke();
+                        return;
+                    }
+
+                    OnWaveStart?.Invoke();
+
                 }
             }
             if (Input.GetKeyUp(KeyCode.F))
@@ -157,22 +165,24 @@ public class GameManager : MonoBehaviour
 
     public void EliteTime()
     {
+        if (!gameIsStart) return;
+
         if (enemyKilledNum >= maxEnemyKilledNum)
         {
             isEliteWave = true;
+            enemyKilledNum = 0;
+            OnEliteWave?.Invoke();
         }
     }
 
     //웨이브 끝내기
     public void EneWave()
     {
-        if (eliteEnemyKilledNum >= maxEliteEnemyKilledNum)
+        if (eliteEnemyKilledNum >= eliteSpawnCount)
         {
-            isEliteWave = false;
             gameIsStart = false;
+            isEliteWave = false;
             eliteEnemyKilledNum = 0;
-            enemyKilledNum = 0;
-            eliteSpawnCount = 3;
         }
     }
 

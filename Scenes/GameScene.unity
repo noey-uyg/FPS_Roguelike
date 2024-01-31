@@ -1035,6 +1035,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143726269}
   m_CullTransparentMesh: 1
+--- !u!1 &144192079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144192080}
+  m_Layer: 0
+  m_Name: BossSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &144192080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144192079}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 39.8, y: 4.6, z: -15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 916563212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &148115042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2819,7 +2850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.4999084, y: 1173525.2}
+  m_AnchoredPosition: {x: 2.4999084, y: 2170125.8}
   m_SizeDelta: {x: 425, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319383763
@@ -8807,6 +8838,7 @@ Transform:
   - {fileID: 1791025794}
   - {fileID: 673071883}
   - {fileID: 2000123565}
+  - {fileID: 144192080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &916563213
@@ -8841,6 +8873,7 @@ MonoBehaviour:
   - {fileID: 1791025794}
   - {fileID: 673071883}
   - {fileID: 2000123565}
+  - {fileID: 144192080}
 --- !u!4 &921127625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7326308086656437384, guid: 81d960fe44e3f6b46bcda7b24988e254, type: 3}
@@ -11729,6 +11762,7 @@ MonoBehaviour:
   - {fileID: 466174982370493815, guid: 7577e3de9babd604d9880ded032d1752, type: 3}
   - {fileID: 6489961540263086545, guid: 77bfe4477ab0a0d4b9718e9f2e259075, type: 3}
   - {fileID: 1000012964112300, guid: 8306882d88a96b64291460c8d7664f4d, type: 3}
+  - {fileID: 25901200661331521, guid: aaf0bae1b4fe202469a91f418e19fa04, type: 3}
 --- !u!4 &1209693672
 Transform:
   m_ObjectHideFlags: 0
@@ -13166,7 +13200,6 @@ MonoBehaviour:
   enemyKilledNum: 0
   maxEnemyKilledNum: 0
   eliteEnemyKilledNum: 0
-  maxEliteEnemyKilledNum: 0
   eliteSpawnCount: 3
   wave: 0
   isEliteWave: 0
@@ -17351,9 +17384,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765087230}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 10
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

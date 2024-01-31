@@ -83,19 +83,15 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             case ShopType.Heal:
                 count = shopObject.GetComponent<ShopObject>().healCount;
-                Debug.Log(count);
                 break;
             case ShopType.Upgrade:
                 count = shopObject.GetComponent<ShopObject>().upgradeCount;
-                Debug.Log(count);
                 break;
             case ShopType.Scroll:
                 count = shopObject.GetComponent<ShopObject>().scrollCount;
-                Debug.Log(count);
                 break;
             case ShopType.Awake:
                 count = shopObject.GetComponent<ShopObject>().awakeCount;
-                Debug.Log(count);
                 break;
         }
     }

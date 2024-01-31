@@ -434,11 +434,16 @@ MonoBehaviour:
   enemyCurrentHP: 0
   HPBar: {fileID: 384968747139821369}
   targetPlayer: {fileID: 0}
+  animator: {fileID: 0}
+  isReinforced: 0
   isElite: 0
-  attackDamaage: 7
+  isBoss: 0
+  monsterRange: 12
+  monsterAdditionalRange: 0
+  attackDamage: 0
   attackPoint: {fileID: 1858312698423866968}
   attackCount: 4
-  monsterRange: 12
+  maxAttackDelay: 5
 --- !u!195 &2432235975822560138
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -453,7 +458,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

@@ -5,7 +5,6 @@ using Unity.Services.Analytics.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
@@ -26,6 +25,8 @@ public class Enemy : MonoBehaviour
     private bool isReinforced = false;
     [SerializeField]
     private bool isElite = false;
+    [SerializeField]
+    private bool isBoss = false;
 
     [Header("Attack")]
     [SerializeField]
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        if(GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum)
+        if(GameManager.Instance.isEliteWave)
         {
             DisableObject();
         }
@@ -88,7 +89,7 @@ public class Enemy : MonoBehaviour
 
             if(distance > agent.stoppingDistance)
             {
-                transform.LookAt(targetPlayer.transform.position);
+                SmoothLookAt(targetPlayer.transform.position);
             }
 
             //공격
@@ -120,6 +121,14 @@ public class Enemy : MonoBehaviour
                 agent.isStopped = false;
             }
         }
+    }
+
+    private void SmoothLookAt(Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        Quaternion toRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, agent.speed * Time.deltaTime);
     }
 
     // 플레이어가 공격 범위에 들어왔는지 확인하는 함수
@@ -179,9 +188,11 @@ public class Enemy : MonoBehaviour
         }
         else if (isElite)
         {
-            newScale = new Vector3(3f, 3f, 3f);
-            SetObjectScale(newScale);
-            maxHP *= 10;
+            maxHP *= 1;
+        }
+        else if (isBoss)
+        {
+            maxHP *= 100;
         }
         else
         {
@@ -189,13 +200,14 @@ public class Enemy : MonoBehaviour
             SetObjectScale(newScale);
         }
 
-        enemyCurrentHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerLevel) / 2);
+        maxHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerLevel) / 2);
+        enemyCurrentHP = maxHP;
     }
 
     //몬스터 웨이브 다 잡을 시 모두 비활성화
     private void DisableObject()
     {
-        if (isElite) return;
+        if (isElite || isBoss) return;
 
         gameObject.SetActive(false);
     }
@@ -222,13 +234,15 @@ public class Enemy : MonoBehaviour
         CrystalDrop();
         BulletDrop();
 
-        GameManager.Instance.enemyKilledNum++;
-
         if (isElite)
         {
             GameManager.Instance.eliteEnemyKilledNum++;
         }
-        
+        else
+        {
+            GameManager.Instance.enemyKilledNum++;
+        }
+
         gameObject.SetActive(false);
     }
 

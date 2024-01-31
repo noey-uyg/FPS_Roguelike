@@ -42,9 +42,9 @@ public class ItemPickUp : MonoBehaviour
         rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
             switch (item.itemType)
             {
@@ -71,4 +71,5 @@ public class ItemPickUp : MonoBehaviour
             }
         }
     }
+
 }
