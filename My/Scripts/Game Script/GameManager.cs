@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     public AwakeningData[] awakeDatas;
 
     [Header("Wave")]
-    public int[] waveMaxKill = { 1000, 3000, 5000, 0 };
+    public int[] waveMaxKill = { 1000, 3000, 5000, 1 };
     public int enemyKilledNum = 0;
     public int maxEnemyKilledNum = 0;
     public int eliteEnemyKilledNum = 0;

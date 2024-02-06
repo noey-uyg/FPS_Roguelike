@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 217688
   packageName: Fire Ice Projectile - Explosion
   packageVersion: 1.0
-  assetPath: Assets/FireIceProjectileExplosion/Materials/M_Flare_01.mat
+  assetPath: Assets/My/Prefabs/Particle/EnemyAttack/Materials/M_Flare_01.mat
   uploadId: 491534

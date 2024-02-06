@@ -49,7 +49,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -61,11 +61,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!136 &466174982370493812
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d8723631e475824fbfad41470d720be, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -125,7 +125,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -152,10 +152,12 @@ MonoBehaviour:
   animator: {fileID: 7039619587674655494}
   isReinforced: 0
   isElite: 1
+  isBoss: 0
   monsterRange: 8
   monsterAdditionalRange: 5
   attackDamage: 1
   attackPoint: {fileID: 0}
+  bossAttackPoint: []
   attackCount: 0
   maxAttackDelay: 3
 --- !u!1 &1096692367984722467

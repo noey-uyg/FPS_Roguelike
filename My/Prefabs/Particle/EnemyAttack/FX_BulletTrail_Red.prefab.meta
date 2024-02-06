@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 217688
   packageName: Fire Ice Projectile - Explosion
   packageVersion: 1.0
-  assetPath: Assets/FireIceProjectileExplosion/Prefabs/FX_BulletTrail_Red.prefab
+  assetPath: Assets/My/Prefabs/Particle/EnemyAttack/FX_BulletTrail_Red.prefab
   uploadId: 491534

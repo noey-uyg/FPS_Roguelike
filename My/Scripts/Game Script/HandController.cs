@@ -88,7 +88,7 @@ public class HandController : CloseWeaponController
         }
     }
 
-    //피격당한 적 뒤의 몬스터 탐지(원뿔형태)
+    //피격당한 적 뒤의 몬스터 탐지
     private bool TargetInRange(Transform caster, Transform target)
     {
         float angleRange = 120f;

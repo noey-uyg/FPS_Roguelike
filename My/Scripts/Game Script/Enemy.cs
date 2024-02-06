@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject attackPoint;
     [SerializeField]
+    private GameObject[] BombardAttackPoint;
+    [SerializeField]
     private int attackCount;
     [SerializeField]
     private float maxAttackDelay = 5f;
@@ -109,6 +111,10 @@ public class Enemy : MonoBehaviour
                             animator.SetTrigger("Attack1");
                         }    
                     }
+                    else if (isBoss)
+                    {
+                        StartCoroutine(BossThink());
+                    }
                     else
                     {
                         StartCoroutine(EnemyAttackCoroutine());
@@ -149,7 +155,7 @@ public class Enemy : MonoBehaviour
 
     private void IsReinforced()
     {
-        if (isElite || GameManager.Instance.wave < 2) return;
+        if (isElite || isBoss || GameManager.Instance.wave < 2) return;
 
         int ranNum = Random.Range(0, 100);
 
@@ -320,5 +326,93 @@ public class Enemy : MonoBehaviour
             GameObject bullet = PoolManager.instance.ActivateObj(20);
             bullet.transform.position = gameObject.transform.position;
         }
+    }
+
+    //보스
+    IEnumerator BossThink()
+    {
+        float randPattern = Random.Range(0, 5);
+
+        switch (randPattern)
+        {
+            case 0:
+            case 1:
+            case 2:
+                StartCoroutine(Bombard());
+                break;
+            case 3:
+            case 4:
+                StartCoroutine(IndisciAttack());
+                break;
+        }
+
+        yield return new WaitForSeconds(maxAttackDelay*2);
+    }
+
+    IEnumerator Bombard()
+    {
+        animator.SetTrigger("Bombard");
+        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(maxAttackDelay);
+    }
+
+    IEnumerator IndisciAttack()
+    {
+        animator.SetTrigger("IndisciAttack");
+
+        yield return new WaitForSeconds(1f);
+
+        for (int i=0;i<attackCount; i++)
+        {
+            BossIndisciAttack();
+
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        yield return new WaitForSeconds(maxAttackDelay);
+    }
+
+    void BossIndisciAttack()
+    {
+        Vector3 attackPosition = CalculateAttackPosition();
+
+        GameObject attackPt = PoolManager.instance.ActivateObj(22);
+        attackPt.transform.position = attackPosition;
+
+        Vector3 directionToPlayer = (targetPlayer.transform.position - attackPt.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        attackPt.transform.rotation = lookRotation;
+
+        BossAttack(attackPt);
+        StartCoroutine(DisableAfterDelay(attackPt));
+    }
+
+    Vector3 CalculateAttackPosition()
+    {
+        // 플레이어 주변 위치 계산 로직
+        Vector3 playerPosition = targetPlayer.transform.position;
+        Vector3 attackPosition = playerPosition + Random.insideUnitSphere * (monsterRange/4);
+
+        float desiredY = 7f;
+
+        attackPosition.y = Mathf.Max(attackPosition.y, desiredY);
+
+        return attackPosition;
+    }
+
+    void BossAttack(GameObject attackPt)
+    {
+        Vector3 aim = (targetPlayer.transform.position - attackPt.transform.position).normalized;
+        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13, 15));
+        eA.GetComponent<EnemyAttackManager>().InitBulletDamage(attackDamage);
+        eA.transform.position = attackPt.transform.position;
+        eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
+    }
+
+    IEnumerator DisableAfterDelay(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.3f);
+        obj.SetActive(false);
     }
 }

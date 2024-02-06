@@ -107,5 +107,5 @@ AssetOrigin:
   productId: 217688
   packageName: Fire Ice Projectile - Explosion
   packageVersion: 1.0
-  assetPath: Assets/FireIceProjectileExplosion/Textures/Tex_Fx__Stars_Outline.png
+  assetPath: Assets/My/Prefabs/Particle/EnemyAttack/Textures/Tex_Fx__Stars_Outline.png
   uploadId: 491534

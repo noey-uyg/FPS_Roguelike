@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
     //일반 몬스터 스폰
     private void SpawnEnemy()
     {
-        if (GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum) return;
+        if (GameManager.Instance.enemyKilledNum >= GameManager.Instance.maxEnemyKilledNum || GameManager.Instance.wave == 4) return;
 
         GameObject enemy = PoolManager.instance.ActivateObj(Random.Range(0, 7));
         enemy.transform.position = GetValidSpawnPoint();
