@@ -128,6 +128,31 @@ MonoBehaviour:
   HPBar: {fileID: 1873829829278635243}
   targetPlayer: {fileID: 0}
   animator: {fileID: 3293061916431516914}
+  bombbardPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   isReinforced: 0
   isElite: 0
   isBoss: 1
@@ -135,9 +160,8 @@ MonoBehaviour:
   monsterAdditionalRange: 0
   attackDamage: 1
   attackPoint: {fileID: 0}
-  BombardAttackPoint: []
   attackCount: 10
-  maxAttackDelay: 3
+  maxAttackDelay: 3.5
 --- !u!195 &6012435736913603909
 NavMeshAgent:
   m_ObjectHideFlags: 0

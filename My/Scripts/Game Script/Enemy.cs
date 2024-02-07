@@ -38,8 +38,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject attackPoint;
     [SerializeField]
-    private GameObject[] BombardAttackPoint;
-    [SerializeField]
     private int attackCount;
     [SerializeField]
     private float maxAttackDelay = 5f;
@@ -352,40 +350,45 @@ public class Enemy : MonoBehaviour
     IEnumerator Bombard()
     {
         animator.SetTrigger("Bombard");
-        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(maxAttackDelay);
+        StartCoroutine(BombardIndicator());
+
+
+        yield return null;
+    }
+
+    IEnumerator BombardIndicator()
+    {
+        GameObject indicator = PoolManager.instance.ActivateObj(23);
+        Vector3 targetPosition = targetPlayer.transform.position;
+        targetPosition.y -= 1f;
+        indicator.transform.position = targetPosition;
+
+        yield return new WaitForSeconds(3f);
+
+        BombAttack(indicator.transform.position);
+    }
+
+    void BombAttack(Vector3 position)
+    {
+        GameObject Bomb = PoolManager.instance.ActivateObj(Random.Range(24, 26));
+        Bomb.transform.position = position;
     }
 
     IEnumerator IndisciAttack()
     {
         animator.SetTrigger("IndisciAttack");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         for (int i=0;i<attackCount; i++)
         {
-            BossIndisciAttack();
+            BossAttack();
 
             yield return new WaitForSeconds(0.3f);
         }
 
         yield return new WaitForSeconds(maxAttackDelay);
-    }
-
-    void BossIndisciAttack()
-    {
-        Vector3 attackPosition = CalculateAttackPosition();
-
-        GameObject attackPt = PoolManager.instance.ActivateObj(22);
-        attackPt.transform.position = attackPosition;
-
-        Vector3 directionToPlayer = (targetPlayer.transform.position - attackPt.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        attackPt.transform.rotation = lookRotation;
-
-        BossAttack(attackPt);
-        StartCoroutine(DisableAfterDelay(attackPt));
     }
 
     Vector3 CalculateAttackPosition()
@@ -395,19 +398,28 @@ public class Enemy : MonoBehaviour
         Vector3 attackPosition = playerPosition + Random.insideUnitSphere * (monsterRange/4);
 
         float desiredY = 7f;
-
         attackPosition.y = Mathf.Max(attackPosition.y, desiredY);
 
         return attackPosition;
     }
 
-    void BossAttack(GameObject attackPt)
+    void BossAttack()
     {
-        Vector3 aim = (targetPlayer.transform.position - attackPt.transform.position).normalized;
-        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13, 15));
+        Vector3 attackPosition = CalculateAttackPosition();
+
+        GameObject attackPt = PoolManager.instance.ActivateObj(22);
+        GameObject eA = PoolManager.instance.ActivateObj(Random.Range(13,15));
+        attackPt.transform.position = attackPosition;
+
+        Vector3 directionToPlayer = (targetPlayer.transform.position - attackPt.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        attackPt.transform.rotation = lookRotation;
+
         eA.GetComponent<EnemyAttackManager>().InitBulletDamage(attackDamage);
         eA.transform.position = attackPt.transform.position;
-        eA.transform.rotation = Quaternion.LookRotation(aim, Vector3.up);
+        eA.transform.rotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
+
+        StartCoroutine(DisableAfterDelay(attackPt));
     }
 
     IEnumerator DisableAfterDelay(GameObject obj)

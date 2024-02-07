@@ -8,10 +8,14 @@ public class EnemyAttackManager : MonoBehaviour
     private float attackMoveSpeed;
     [SerializeField]
     private float attackDamage;
-
+    [SerializeField]
+    private float maxDestroyAttack;
     private float destroyAttack;
 
-
+    private void OnEnable()
+    {
+        destroyAttack = maxDestroyAttack;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -51,6 +55,6 @@ public class EnemyAttackManager : MonoBehaviour
     private void DestroyBullet()
     {
         gameObject.SetActive(false);
-        destroyAttack = 4f;
+        destroyAttack = maxDestroyAttack;
     }
 }

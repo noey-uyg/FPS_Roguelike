@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackMoveSpeed: 10
   attackDamage: 0
+  maxDestroyAttack: 5
 --- !u!1 &8406815242764361057
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4943,7 +4944,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
