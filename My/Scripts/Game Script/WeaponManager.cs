@@ -64,7 +64,7 @@ public class WeaponManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isOpenTab) return;
+        if (GameManager.Instance.isOpenTab || GameManager.Instance.mainScene) return;
 
         if (currentWeaponType == null)
         {

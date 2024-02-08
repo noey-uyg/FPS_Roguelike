@@ -142,9 +142,8 @@ MonoBehaviour:
   isBoss: 0
   monsterRange: 5
   monsterAdditionalRange: 0
-  attackDamage: 0
+  attackDamage: 5
   attackPoint: {fileID: 1457667856731752382}
-  bossAttackPoint: []
   attackCount: 1
   maxAttackDelay: 5
 --- !u!195 &-6682749923284481538

@@ -11,6 +11,9 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public enum ShopType { Heal,Scroll,Awake,Upgrade}
     public ShopType shopType;
 
+    public int cost;
+    public Text costText;
+
     string nameText;
     string descText;
 
@@ -58,27 +61,33 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
+    private void LateUpdate()
+    {
+        costText.text = cost.ToString();
+    }
+
     // 스크롤에 마우스를 가져다 대면
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("마우스가" + shopType + "에 있습니다.");
         UpdateDescPosition();
         isMouseOverSlot = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("마우스가" + shopType + "를 벗어났습니다.");
         UpdateDescPosition();
         isMouseOverSlot = false;
     }
 
     public void OnEnable()
     {
+        cost = (cost * GameManager.Instance.playerLevel) / GameManager.Instance.wave;
+
         if (shopObject == null)
         {
             shopObject = GameObject.FindWithTag("Shop");
         }
+
         switch (shopType)
         {
             case ShopType.Heal:
@@ -101,22 +110,34 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         switch (shopType)
         {
             case ShopType.Heal:
-                GameManager.Instance.GetHP();
-                count--;
+                if(cost <= GameManager.Instance.playerGold)
+                {
+                    GameManager.Instance.GetHP();
+                    count--;
+                }
                 break;
             case ShopType.Scroll:
-                userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
-                gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
-                gameObject.GetComponent<Scroll>().DeleteHaveScroll();
-                count--;
+                if (cost <= GameManager.Instance.playerGold)
+                {
+                    userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
+                    gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
+                    gameObject.GetComponent<Scroll>().DeleteHaveScroll();
+                    count--;
+                }
                 break;
             case ShopType.Awake:
-                gameObject.GetComponent<RandomAwakening>().AwakeUpgrade();
-                count--;
+                if (cost <= GameManager.Instance.playerGold)
+                {
+                    gameObject.GetComponent<RandomAwakening>().AwakeUpgrade();
+                    count--;
+                }
                 break;
             case ShopType.Upgrade:
-                GameManager.Instance.extraDamage += 0.1f;
-                count--;
+                if (cost <= GameManager.Instance.playerGold)
+                {
+                    GameManager.Instance.extraDamage += 0.1f;
+                    count--;
+                }
                 break;
         }
     }

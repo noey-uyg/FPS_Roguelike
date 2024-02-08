@@ -205,6 +205,8 @@ public class Enemy : MonoBehaviour
         }
 
         maxHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerLevel) / 2);
+        maxHP *= GameManager.Instance.difficultyLevel;
+        attackDamage *= GameManager.Instance.difficultyLevel;
         enemyCurrentHP = maxHP;
     }
 
@@ -353,7 +355,6 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(BombardIndicator());
 
-
         yield return null;
     }
 
@@ -364,15 +365,32 @@ public class Enemy : MonoBehaviour
         targetPosition.y -= 1f;
         indicator.transform.position = targetPosition;
 
+        indicator.GetComponent<DrawCircle>().DrawCircleAtPosition(targetPosition);
         yield return new WaitForSeconds(3f);
 
-        BombAttack(indicator.transform.position);
+        StartCoroutine(BombAttack(indicator.transform.position));
     }
 
-    void BombAttack(Vector3 position)
+    IEnumerator BombAttack(Vector3 position)
     {
         GameObject Bomb = PoolManager.instance.ActivateObj(Random.Range(24, 26));
         Bomb.transform.position = position;
+
+        float explosionRadius = 3.5f;
+
+        Collider[] colliders = Physics.OverlapSphere(position, explosionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                GameManager.Instance.playerCurHP -= 10;
+            }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        Bomb.SetActive(false);
     }
 
     IEnumerator IndisciAttack()

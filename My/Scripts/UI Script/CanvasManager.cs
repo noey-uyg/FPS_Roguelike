@@ -1,0 +1,55 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CanvasManager : MonoBehaviour
+{
+    public GameObject inGameUI;
+    public GameObject mainUI;
+    public Dropdown selectDifficulty;
+
+    private void Update()
+    {
+        MainUIShow();
+        InGameUIShow();
+    }
+
+    void InGameUIShow()
+    {
+        if (!GameManager.Instance.mainScene)
+        {
+            inGameUI.SetActive(true);
+            mainUI.SetActive(false);
+        }
+    }
+
+    void MainUIShow()
+    {
+        if(GameManager.Instance.mainScene)
+        {
+            inGameUI.SetActive(false);
+            mainUI.SetActive(true);
+        }
+    }
+
+    public void OnStartBtn()
+    {
+        GameManager.Instance.mainScene = false;
+        switch (selectDifficulty.value)
+        {
+            case 0:
+                GameManager.Instance.difficultyLevel = 0.75f;
+                break;
+            case 1:
+                GameManager.Instance.difficultyLevel = 1f;
+                break;
+            case 2:
+                GameManager.Instance.difficultyLevel = 1.5f;
+                break;
+            case 3:
+                GameManager.Instance.difficultyLevel = 3f;
+                break;
+        }
+    }
+}

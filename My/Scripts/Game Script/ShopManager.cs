@@ -30,10 +30,7 @@ public class ShopManager : MonoBehaviour
                     shop.count = 2;
                     break;
                 case Shop.ShopType.Scroll:
-                    shop.count = 0;
-                    break;
                 case Shop.ShopType.Awake:
-                    shop.count = 0;
                     break;
             }
         }

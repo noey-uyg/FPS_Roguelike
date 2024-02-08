@@ -59,12 +59,14 @@ public class GameManager : MonoBehaviour
     public float extraHP = 0;
 
     [Header("GameElements")]
+    public bool mainScene = true;
     public bool gameIsStart = false;
     public float maxGameStartPushTime = 1f;
     public float curGameStartPushTime = 0f;
     public AwakeningData[] awakeDatas;
 
     [Header("Wave")]
+    public float difficultyLevel = 0;
     public int[] waveMaxKill = { 1000, 3000, 5000, 1 };
     public int enemyKilledNum = 0;
     public int maxEnemyKilledNum = 0;
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isOpenTab)
+        if (isOpenTab || mainScene)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

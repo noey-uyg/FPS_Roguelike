@@ -15,11 +15,10 @@ public class DrawCircle : MonoBehaviour
 
     private void OnEnable()
     {
-        DrawCircleAtPosition(transform.position);
         StartCoroutine(FillCircleAnimation());
     }
 
-    private void DrawCircleAtPosition(Vector3 position)
+    public void DrawCircleAtPosition(Vector3 position)
     {
         lineRenderer.positionCount = numSegments + 1;
         lineRenderer.useWorldSpace = true; // 월드 좌표계 사용
