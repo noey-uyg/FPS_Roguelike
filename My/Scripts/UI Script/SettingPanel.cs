@@ -14,6 +14,13 @@ public class SettingPanel : MonoBehaviour
     public Slider mouseSet;
     public InputField mouseSetInput;
 
+    List<Resolution> resolutions = new List<Resolution>();
+    FullScreenMode screenMode;
+    public Dropdown resolutionDd;
+    public Toggle fullScreenBtn;
+    public int resolutionNum;
+
+
     private void Start()
     {
         mouseSet.value = GameManager.Instance.mouseSensitivity;
@@ -24,6 +31,8 @@ public class SettingPanel : MonoBehaviour
 
         seSet.value = GameManager.Instance.soundEffectVolume;
         seSetInput.text = (seSet.value * 100).ToString();
+
+        InitResolution();
 
     }
 
@@ -70,5 +79,50 @@ public class SettingPanel : MonoBehaviour
         seSet.value = float.Parse(seSetInput.text) / 100;
         GameManager.Instance.soundEffectVolume = seSet.value;
         SoundManager.instance.SetEffectVolume(GameManager.Instance.soundEffectVolume);
+    }
+
+    //해상도 초기화
+    void InitResolution()
+    {
+        resolutions.AddRange(Screen.resolutions);
+        resolutionDd.options.Clear();
+
+        int optionNum = 0;
+
+        foreach (Resolution item in resolutions)
+        {
+            Dropdown.OptionData option = new Dropdown.OptionData();
+            option.text = item.width + "X" + item.height + " " + item.refreshRateRatio + "hz";
+            resolutionDd.options.Add(option);
+
+            if(item.width == Screen.width && item.height == Screen.height)
+            {
+                resolutionDd.value = optionNum;
+            }
+            optionNum++;
+        }
+        resolutionDd.RefreshShownValue();
+        fullScreenBtn.isOn = Screen.fullScreenMode.Equals(FullScreenMode.FullScreenWindow) ? true : false;
+    }
+
+
+    public void DropboxOptionChange(int x)
+    {
+        resolutionNum = x;
+        ResolutionOkBtn();
+    }
+
+    public void FullScreenBtn(bool isFull)
+    {
+        screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        ResolutionOkBtn();
+    }
+
+    //해상도 변경
+    public void ResolutionOkBtn()
+    {
+        Screen.SetResolution(resolutions[resolutionNum].width,
+            resolutions[resolutionNum].height,
+            screenMode);
     }
 }
