@@ -36,9 +36,14 @@ public class SoundManager : MonoBehaviour
 
     public string[] playSoundName;
 
+    public float effectVolume;
+    public float bgmVolume;
+
     private void Start()
     {
         playSoundName = new string[audioSourceEffects.Length];
+        effectVolume = GameManager.Instance.soundEffectVolume;
+        bgmVolume = GameManager.Instance.soundBgmVolume;
     }
 
     public void PlaySE(string name)
@@ -53,14 +58,13 @@ public class SoundManager : MonoBehaviour
                     {
                         playSoundName[j] = effectSound[i].name;
                         audioSourceEffects[j].clip = effectSound[i].clip;
+                        audioSourceEffects[j].volume = effectVolume;
                         audioSourceEffects[j].Play();
                         return;
                     }
                 }
-                Debug.Log("모든 오디오 소스가 사용중입니다.");
                 return;
             }
-            Debug.Log(name + "사운드가 등록되지 않았습니다.");
         }
     }
 
@@ -82,7 +86,20 @@ public class SoundManager : MonoBehaviour
                 return;
             }
         }
+    }
 
-        Debug.Log("재생 중인" + name + "사운드가 없습니다.");
+    public void SetEffectVolume(float volume)
+    {
+        effectVolume = volume;
+        foreach (var source in audioSourceEffects)
+        {
+            source.volume = effectVolume;
+        }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        bgmVolume = volume;
+        audioSourceBGM.volume = bgmVolume;
     }
 }

@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastPos;
 
     [Header("Camera")]
-    [SerializeField]
-    private float mouseSensitivity;
+    public float mouseSensitivity;
     [SerializeField]
     private float cameraRotationLimit;
     private float currentCameraRoataionX;
@@ -56,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.canPlayerMove || GameManager.Instance.mainScene) return;
 
+        mouseSensitivity = GameManager.Instance.mouseSensitivity;
         IsGround();
         TryJump();
         TryRun();

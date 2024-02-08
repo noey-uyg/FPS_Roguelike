@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
         231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
 
+    [Header("Setting")]
+    public float mouseSensitivity;
+    public float soundEffectVolume;
+    public float soundBgmVolume;
+
     [Header("AxeAwakening")]
     public float axeExtraDamage = 0;
     public bool axeBleeding = false;

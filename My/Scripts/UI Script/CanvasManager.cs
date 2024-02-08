@@ -8,11 +8,30 @@ public class CanvasManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject mainUI;
     public Dropdown selectDifficulty;
+    public GameObject traitsPanel;
+    public GameObject puzzlePanel;
+    public GameObject settingPanel;
 
     private void Update()
     {
         MainUIShow();
         InGameUIShow();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(traitsPanel.activeSelf)
+            {
+                traitsPanel.SetActive(false);
+            }
+            if(puzzlePanel.activeSelf)
+            {
+                puzzlePanel.SetActive(false);
+            }
+            if(settingPanel.activeSelf)
+            {
+                settingPanel.SetActive(false);
+            }
+        }
     }
 
     void InGameUIShow()
@@ -51,5 +70,20 @@ public class CanvasManager : MonoBehaviour
                 GameManager.Instance.difficultyLevel = 3f;
                 break;
         }
+    }
+
+    public void OnTraitsBtn()
+    {
+        traitsPanel.SetActive(true);
+    }
+
+    public void OnPuzzleBtn()
+    {
+        puzzlePanel.SetActive(true);
+    }
+
+    public void OnSettingBtn()
+    {
+        settingPanel.SetActive(true);
     }
 }
