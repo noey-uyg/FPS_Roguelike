@@ -20,7 +20,6 @@ public class SettingPanel : MonoBehaviour
     public Toggle fullScreenBtn;
     public int resolutionNum;
 
-
     private void Start()
     {
         mouseSet.value = GameManager.Instance.mouseSensitivity;
@@ -102,9 +101,8 @@ public class SettingPanel : MonoBehaviour
             optionNum++;
         }
         resolutionDd.RefreshShownValue();
-        fullScreenBtn.isOn = Screen.fullScreenMode.Equals(FullScreenMode.FullScreenWindow) ? true : false;
+        fullScreenBtn.isOn = Screen.fullScreenMode.Equals(FullScreenMode.ExclusiveFullScreen) ? true : false;
     }
-
 
     public void DropboxOptionChange(int x)
     {
@@ -114,7 +112,7 @@ public class SettingPanel : MonoBehaviour
 
     public void FullScreenBtn(bool isFull)
     {
-        screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        screenMode = isFull ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
         ResolutionOkBtn();
     }
 

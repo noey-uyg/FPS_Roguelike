@@ -80,10 +80,23 @@ public class CanvasManager : MonoBehaviour
     public void OnPuzzleBtn()
     {
         puzzlePanel.SetActive(true);
+
     }
 
     public void OnSettingBtn()
     {
         settingPanel.SetActive(true);
+    }
+
+    public void GameQuitBtn()
+    {
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+        else
+        {
+            Application.Quit();
+        }
     }
 }

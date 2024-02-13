@@ -39,7 +39,6 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         shopNameText = texts[0];
         shopDescText = texts[1];
-
     }
 
     private void Update()
@@ -66,17 +65,16 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         costText.text = cost.ToString();
     }
 
-    // 스크롤에 마우스를 가져다 대면
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UpdateDescPosition();
         isMouseOverSlot = true;
+        UpdateDescPosition();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UpdateDescPosition();
         isMouseOverSlot = false;
+        UpdateDescPosition();
     }
 
     public void OnEnable()
@@ -180,12 +178,8 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             RectTransformUtility.ScreenPointToLocalPointInRectangle(descRect.parent as RectTransform, mousePosition, null, out Vector2 localMousePosition);
 
             descRect.localPosition = localMousePosition;
-            descRect.localScale = Vector3.one;
         }
-        else
-        {
-            descRect.localScale = Vector3.zero;
-        }
+        descRect.localScale = isMouseOverSlot ? Vector3.one : Vector3.zero;
     }
 
     public void SetAlpha(float alphaValue)

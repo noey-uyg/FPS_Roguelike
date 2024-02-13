@@ -40,18 +40,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         scroll = null;
     }
 
-    // 스크롤에 마우스를 가져다 대면
     public void OnPointerEnter(PointerEventData eventData)
     {
         isMouseOverSlot = true;
-        Debug.Log("마우스가" + gameObject.name + "에 있습니다.");
         UpdateDescPosition();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isMouseOverSlot = false;
-        Debug.Log("마우스가" + gameObject.name + "를 벗어났습니다.");
         UpdateDescPosition();
     }
 
@@ -65,12 +62,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             RectTransformUtility.ScreenPointToLocalPointInRectangle(descRect.parent as RectTransform, mousePosition, null, out Vector2 localMousePosition);
 
             descRect.localPosition = localMousePosition;
-            descRect.localScale = Vector3.one;
         }
-        else
-        {
-            descRect.localScale = Vector3.zero;
-        }
+        descRect.localScale = isMouseOverSlot ? Vector3.one : Vector3.zero;
     }
 }
 

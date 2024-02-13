@@ -290,7 +290,7 @@ public class Enemy : MonoBehaviour
     void ScrollDrop()
     {
         int scrollRandom = Random.Range(0, 1000);
-        if (scrollRandom < 5)
+        if (scrollRandom < 1000)
         {
             GameObject scroll = PoolManager.instance.ActivateObj(12);
             scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
@@ -353,9 +353,9 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("Bombard");
 
-        StartCoroutine(BombardIndicator());
+        yield return new WaitForSeconds(0.1f);
 
-        yield return null;
+        StartCoroutine(BombardIndicator());
     }
 
     IEnumerator BombardIndicator()
