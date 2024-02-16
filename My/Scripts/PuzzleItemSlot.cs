@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,7 +13,8 @@ public class PuzzleItemSlot : MonoBehaviour
     public Vector2 oldPosition;
     public Image icon;
 
-    // Start is called before the first frame update
+    TetrisSlot slots;
+
     void Start()
     {
         Rescaling();
