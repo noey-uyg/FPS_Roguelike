@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3828292801742d9418fa31f8228769ed, type: 3}
+  m_Name: NewPuzzle 5
+  m_EditorClassIdentifier: 
+  puzzleID: 5
+  puzzleIcon: {fileID: 21300000, guid: 5f22cbfcac4977a4c8a20a96b436a437, type: 3}
+  puzzleName: F
+  puzzleDesc: F
+  currentStackSize: 0
+  maxStackSize: 5
+  puzzleSize: {x: 3, y: 3}
+  isHave: 0
+  damage: 0

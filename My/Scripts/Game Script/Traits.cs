@@ -86,6 +86,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         descRect.localScale = isMouseOverSlot ? Vector3.one : Vector3.zero;
     }
 
+    //특성 개방
     void SkillUnlock()
     {
         if(traitsdata.prevTraits.Length == 0)
@@ -103,7 +104,8 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         btn.interactable = traitsdata.isUnlocked;
     }
-
+    
+    //특성 개방 체크
     bool AllPrevTraitsUnlock()
     {
         foreach (var prevTrait in traitsdata.prevTraits)
@@ -117,6 +119,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         return true;
     }
 
+    //특성 강화
     public void TraitsUpgrade()
     {
         if (traitsdata.level >= traitsdata.damage.Length - 1) return;
