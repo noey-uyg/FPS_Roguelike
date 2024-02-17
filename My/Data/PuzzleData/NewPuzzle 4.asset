@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NewPuzzle 4
   m_EditorClassIdentifier: 
   puzzleID: 4
-  puzzleIcon: {fileID: 21300000, guid: 4ad9079a9ab98fb429e0cea66d2547cc, type: 3}
+  puzzleIcon: {fileID: 21300000, guid: 130ec14f997247b48892627ec95c3367, type: 3}
   puzzleName: E
   puzzleDesc: E
   currentStackSize: 0

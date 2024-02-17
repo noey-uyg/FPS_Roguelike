@@ -19,5 +19,5 @@ MonoBehaviour:
   currentStackSize: 0
   maxStackSize: 5
   puzzleSize: {x: 3, y: 3}
-  isHave: 0
+  isHave: 1
   damage: 0

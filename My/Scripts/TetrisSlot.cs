@@ -26,7 +26,7 @@ public class TetrisSlot : MonoBehaviour
     public int maxGridY;
 
     public PuzzleItemSlot prefabSlot; // item prefab
-    Vector2 cellSize = new Vector2(34f, 34f); //slot cell size 
+    public Vector2 cellSize = new Vector2(60f, 60f); //slot cell size 
 
     List<Vector2> posItemNaBag = new List<Vector2>(); // new item pos in bag matrix
 
