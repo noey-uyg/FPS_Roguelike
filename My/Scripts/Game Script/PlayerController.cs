@@ -67,9 +67,9 @@ public class PlayerController : MonoBehaviour
 
     private void InitPlayerInfo()
     {
-        walkSpeed = (GameManager.Instance.playerWalkSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
-        runSpeed = (GameManager.Instance.playerRunSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
-        crouchSpeed = (GameManager.Instance.playerCrouchSpeed) + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed);
+        walkSpeed = (GameManager.Instance.playerWalkSpeed);
+        runSpeed = (GameManager.Instance.playerRunSpeed);
+        crouchSpeed = (GameManager.Instance.playerCrouchSpeed);
         jumpForce = GameManager.Instance.playerJumpForce;
     }
 
@@ -197,7 +197,10 @@ public class PlayerController : MonoBehaviour
         Vector3 moveHorizontal = transform.right * moveDirX;
         Vector3 moveVertical = transform.forward * moveDirZ;
 
-        Vector3 velocity = (moveHorizontal + moveVertical).normalized * currentSpeed;
+        float FinalSpeed;
+        FinalSpeed = currentSpeed + (currentSpeed * GameManager.Instance.extraSpeed);
+
+        Vector3 velocity = (moveHorizontal + moveVertical).normalized * FinalSpeed;
 
         myRigid.MovePosition(transform.position + velocity * Time.deltaTime);
     }

@@ -74,11 +74,20 @@ public class GameManager : MonoBehaviour
     public float difficultyLevel = 0;
     public int[] waveMaxKill = { 1000, 3000, 5000, 1 };
     public int enemyKilledNum = 0;
+    public int allEnemyKill = 0;
     public int maxEnemyKilledNum = 0;
     public int eliteEnemyKilledNum = 0;
     public int eliteSpawnCount = 3;
     public int wave = 0;
     public bool isEliteWave = false;
+
+    [Header("Puzzle")]
+    public bool puzzleDam;
+    public bool puzzleHP;
+    public bool puzzleSpeed;
+    public bool puzzleLevelDam;
+    public bool puzzleLevelHP;
+    public bool puzzleLevelSpeed;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
@@ -105,12 +114,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerMaxHP += playerMaxHP * extraHP;
         playerNextEXP = playerExp[0];
         playerCurHP = playerMaxHP;
     }
 
     private void Update()
     {
+        PuzzleKillAblity();
         if (isOpenTab || mainScene)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -193,6 +204,77 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PuzzleKillAblity()
+    {
+        Kill50Dam();
+        Kill50HP();
+        Kill50Speed();
+    }
+
+    public void Kill50Dam()
+    {
+        if (puzzleDam)
+        {
+            extraDamage += (allEnemyKill / 50) * 0.01f;
+        }
+    }
+
+    public void Kill50HP()
+    {
+        if (puzzleHP)
+        {
+            extraHP += (allEnemyKill / 50) * 0.01f;
+        }
+    }
+
+    public void Kill50Speed()
+    {
+        if (puzzleSpeed)
+        {
+            extraSpeed += ((allEnemyKill / 50) * 0.001f);
+        }
+    }
+
+    public void LevelUPDam()
+    {
+        if (puzzleLevelDam)
+        {
+            extraDamage += 0.015f;
+        }
+    }
+
+    public void LevelUPHP()
+    {
+        if (puzzleLevelHP)
+        {
+            playerCurHP = playerMaxHP;
+        }
+    }
+
+    public void LevelUPSpeed()
+    {
+        if (puzzleLevelSpeed)
+        {
+            extraSpeed += 0.002f;
+        }
+    }
+
+    public void PuzzleLevelUPAblity()
+    {
+        LevelUPDam();
+        LevelUPHP();
+        LevelUPSpeed();
+    }
+
+    public void LevelUP()
+    {
+        playerCurEXP = 0;
+        playerNextEXP = playerExp[Mathf.Min(playerLevel, playerExp.Length)];
+        playerLevel += 1;
+        PuzzleLevelUPAblity();
+        levelUpUi.Show();
+    }
+
     public void GetEXP()
     {
         playerCurEXP += 1;
@@ -201,14 +283,6 @@ public class GameManager : MonoBehaviour
         {
             LevelUP();
         }
-    }
-
-    public void LevelUP()
-    {
-        playerCurEXP = 0;
-        playerNextEXP = playerExp[Mathf.Min(playerLevel, playerExp.Length)];
-        playerLevel += 1;
-        levelUpUi.Show();
     }
 
     public void GetHP()

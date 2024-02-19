@@ -249,6 +249,8 @@ public class Enemy : MonoBehaviour
             GameManager.Instance.enemyKilledNum++;
         }
 
+        GameManager.Instance.allEnemyKill++;
+
         gameObject.SetActive(false);
     }
 

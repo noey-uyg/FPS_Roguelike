@@ -8,6 +8,7 @@ public class PuzzleView : MonoBehaviour
 
     int x = 1;
     int y = 1;
+
     private void Start()
     {
         PuzzleViewClick();
@@ -38,6 +39,7 @@ public class PuzzleView : MonoBehaviour
             {
                 puzzleBtn[i].SetActive(false);
             }
+
         }
     }
 }

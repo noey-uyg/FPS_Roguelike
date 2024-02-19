@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3828292801742d9418fa31f8228769ed, type: 3}
-  m_Name: NewPuzzle 1
+  m_Name: NewPuzzle 7
   m_EditorClassIdentifier: 
-  puzzleID: 1
-  puzzleIcon: {fileID: 21300000, guid: 179a9e46cf2504a4e86ffac5ff5e90bb, type: 3}
+  puzzleID: 7
+  puzzleIcon: {fileID: 21300000, guid: 1bbdd269e2bdd9e4b90f4810c00f43a0, type: 3}
   puzzleName: A
-  puzzleDesc: "\uC801 50\uB9C8\uB9AC \uCC98\uCE58 \uC2DC\uB9C8\uB2E4 \uCD5C\uB300
-    \uC0DD\uBA85\uB825 +{0}%"
-  puzzleSize: {x: 1, y: 1}
+  puzzleDesc: "\uCD1D \uAE30\uBCF8 \uB370\uBBF8\uC9C0 +{0}%"
+  puzzleSize: {x: 2, y: 2}
   isHave: 1
   isEquip: 0
-  damage: 0.01
+  damage: 0.05

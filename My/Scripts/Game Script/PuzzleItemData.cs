@@ -5,15 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPuzzle", menuName = "New Puzzle/Puzzle")]
 public class PuzzleItemData : ScriptableObject
 {
-    public string puzzleID;
+    public int puzzleID;
     public Sprite puzzleIcon;
     public string puzzleName;
+    [TextArea]
     public string puzzleDesc;
-    public int currentStackSize;
-    public int maxStackSize;
     public Vector2 puzzleSize;
     public bool isHave = false;
-
+    public bool isEquip = false;
 
     public float damage;
 }

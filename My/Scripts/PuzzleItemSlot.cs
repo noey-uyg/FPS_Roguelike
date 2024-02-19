@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PuzzleItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class PuzzleItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
     public Vector2 size = new Vector2(60f, 60f); //slot cell size 
     public PuzzleItemData item;
@@ -43,6 +43,11 @@ public class PuzzleItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        DestroyPuzzle();
+
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         oldPosition = transform.GetComponent<RectTransform>().anchoredPosition;
@@ -53,6 +58,7 @@ public class PuzzleItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.position = eventData.position;
+
         //allow the intersection between old pos and new pos.
         for (int i = 0; i < item.puzzleSize.y; i++)
         {
@@ -144,5 +150,21 @@ public class PuzzleItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
 
         GetComponent<CanvasGroup>().blocksRaycasts = true; //register hit on item again
+    }
+
+    public void DestroyPuzzle()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            for (int i = 0; i < item.puzzleSize.y; i++)
+            {
+                for (int j = 0; j < item.puzzleSize.x; j++)
+                {
+                    slots.grid[(int)startPosition.x + j, (int)startPosition.y + i] = 0;                                                              
+                }
+            }
+            item.isEquip = false;
+            Destroy(this.gameObject);
+        }
     }
 }

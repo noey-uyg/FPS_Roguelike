@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: NewPuzzle 4
   m_EditorClassIdentifier: 
   puzzleID: 4
-  puzzleIcon: {fileID: 21300000, guid: 130ec14f997247b48892627ec95c3367, type: 3}
-  puzzleName: E
-  puzzleDesc: E
-  currentStackSize: 0
-  maxStackSize: 5
-  puzzleSize: {x: 2, y: 5}
+  puzzleIcon: {fileID: 21300000, guid: 179a9e46cf2504a4e86ffac5ff5e90bb, type: 3}
+  puzzleName: A
+  puzzleDesc: "\uB808\uBCA8\uC5C5 \uC2DC \uC0DD\uBA85\uB825 \uD68C\uBCF5"
+  puzzleSize: {x: 2, y: 1}
   isHave: 1
+  isEquip: 0
   damage: 0
