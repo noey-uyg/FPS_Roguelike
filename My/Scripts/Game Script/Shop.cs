@@ -120,6 +120,8 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
                     gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
                     gameObject.GetComponent<Scroll>().DeleteHaveScroll();
+                    GameManager.Instance.scrollCount++;
+                    GameManager.Instance.PuzzleScrollDam();
                     count--;
                 }
                 break;

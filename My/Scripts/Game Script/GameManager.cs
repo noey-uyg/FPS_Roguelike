@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public float playerRunSpeed = 20;
     public float playerCrouchSpeed = 3;
     public float playerJumpForce = 7;
+    public int playerResur = 0;
     public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
         231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
 
@@ -88,11 +89,23 @@ public class GameManager : MonoBehaviour
     public bool puzzleLevelDam;
     public bool puzzleLevelHP;
     public bool puzzleLevelSpeed;
+    public bool puzzleHandDam;
+    public bool puzzleGunDam;
+    public bool puzzleAxeDam;
+    public bool puzzleScrollDam;
+    public bool puzzleCriEnemyDam;
+    public bool puzzleResur;
+    public bool puzzleResurDam;
+    public bool puzzleKillNearby;
+    public bool puzzleCriNearby;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
     public bool isOpenTab = false;
     public bool scrollisInitialized = false;
+    public int scrollCount = 0;
+    public bool isCritical = false;
+    public bool criCoroutine = false;
 
     [Header("UI")]
     public LevelUPUI levelUpUi;
@@ -204,11 +217,50 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    //¿Â¬¯µ» ∆€¡Ò
+
+    public void puzzleCriExtraDam()
+    {
+        if (isCritical && puzzleCriEnemyDam)
+        {
+            if (!criCoroutine)
+            {
+                StartCoroutine(CriticalExtraDam());
+            }
+
+        }
+    }
+
+    IEnumerator CriticalExtraDam()
+    {
+        criCoroutine = true;
+        extraDamage += 0.25f;
+
+        yield return new WaitForSeconds(5f);
+
+        extraDamage -= 0.25f;
+        isCritical = false;
+        criCoroutine = false;
+    }
+
+    public void PuzzleScrollDam()
+    {
+        if (puzzleScrollDam)
+        {
+            extraDamage = scrollCount * 0.02f;
+        }
+    }
+
     public void PuzzleKillAblity()
     {
-        Kill50Dam();
-        Kill50HP();
-        Kill50Speed();
+        if(allEnemyKill == 50)
+        {
+            Kill50Dam();
+            Kill50HP();
+            Kill50Speed();
+            allEnemyKill = 0;
+        }
     }
 
     public void Kill50Dam()

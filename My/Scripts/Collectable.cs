@@ -70,22 +70,34 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 GameManager.Instance.puzzleLevelSpeed = item.isEquip;
                 break;
             case 6:
+                GameManager.Instance.puzzleHandDam = item.isEquip;
+                GameManager.Instance.handExtraDamage = 0.5f;
                 break;
             case 7:
+                GameManager.Instance.puzzleGunDam = item.isEquip;
+                GameManager.Instance.gunExtraDamage = 0.5f;
                 break;
             case 8:
+                GameManager.Instance.puzzleAxeDam = item.isEquip;
+                GameManager.Instance.axeExtraDamage = 0.5f;
                 break;
             case 9:
+                GameManager.Instance.puzzleScrollDam = item.isEquip;
                 break;
             case 10:
+                GameManager.Instance.puzzleCriEnemyDam = item.isEquip;
                 break;
             case 11:
+                GameManager.Instance.puzzleResur = item.isEquip;
                 break;
             case 12:
+                GameManager.Instance.puzzleResurDam = item.isEquip;
                 break;
             case 13:
+                GameManager.Instance.puzzleKillNearby = item.isEquip;
                 break;
             case 14:
+                GameManager.Instance.puzzleCriNearby = item.isEquip;
                 break;
         }
     }

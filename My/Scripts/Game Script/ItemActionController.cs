@@ -57,6 +57,8 @@ public class ItemActionController : MonoBehaviour
                     Debug.Log("È¹µæ");
                     userInfoUI.AcquireScroll(hitInfo.transform.GetComponent<Scroll>().scrollData);
                     hitInfo.transform.gameObject.SetActive(false);
+                    GameManager.Instance.scrollCount++;
+                    GameManager.Instance.PuzzleScrollDam();
                     InfoDisAppear();
                 }
                 if (hitInfo.transform.tag == "Shop")

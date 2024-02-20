@@ -15,7 +15,7 @@ MonoBehaviour:
   traitsName: "\uC57D\uC810 \uACF5\uACA9"
   traitsSprite: {fileID: 21300000, guid: 3d05a3e09a0b74e36b1fa94fb9279990, type: 3}
   traitsDesc: "\uCE58\uBA85\uD0C0 \uD655\uB960\uC774 {0}% \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  isUnlocked: 0
+  isUnlocked: 1
   cost: 10
   level: 0
   damage:

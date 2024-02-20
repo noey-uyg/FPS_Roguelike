@@ -13,6 +13,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Text[] texts;
     private Text traitsNameText;
     private Text traitsDescText;
+    private Text traitsLevel;
     private bool isMouseOverSlot = false;
 
     private Button btn;
@@ -33,6 +34,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         traitsNameText = texts[0];
         traitsDescText = texts[1];
+        traitsLevel = texts[2];
     }
 
     private void Update()
@@ -41,6 +43,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             UpdateDescPosition();
         }
+        SkillUnlock();
     }
 
     private void OnEnable()
@@ -63,7 +66,8 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void UpdateDescPosition()
     {
         traitsNameText.text = traitsdata.traitsName;
-        traitsDescText.text = traitsdata.traitsDesc;
+        traitsDescText.text = string.Format(traitsdata.traitsDesc, traitsdata.damage[Mathf.Min(traitsdata.damage.Length-1, traitsdata.level+1)]*100);
+        traitsLevel.text = traitsdata.level.ToString() + " / " + (traitsdata.damage.Length - 1).ToString();
         descTraitsImg[2].sprite = traitsdata.traitsSprite;
 
         if (isMouseOverSlot)
