@@ -48,6 +48,7 @@ public class HandController : CloseWeaponController
 
                     if (cri < criPer)
                     {
+                        CriticalNearbyEnemyAttack();
                         GameManager.Instance.isCritical = true;
                         GameManager.Instance.puzzleCriExtraDam();
                         enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
@@ -108,5 +109,26 @@ public class HandController : CloseWeaponController
     {
         base.CloseWeaponChange(hand);
         isActivate = true;
+    }
+
+    //치명타 시 주변 적 공격(퍼즐)
+    private void CriticalNearbyEnemyAttack()
+    {
+        if (GameManager.Instance.puzzleCriNearby)
+        {
+            Collider[] colliders = Physics.OverlapSphere(hitInfo.point, 10f, LayerMask.GetMask("Enemy"))
+                .Where(collider => collider.gameObject != hitInfo.collider.gameObject)
+                .ToArray();
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Enemy nearbyEnemy = colliders[i].GetComponent<Enemy>();
+
+                if (nearbyEnemy != null && nearbyEnemy.enemyCurrentHP > 0)
+                {
+                    nearbyEnemy.enemyCurrentHP -= (nearbyEnemy.enemyCurrentHP * 0.05f);
+                }
+            }
+        }
     }
 }

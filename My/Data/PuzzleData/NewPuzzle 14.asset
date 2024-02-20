@@ -15,7 +15,7 @@ MonoBehaviour:
   puzzleID: 14
   puzzleIcon: {fileID: 21300000, guid: 130ec14f997247b48892627ec95c3367, type: 3}
   puzzleName: A
-  puzzleDesc: "\uCE58\uBA85\uD0C0 \uC2DC \uC8FC\uBCC0\uC758 \uC801\uC5D0\uAC8C \uCD5C\uB300
+  puzzleDesc: "\uCE58\uBA85\uD0C0 \uC2DC \uC8FC\uBCC0\uC758 \uC801\uC5D0\uAC8C \uD604\uC7AC
     \uC0DD\uBA85\uB825\uC758 {0}%\uC758 \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
   puzzleSize: {x: 3, y: 3}
   isHave: 1

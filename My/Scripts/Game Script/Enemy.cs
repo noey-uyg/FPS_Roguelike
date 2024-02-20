@@ -1,7 +1,9 @@
 using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Services.Analytics.Internal;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -9,7 +11,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float maxHP;
+    public float maxHP;
     public float enemyCurrentHP = 0;
 
     [SerializeField]
@@ -250,7 +252,7 @@ public class Enemy : MonoBehaviour
         }
 
         GameManager.Instance.allEnemyKill++;
-
+        CriticalNearbyEnemyAttack();
         gameObject.SetActive(false);
     }
 
@@ -446,5 +448,26 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         obj.SetActive(false);
+    }
+
+    //처치시 주위 적에게 데미지(퍼즐)
+    private void CriticalNearbyEnemyAttack()
+    {
+        if (GameManager.Instance.puzzleKillNearby)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 10f, LayerMask.GetMask("Enemy"))
+                    .Where(collider => collider.gameObject != gameObject)
+                    .ToArray();
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Enemy nearbyEnemy = colliders[i].GetComponent<Enemy>();
+
+                if (nearbyEnemy != null && nearbyEnemy.enemyCurrentHP > 0)
+                {
+                    nearbyEnemy.enemyCurrentHP -= (nearbyEnemy.enemyCurrentHP * 0.15f);
+                }
+            }
+        }
     }
 }
