@@ -276,6 +276,7 @@ public class GameManager : MonoBehaviour
         if (puzzleHP)
         {
             extraHP += (allEnemyKill / 50) * 0.01f;
+            playerMaxHP += playerMaxHP * extraHP;
         }
     }
 

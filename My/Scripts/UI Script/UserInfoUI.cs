@@ -7,7 +7,17 @@ public class UserInfoUI : MonoBehaviour
 {
     [SerializeField]
     private RectTransform rect;
-
+    [SerializeField]
+    private GameObject userInfoRect;
+    [SerializeField]
+    private GameObject scrollInfoRect;
+    [SerializeField]
+    private GameObject awakeInfoRect;
+    [SerializeField]
+    private GameObject nextBtn;
+    [SerializeField]
+    private GameObject prevBtn;
+    
     [Header("UserInfo")]
     [SerializeField]
     private Text levelText;
@@ -50,9 +60,9 @@ public class UserInfoUI : MonoBehaviour
         userInfoTexts[1].text = GameManager.Instance.playerCurDamage.ToString();
         userInfoTexts[2].text = GameManager.Instance.playerCriticalPer.ToString();
         userInfoTexts[3].text = GameManager.Instance.playerCriticalDam.ToString();
-        userInfoTexts[4].text = GameManager.Instance.playerWalkSpeed.ToString();
-        userInfoTexts[5].text = GameManager.Instance.playerRunSpeed.ToString();
-        userInfoTexts[6].text = GameManager.Instance.playerCrouchSpeed.ToString();
+        userInfoTexts[4].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[5].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerRunSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[6].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerCrouchSpeed * GameManager.Instance.extraSpeed)).ToString();
     }
 
     void Show()
@@ -86,5 +96,25 @@ public class UserInfoUI : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void NextPage()
+    {
+        userInfoRect.SetActive(false);
+        scrollInfoRect.SetActive(false);
+        nextBtn.SetActive(false);
+
+        awakeInfoRect.SetActive(true);
+        prevBtn.SetActive(true);
+    }
+
+    public void PrevPage()
+    {
+        userInfoRect.SetActive(true);
+        scrollInfoRect.SetActive(true);
+        nextBtn.SetActive(true);
+
+        awakeInfoRect.SetActive(false);
+        prevBtn.SetActive(false);
     }
 }

@@ -144,6 +144,7 @@ public class GunController : MonoBehaviour
                     GameManager.Instance.puzzleCriExtraDam();
                     int cri = Random.Range(0, 30);
                     float damage = currentGun.damage + (currentGun.damage * GameManager.Instance.extraDamage) +(currentGun.damage * GameManager.Instance.gunExtraDamage);
+                    GameManager.Instance.playerCurDamage = damage;
                     int criPer = (int)(currentGun.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentGun.criticalDamage + (GameManager.Instance.extraCriticalDamage);
 

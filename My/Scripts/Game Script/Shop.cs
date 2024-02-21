@@ -179,6 +179,16 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Vector3 mousePosition = Input.mousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(descRect.parent as RectTransform, mousePosition, null, out Vector2 localMousePosition);
 
+            if (mousePosition.x > Screen.width / 2)
+            {
+                localMousePosition.x -= descRect.rect.width;
+            }
+
+            if (mousePosition.y < Screen.height / 2)
+            {
+                localMousePosition.y += descRect.rect.height;
+            }
+
             descRect.localPosition = localMousePosition;
         }
         descRect.localScale = isMouseOverSlot ? Vector3.one : Vector3.zero;

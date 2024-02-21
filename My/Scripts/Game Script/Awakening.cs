@@ -8,10 +8,10 @@ public class Awakening : MonoBehaviour
 {
     public AwakeningData data;
 
-    Text textName;
-    Text textType;
-    Text textDesc;
-    Text textLevel;
+    private Text textName;
+    private Text textType;
+    private Text textDesc;
+    private Text textLevel;
 
     private void Start()
     {

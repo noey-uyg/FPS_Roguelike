@@ -45,7 +45,7 @@ public class HandController : CloseWeaponController
                     int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
                     float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.extraDamage) + (currentCloseWeapon.damage * handStackDamage) + (currentCloseWeapon.damage * GameManager.Instance.handExtraDamage);
-
+                    GameManager.Instance.playerCurDamage = damage;
                     if (cri < criPer)
                     {
                         CriticalNearbyEnemyAttack();
