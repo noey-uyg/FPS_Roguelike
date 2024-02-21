@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         shopNameText = texts[0];
         shopDescText = texts[1];
+        cost = cost - (int)(cost * GameManager.Instance.traitsDiscountShop);
     }
 
     private void Update()
@@ -98,6 +99,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 count = shopObject.GetComponent<ShopObject>().scrollCount;
                 break;
             case ShopType.Awake:
+                if(!GameManager.Instance.traitsShopUseAwake) gameObject.SetActive(false);
                 count = shopObject.GetComponent<ShopObject>().awakeCount;
                 break;
         }

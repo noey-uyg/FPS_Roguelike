@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6261dd887ab98440b4609520a24e157, type: 3}
-  m_Name: NewTraits 3
+  m_Name: NewTraits 13
   m_EditorClassIdentifier: 
-  traitsName: "\uD560\uC778 \uC0C1\uC810"
-  traitsSprite: {fileID: 21300000, guid: 05a2fbb0084a1167e853e46d75331916, type: 3}
-  traitsDesc: "\uC0C1\uC810 \uBB3C\uD488 \uAC00\uACA9\uC774 {0}% \uD560\uC778\uB429\uB2C8\uB2E4."
+  traitsName: "\uAE08\uAC15\uBD88\uAD34"
+  traitsSprite: {fileID: 21300000, guid: 63ec11672f5f8fc5fa0bc44f23e0d56b, type: 3}
+  traitsID: 13
+  traitsDesc: "\uBC1B\uB294 \uB370\uBBF8\uC9C0\uAC00 {0}% \uAC10\uC18C\uD569\uB2C8\uB2E4."
   isUnlocked: 1
-  cost: 30
+  cost: 60
   level: 0
   damage:
   - 0
   - 0.1
+  - 0.125
   - 0.15
+  - 0.175
   - 0.2
-  - 0.25
-  - 0.3
   prevTraits:
-  - {fileID: 11400000, guid: 93188c70d7d913d4190e176716c59f30, type: 2}
+  - {fileID: 11400000, guid: fe95602053db76c4ca6c76352371d4a8, type: 2}

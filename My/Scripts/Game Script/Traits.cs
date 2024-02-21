@@ -131,6 +131,7 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(traitsdata.cost <= GameManager.Instance.playerCrystal)
         {
             GameManager.Instance.playerCrystal -= traitsdata.cost;
+            TraitsUpgradeApply();
             traitsdata.level++;
             Debug.Log("강화완료");
         }
@@ -140,5 +141,58 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
         SkillUnlock();
+    }
+
+    public void TraitsUpgradeApply()
+    {
+        switch (traitsdata.traitsID)
+        {
+            case 0:
+                GameManager.Instance.traitsCoin = (int)(traitsdata.damage[traitsdata.level]*100);
+                break;
+            case 1:
+                GameManager.Instance.traitsShopUseAwake = true;
+                break;
+            case 2:
+                GameManager.Instance.traitsDoubleCoinPer = traitsdata.damage[traitsdata.level]*100;
+                break;
+            case 3:
+                GameManager.Instance.traitsDiscountShop = traitsdata.damage[traitsdata.level];
+                break;
+            case 4:
+                GameManager.Instance.traitsScrollPer = true;
+                break;
+            case 5:
+                GameManager.Instance.traitsExtraDam = traitsdata.damage[traitsdata.level];
+                break;
+            case 6:
+                GameManager.Instance.traitsCriPer = traitsdata.damage[traitsdata.level];
+                break;
+            case 7:
+                GameManager.Instance.traitsGunDam = traitsdata.damage[traitsdata.level];
+                break;
+            case 8:
+                GameManager.Instance.traitsAxeSpeed = traitsdata.damage[traitsdata.level];
+                break;
+            case 9:
+                GameManager.Instance.traitsHandRange = traitsdata.damage[traitsdata.level];
+                break;
+            case 10:
+
+                break;
+            case 11:
+
+                break;
+            case 12:
+
+                break;
+            case 13:
+
+                break;
+            case 14:
+
+                break;
+        }
+        
     }
 }

@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public float playerCurHP = 0;
     public float playerNextEXP = 0;
     public float playerCurEXP = 0;
-    public float playerGold = 0;
-    public float playerCrystal = 0;
+    public float playerGold=0;
+    public float playerCrystal;
     public float playerMaxCrystal = 25000;
     public int playerLevel = 1;
     public float playerCriticalPer = 5;
@@ -33,6 +33,18 @@ public class GameManager : MonoBehaviour
     public float mouseSensitivity;
     public float soundEffectVolume;
     public float soundBgmVolume;
+
+    [Header("Traits")]
+    public int traitsCoin = 0;
+    public bool traitsShopUseAwake = false;
+    public float traitsDoubleCoinPer = 0;
+    public float traitsDiscountShop = 0;
+    public bool traitsScrollPer = false;
+    public float traitsExtraDam = 0;
+    public float traitsCriPer = 0;
+    public float traitsGunDam = 0;
+    public float traitsAxeSpeed = 0;
+    public float traitsHandRange = 0;
 
     [Header("AxeAwakening")]
     public float axeExtraDamage = 0;
@@ -83,21 +95,21 @@ public class GameManager : MonoBehaviour
     public bool isEliteWave = false;
 
     [Header("Puzzle")]
-    public bool puzzleDam;
-    public bool puzzleHP;
-    public bool puzzleSpeed;
-    public bool puzzleLevelDam;
-    public bool puzzleLevelHP;
-    public bool puzzleLevelSpeed;
-    public bool puzzleHandDam;
-    public bool puzzleGunDam;
-    public bool puzzleAxeDam;
-    public bool puzzleScrollDam;
-    public bool puzzleCriEnemyDam;
-    public bool puzzleResur;
-    public bool puzzleResurDam;
-    public bool puzzleKillNearby;
-    public bool puzzleCriNearby;
+    public bool puzzleDam = false;
+    public bool puzzleHP = false;
+    public bool puzzleSpeed = false;
+    public bool puzzleLevelDam = false;
+    public bool puzzleLevelHP = false;
+    public bool puzzleLevelSpeed = false;
+    public bool puzzleHandDam = false;
+    public bool puzzleGunDam = false;
+    public bool puzzleAxeDam = false;
+    public bool puzzleScrollDam = false;
+    public bool puzzleCriEnemyDam = false;
+    public bool puzzleResur = false;
+    public bool puzzleResurDam = false;
+    public bool puzzleKillNearby = false;
+    public bool puzzleCriNearby = false;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
@@ -114,6 +126,8 @@ public class GameManager : MonoBehaviour
     public static event System.Action OnBossWave;
     public static event System.Action OnEliteWave;
     public Gun currentGun;
+    public CloseWeapon weaponAxe;
+    public CloseWeapon weaponHand;
 
     private void Awake()
     {
@@ -127,9 +141,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerMaxHP += playerMaxHP * extraHP;
-        playerNextEXP = playerExp[0];
-        playerCurHP = playerMaxHP;
+        PlayerInit();
     }
 
     private void Update()
@@ -159,6 +171,20 @@ public class GameManager : MonoBehaviour
         {
             awakeDatas[i].level = 0;
         }
+    }
+
+    //플레이어 초기화
+    public void PlayerInit()
+    {
+        playerMaxHP += playerMaxHP * extraHP;
+        playerNextEXP = playerExp[0];
+        playerCurHP = playerMaxHP;
+        playerGold += traitsCoin;
+        extraDamage += traitsExtraDam;
+        extraCriticalPer += traitsCriPer;
+        gunExtraDamage += traitsGunDam;
+        weaponAxe.attackDelay -= weaponAxe.attackDelay * traitsAxeSpeed;
+        weaponHand.range += weaponHand.range * traitsHandRange;
     }
 
     //웨이브시작하기
@@ -350,6 +376,13 @@ public class GameManager : MonoBehaviour
 
     public void GetGold()
     {
+        int coinRanNum = Random.Range(0, 100);
+
+        if(coinRanNum < traitsDoubleCoinPer)
+        {
+            playerGold += 2;
+        }
+
         playerGold += 1;
     }
 

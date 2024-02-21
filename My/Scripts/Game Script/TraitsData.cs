@@ -7,6 +7,7 @@ public class TraitsData : ScriptableObject
 {
     public string traitsName;
     public Sprite traitsSprite;
+    public int traitsID;
 
     [TextArea]
     public string traitsDesc;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitsName: "\uCD94\uAC00\uD0C0"
   traitsSprite: {fileID: 21300000, guid: fdf1d06ccfd6a8a5fada1b0b4a2144e6, type: 3}
+  traitsID: 10
   traitsDesc: "\uAC15\uD654, \uC5D8\uB9AC\uD2B8, \uBCF4\uC2A4 \uBAAC\uC2A4\uD130
     \uACF5\uACA9\uC2DC {0}%\uC758 \uCD94\uAC00 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
   isUnlocked: 1

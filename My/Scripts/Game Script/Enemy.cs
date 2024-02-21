@@ -294,7 +294,17 @@ public class Enemy : MonoBehaviour
     void ScrollDrop()
     {
         int scrollRandom = Random.Range(0, 1000);
-        if (scrollRandom < 1000)
+        if(isReinforced || isElite)
+        {
+            if (scrollRandom < 15)
+            {
+                GameObject scroll = PoolManager.instance.ActivateObj(12);
+                scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
+                scroll.GetComponent<Scroll>().DeleteHaveScroll();
+                scroll.transform.position = gameObject.transform.position;
+            }
+        }
+        else if(scrollRandom < 5)
         {
             GameObject scroll = PoolManager.instance.ActivateObj(12);
             scroll.GetComponent<Scroll>().scrollData.haveScroll = true;

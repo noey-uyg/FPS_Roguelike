@@ -8,7 +8,6 @@ public class AxeController : CloseWeaponController
     //활성화 여부
     public static bool isActivate = false;
 
-
     Enemy enemy;
 
     private void Start()
