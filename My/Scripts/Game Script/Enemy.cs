@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
     public float maxHP;
     public float enemyCurrentHP = 0;
 
@@ -23,12 +22,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    [SerializeField]
-    private bool isReinforced = false;
-    [SerializeField]
-    private bool isElite = false;
-    [SerializeField]
-    private bool isBoss = false;
+    public bool isReinforced = false;
+    public bool isElite = false;
+    public bool isBoss = false;
 
     [Header("Attack")]
     [SerializeField]
@@ -149,7 +145,7 @@ public class Enemy : MonoBehaviour
     {
         if(IsPlayerInAttackRange())
         {
-            GameManager.Instance.playerCurHP -= attackDamage;
+            GameManager.Instance.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.traitsReduceDam));
         }
     }
 
@@ -173,7 +169,6 @@ public class Enemy : MonoBehaviour
                 isReinforced = true;
             }
         }
-
     }
 
     private void SetObjectScale(Vector3 newScale)
@@ -293,24 +288,26 @@ public class Enemy : MonoBehaviour
 
     void ScrollDrop()
     {
-        int scrollRandom = Random.Range(0, 1000);
+        int scrollRandom = Random.Range(0, 5);
         if(isReinforced || isElite)
         {
             if (scrollRandom < 15)
             {
-                GameObject scroll = PoolManager.instance.ActivateObj(12);
-                scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
-                scroll.GetComponent<Scroll>().DeleteHaveScroll();
-                scroll.transform.position = gameObject.transform.position;
+                ScrollObjectDrop();
             }
         }
         else if(scrollRandom < 5)
         {
-            GameObject scroll = PoolManager.instance.ActivateObj(12);
-            scroll.GetComponent<Scroll>().scrollData.haveScroll = true;
-            scroll.GetComponent<Scroll>().DeleteHaveScroll();
-            scroll.transform.position = gameObject.transform.position;
+            ScrollObjectDrop();
         }
+    }
+
+    void ScrollObjectDrop()
+    {
+        GameObject scroll = PoolManager.instance.ActivateObj(12);
+        scroll.GetComponent<Scroll>().scrollData.dropScroll = true;
+        scroll.GetComponent<Scroll>().DeleteHaveScroll();
+        scroll.transform.position = gameObject.transform.position;
     }
 
     void GoldDrop()
@@ -398,7 +395,7 @@ public class Enemy : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
-                GameManager.Instance.playerCurHP -= 10;
+                GameManager.Instance.playerCurHP -= (10 - (10 * GameManager.Instance.traitsReduceDam));
             }
         }
 

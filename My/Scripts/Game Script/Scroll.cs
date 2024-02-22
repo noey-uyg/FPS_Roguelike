@@ -33,6 +33,7 @@ public class Scroll : MonoBehaviour
         for(int i=0;i<scrollDatas.Count; i++)
         {
             scrollDatas[i].haveScroll = false;
+            scrollDatas[i].dropScroll = false;
         }
     }
 

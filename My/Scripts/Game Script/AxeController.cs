@@ -58,11 +58,11 @@ public class AxeController : CloseWeaponController
                 if (cri < criPer)
                 {
                     CriticalNearbyEnemyAttack();
-                    enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
+                    enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
                 }
                 else
                 {
-                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
+                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
                 }
 
                 if (GameManager.Instance.axeBleeding)

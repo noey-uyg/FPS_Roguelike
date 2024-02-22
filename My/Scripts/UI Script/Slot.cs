@@ -33,6 +33,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void AddScroll(ScrollData addScroll)
     {
         scroll = addScroll;
+        scroll.haveScroll = true;
     }
 
     public void ClearSlot()

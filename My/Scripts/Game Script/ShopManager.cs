@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
 
     private void OnEnable()
     {
-        refreshBtn.interactable = true;
+        refreshBtn.interactable = GameManager.Instance.traitsShopRefrsh;
     }
 
     public void OnRefresh()

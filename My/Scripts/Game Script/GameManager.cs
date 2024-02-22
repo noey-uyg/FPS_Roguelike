@@ -45,6 +45,11 @@ public class GameManager : MonoBehaviour
     public float traitsGunDam = 0;
     public float traitsAxeSpeed = 0;
     public float traitsHandRange = 0;
+    public float traitsAddDam = 0;
+    public int traitsMaxHP = 0;
+    public int traitsResur = 0;
+    public float traitsReduceDam = 0;
+    public bool traitsShopRefrsh = false;
 
     [Header("AxeAwakening")]
     public float axeExtraDamage = 0;
@@ -176,10 +181,15 @@ public class GameManager : MonoBehaviour
     //플레이어 초기화
     public void PlayerInit()
     {
+        //플레이어 기본 초기화
         playerMaxHP += playerMaxHP * extraHP;
         playerNextEXP = playerExp[0];
         playerCurHP = playerMaxHP;
+
+        //특성 수치 적용
+        playerMaxHP += traitsMaxHP;
         playerGold += traitsCoin;
+        playerResur += traitsResur;
         extraDamage += traitsExtraDam;
         extraCriticalPer += traitsCriPer;
         gunExtraDamage += traitsGunDam;
@@ -208,9 +218,7 @@ public class GameManager : MonoBehaviour
                         OnBossWave?.Invoke();
                         return;
                     }
-
                     OnWaveStart?.Invoke();
-
                 }
             }
             if (Input.GetKeyUp(KeyCode.F))
@@ -243,6 +251,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //보스,강화,엘리트 몹 추가 데미지
+    public float REBAddAttack(Enemy enemy, float damage)
+    {
+        if (enemy.isBoss || enemy.isReinforced || enemy.isElite)
+        {
+            return damage * traitsAddDam;
+        }
+        return 0;
+    }
 
     //장착된 퍼즐
 

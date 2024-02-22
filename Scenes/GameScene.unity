@@ -26753,6 +26753,11 @@ MonoBehaviour:
   traitsGunDam: 0
   traitsAxeSpeed: 0
   traitsHandRange: 0
+  traitsAddDam: 0
+  traitsMaxHP: 0
+  traitsResur: 0
+  traitsReduceDam: 0
+  traitsShopRefrsh: 0
   axeExtraDamage: 0
   axeBleeding: 0
   axeBleedingDamage: 0

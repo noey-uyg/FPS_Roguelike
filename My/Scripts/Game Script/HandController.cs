@@ -51,11 +51,11 @@ public class HandController : CloseWeaponController
                         CriticalNearbyEnemyAttack();
                         GameManager.Instance.isCritical = true;
                         GameManager.Instance.puzzleCriExtraDam();
-                        enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage);
+                        enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
                     }
                     else
                     {
-                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage);
+                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
                     }
 
                     if (GameManager.Instance.handWave)

@@ -43,7 +43,7 @@ public class EnemyAttackManager : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            GameManager.Instance.playerCurHP -= attackDamage;
+            GameManager.Instance.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.traitsReduceDam));
             gameObject.SetActive(false);
         }
         else if (other.CompareTag("Ground"))

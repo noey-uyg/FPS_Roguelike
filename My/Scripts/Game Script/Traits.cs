@@ -178,19 +178,19 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.traitsHandRange = traitsdata.damage[traitsdata.level];
                 break;
             case 10:
-
+                GameManager.Instance.traitsAddDam = traitsdata.damage[traitsdata.level];
                 break;
             case 11:
-
+                GameManager.Instance.traitsMaxHP = (int)(traitsdata.damage[traitsdata.level] * 100);
                 break;
             case 12:
-
+                GameManager.Instance.traitsResur += 1;
                 break;
             case 13:
-
+                GameManager.Instance.traitsReduceDam = traitsdata.damage[traitsdata.level];
                 break;
             case 14:
-
+                GameManager.Instance.traitsShopRefrsh = true;
                 break;
         }
         
