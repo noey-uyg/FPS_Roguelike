@@ -50,6 +50,12 @@ public class AxeController : CloseWeaponController
                 float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
                 float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.extraDamage) + (currentCloseWeapon.damage * GameManager.Instance.axeExtraDamage);
                 GameManager.Instance.playerCurDamage = damage;
+
+                float adrenalineDam = GameManager.Instance.isIncreased ? damage * 1.5f : 0;
+
+                damage += GameManager.Instance.MaxHPDam(damage) + adrenalineDam;
+
+                GameManager.Instance.Judge(enemy);
                 if (GameManager.Instance.axeFear)
                 {
                     damage = damage + (damage * GameManager.Instance.axeFearDamage);
@@ -62,7 +68,7 @@ public class AxeController : CloseWeaponController
                 }
                 else
                 {
-                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
+                    enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.NoCriDam(damage) + GameManager.Instance.REBAddAttack(enemy, damage);
                 }
 
                 if (GameManager.Instance.axeBleeding)

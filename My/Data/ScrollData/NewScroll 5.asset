@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: NewScroll 5
   m_EditorClassIdentifier: 
   scrollName: "\uBD80\uD65C"
+  scrollID: 5
   scrollDesc: "\uBD80\uD65C \uD69F\uC218 +{0}"
   haveScroll: 0
-  baseDamage: 0.1
+  dropScroll: 0
+  baseDamage: 0.01

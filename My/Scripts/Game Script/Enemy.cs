@@ -145,6 +145,8 @@ public class Enemy : MonoBehaviour
     {
         if(IsPlayerInAttackRange())
         {
+            float addDam = GameManager.Instance.isBloodCurse ? attackDamage * 0.5f : 0;
+            attackDamage += addDam;
             GameManager.Instance.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.traitsReduceDam));
         }
     }
@@ -237,8 +239,10 @@ public class Enemy : MonoBehaviour
         CrystalDrop();
         BulletDrop();
 
+        GameManager.Instance.DestroyerScroll();
         if (isElite)
         {
+            GameManager.Instance.EliteKiler();
             GameManager.Instance.eliteEnemyKilledNum++;
         }
         else

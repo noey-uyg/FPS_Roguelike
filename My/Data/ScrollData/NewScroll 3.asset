@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: NewScroll 3
   m_EditorClassIdentifier: 
   scrollName: "\uAE30\uC2B5 \uACF5\uACA9"
+  scrollID: 3
   scrollDesc: "\uC0DD\uBA85\uB825 70% \uC774\uC0C1\uC758 \uC801\uC744 \uACF5\uACA9\uC2DC
     \uB370\uBBF8\uC9C0 +{0}%"
   haveScroll: 0
-  baseDamage: 3
+  dropScroll: 0
+  baseDamage: 0.3

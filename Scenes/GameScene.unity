@@ -26824,6 +26824,20 @@ MonoBehaviour:
   puzzleResurDam: 0
   puzzleKillNearby: 0
   puzzleCriNearby: 0
+  scrollNoCriDam: 0
+  isScrollMaxHpDam: 0
+  isReduceDamHPHeal: 0
+  isSurpriseAttack: 0
+  isAdrenaline: 0
+  isJudge: 0
+  isBloodCurse: 0
+  isEliteKiller: 0
+  isGrabber: 0
+  grabberCount: 3
+  isLifeCurse: 0
+  isDestroyer: 0
+  isGiveMe: 0
+  refreshCount: 0
   canPlayerMove: 1
   isOpenTab: 0
   scrollisInitialized: 0
@@ -26834,6 +26848,7 @@ MonoBehaviour:
   currentGun: {fileID: 1253866165}
   weaponAxe: {fileID: 1786530702}
   weaponHand: {fileID: 1655734507}
+  isIncreased: 0
 --- !u!4 &1317187955
 Transform:
   m_ObjectHideFlags: 0

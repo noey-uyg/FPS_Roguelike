@@ -148,6 +148,11 @@ public class GunController : MonoBehaviour
                     int criPer = (int)(currentGun.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentGun.criticalDamage + (GameManager.Instance.extraCriticalDamage);
 
+                    float adrenalineDam = GameManager.Instance.isIncreased ? damage * 1.5f : 0;
+
+                    damage += GameManager.Instance.MaxHPDam(damage) + adrenalineDam;
+
+                    GameManager.Instance.Judge(enemy);
                     if (cri < criPer)
                     {
                         CriticalNearbyEnemyAttack();
@@ -156,7 +161,7 @@ public class GunController : MonoBehaviour
                     }
                     else
                     {
-                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
+                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.NoCriDam(damage) + GameManager.Instance.REBAddAttack(enemy, damage);
                     }
 
                     LightningAttack(damage);

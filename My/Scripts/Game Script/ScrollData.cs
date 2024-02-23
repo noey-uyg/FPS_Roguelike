@@ -7,6 +7,7 @@ public class ScrollData : ScriptableObject
 {
     [Header("# Main Info")]
     public string scrollName;
+    public int scrollID;
     [TextArea]
     public string scrollDesc;
     public bool haveScroll = false;

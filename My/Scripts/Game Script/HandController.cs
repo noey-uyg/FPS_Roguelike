@@ -46,6 +46,12 @@ public class HandController : CloseWeaponController
                     float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
                     float damage = currentCloseWeapon.damage + (currentCloseWeapon.damage * GameManager.Instance.extraDamage) + (currentCloseWeapon.damage * handStackDamage) + (currentCloseWeapon.damage * GameManager.Instance.handExtraDamage);
                     GameManager.Instance.playerCurDamage = damage;
+
+                    float adrenalineDam = GameManager.Instance.isIncreased ? damage * 1.5f : 0;
+
+                    damage += GameManager.Instance.MaxHPDam(damage) + adrenalineDam;
+
+                    GameManager.Instance.Judge(enemy);
                     if (cri < criPer)
                     {
                         CriticalNearbyEnemyAttack();
@@ -55,7 +61,7 @@ public class HandController : CloseWeaponController
                     }
                     else
                     {
-                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
+                        enemy.enemyCurrentHP -= damage + (damage * GameManager.Instance.extraFinalDamage) + GameManager.Instance.NoCriDam(damage) + GameManager.Instance.REBAddAttack(enemy, damage);
                     }
 
                     if (GameManager.Instance.handWave)

@@ -25,5 +25,6 @@ public class ShopObject : MonoBehaviour
         upgradeCount = 2;
         awakeCount = 1;
         scrollCount = 1;
+        GameManager.Instance.refreshCount = GameManager.Instance.isGiveMe ? 1 : 0;
     }
 }

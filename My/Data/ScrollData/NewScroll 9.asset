@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: NewScroll 9
   m_EditorClassIdentifier: 
   scrollName: "\uC695\uC2EC\uC7C1\uC774"
-  scrollDesc: "\uBAA8\uB4E0 \uAC01\uC131\uC744 \uC120\uD0DD\uD560 \uC218 \uC788\uB2E4.(\uD55C
-    \uBC88\uB9CC \uC0AC\uC6A9\uAC00\uB2A5)"
+  scrollID: 9
+  scrollDesc: "\uB2E4\uC74C \uAC01\uC131 \uC120\uD0DD \uC2DC \uBAA8\uB4E0 \uAC01\uC131\uC744
+    \uC120\uD0DD\uD560 \uC218 \uC788\uB2E4."
   haveScroll: 1
+  dropScroll: 0
   baseDamage: 0

@@ -16,7 +16,12 @@ public class ShopManager : MonoBehaviour
 
     public void OnRefresh()
     {
-        refreshBtn.interactable = false;
+        GameManager.Instance.refreshCount--;
+        if (GameManager.Instance.refreshCount < 0)
+        {
+            refreshBtn.interactable = false;
+        }
+
         foreach (Shop shop in shops)
         {
             Shop.ShopType shopType = shop.shopType;

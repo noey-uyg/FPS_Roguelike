@@ -34,6 +34,57 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         scroll = addScroll;
         scroll.haveScroll = true;
+        ApplyScroll(scroll);
+    }
+
+    public void ApplyScroll(ScrollData scroll)
+    {
+        switch (scroll.scrollID)
+        {
+            case 0:
+                GameManager.Instance.scrollNoCriDam = true;
+                break;
+            case 1:
+                GameManager.Instance.isScrollMaxHpDam = true;
+                break;
+            case 2:
+                GameManager.Instance.isReduceDamHPHeal = true;
+                break;
+            case 3:
+                GameManager.Instance.isSurpriseAttack = true;
+                break;
+            case 4:
+                GameManager.Instance.isAdrenaline = true;
+                break;
+            case 5:
+                GameManager.Instance.playerResur += 1;
+                break;
+            case 6:
+                GameManager.Instance.isJudge = true;
+                break;
+            case 7:
+                GameManager.Instance.isBloodCurse = true;
+                GameManager.Instance.playerMaxHP += GameManager.Instance.playerMaxHP * 0.5f;
+                GameManager.Instance.playerCurHP = GameManager.Instance.playerMaxHP;
+                break;
+            case 8:
+                GameManager.Instance.isEliteKiller = true;
+                break;
+            case 9:
+                GameManager.Instance.isGrabber = true;
+                GameManager.Instance.grabberCount = 3;
+                break;
+            case 10:
+                GameManager.Instance.isLifeCurse = true;
+                GameManager.Instance.playerMaxHP -= GameManager.Instance.playerMaxHP * 0.5f;
+                GameManager.Instance.extraDamage += 0.5f;
+                break;
+            case 11:
+                GameManager.Instance.isDestroyer = true;
+                break;
+            case 12:
+                break;
+        }
     }
 
     public void ClearSlot()

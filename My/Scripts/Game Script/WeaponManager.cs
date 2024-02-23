@@ -130,6 +130,7 @@ public class WeaponManager : MonoBehaviour
     //무기 교체
     private void WeaponChange(string type, string name)
     {
+        GameManager.Instance.Adrenaline();
         if(type == "GUN")
         {
             theGunController.GunChange(gunDic[name]);

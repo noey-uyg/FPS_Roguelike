@@ -24,8 +24,16 @@ public class LevelUPUI : MonoBehaviour
 
     public void Hide()
     {
-        rect.localScale = Vector3.zero;
-        GameManager.Instance.isOpenTab = false;
+        if (GameManager.Instance.isGrabber)
+        {
+            GameManager.Instance.grabberCount--;
+        }
+
+        if(GameManager.Instance.grabberCount == 0)
+        {
+            rect.localScale = Vector3.zero;
+            GameManager.Instance.isOpenTab = false;
+        }
     }
 
     public void Select(int index)

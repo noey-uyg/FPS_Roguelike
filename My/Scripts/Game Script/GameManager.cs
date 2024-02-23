@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -115,6 +116,22 @@ public class GameManager : MonoBehaviour
     public bool puzzleResurDam = false;
     public bool puzzleKillNearby = false;
     public bool puzzleCriNearby = false;
+
+    [Header("Scroll")]
+    public bool scrollNoCriDam = false;
+    public bool isScrollMaxHpDam = false;
+    public bool isReduceDamHPHeal = false;
+    public bool isSurpriseAttack = false;
+    public bool isAdrenaline = false;
+    public bool isJudge = false;
+    public bool isBloodCurse = false;
+    public bool isEliteKiller = false;
+    public bool isGrabber = false;
+    public int grabberCount = 0;
+    public bool isLifeCurse = false;
+    public bool isDestroyer = false;
+    public bool isGiveMe = false;
+    public int refreshCount = 0;
 
     [Header("ETC")]
     public bool canPlayerMove = true;
@@ -251,6 +268,123 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //스크롤
+    //치명적이지 않은 공격
+    public float NoCriDam(float damage)
+    {
+        if (scrollNoCriDam) return 0;
+
+        return damage * 0.3f;
+    }
+
+    //허세쟁이
+    public float MaxHPDam(float damage)
+    {
+        if (!isScrollMaxHpDam) return 0;
+
+        return damage * 0.3f;
+    }
+
+    //탄력 육체
+    #region PlayerHeal
+    bool isHealing = false;
+    public void TakeHeal()
+    {
+        if (!isReduceDamHPHeal) return;
+
+        if (!isHealing)
+        {
+            StartCoroutine(StartHealingCoroutine());
+        }    
+    }
+
+    IEnumerator StartHealingCoroutine()
+    {
+        isHealing = true;
+
+        float timer = 0f;
+        while (timer < 5f)
+        {
+            Heal();
+            yield return new WaitForSeconds(1f);
+            timer += 1f;
+        }
+
+        isHealing = false;
+    }
+
+    void Heal()
+    {
+        float healingAmount = playerMaxHP * 0.3f;
+        playerCurHP = Mathf.Min(playerCurHP + healingAmount, playerMaxHP);
+    }
+    #endregion
+
+    //기습 공격
+    public float SurpirseAttack(Enemy enemy, float damage)
+    {
+        if (!isSurpriseAttack) return 0;
+
+        if(enemy.enemyCurrentHP > enemy.enemyCurrentHP * 0.7f)
+        {
+            return damage * 0.3f;
+        }
+
+        return 0;
+    }
+
+    //아드레날린
+    #region Adrenaline
+    public bool isIncreased = false;
+
+    public void Adrenaline()
+    {
+        if (!isAdrenaline) return;
+
+        StartCoroutine(AdreanilneCoroutine());
+
+    }
+
+    IEnumerator AdreanilneCoroutine()
+    {
+        isIncreased = true;
+
+        yield return new WaitForSeconds(5f);
+
+        isIncreased = false;
+    }
+    #endregion
+
+    //심판자
+    public void Judge(Enemy enemy)
+    {
+        if (!isJudge) return;
+
+        int ranNum = Random.Range(0, 100);
+
+        if(ranNum < 5)
+        {
+            enemy.enemyCurrentHP -= enemy.maxHP * 0.1f;
+        }
+    }
+
+    //엘리트 킬러
+    public void EliteKiler()
+    {
+        if (!isEliteKiller) return;
+
+        extraDamage += 0.1f;
+    }
+
+    //파괴자
+    public void DestroyerScroll()
+    {
+        if (!isDestroyer) return;
+
+        extraDamage += 0.01f;
+    }
+
+    //특성 
     //보스,강화,엘리트 몹 추가 데미지
     public float REBAddAttack(Enemy enemy, float damage)
     {
@@ -262,7 +396,6 @@ public class GameManager : MonoBehaviour
     }
 
     //장착된 퍼즐
-
     public void puzzleCriExtraDam()
     {
         if (isCritical && puzzleCriEnemyDam)
