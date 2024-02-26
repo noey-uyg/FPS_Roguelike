@@ -61,14 +61,14 @@ public class UserInfoUI : MonoBehaviour
 
     void InfoTextUpdate()
     {
-        levelText.text = string.Format("Lv." + GameManager.Instance.playerLevel);
-        userInfoTexts[0].text = GameManager.Instance.playerMaxHP.ToString();
-        userInfoTexts[1].text = GameManager.Instance.playerCurDamage.ToString();
-        userInfoTexts[2].text = GameManager.Instance.playerCriticalPer.ToString();
-        userInfoTexts[3].text = GameManager.Instance.playerCriticalDam.ToString();
-        userInfoTexts[4].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerWalkSpeed * GameManager.Instance.extraSpeed)).ToString();
-        userInfoTexts[5].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerRunSpeed * GameManager.Instance.extraSpeed)).ToString();
-        userInfoTexts[6].text = (GameManager.Instance.playerCrouchSpeed + (GameManager.Instance.playerCrouchSpeed * GameManager.Instance.extraSpeed)).ToString();
+        levelText.text = string.Format("Lv." + GameManager.Instance.playerData.playerLevel);
+        userInfoTexts[0].text = GameManager.Instance.playerData.playerMaxHP.ToString();
+        userInfoTexts[1].text = GameManager.Instance.playerData.playerCurDamage.ToString();
+        userInfoTexts[2].text = GameManager.Instance.playerData.playerCriticalPer.ToString();
+        userInfoTexts[3].text = GameManager.Instance.playerData.playerCriticalDam.ToString();
+        userInfoTexts[4].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerWalkSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[5].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerRunSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[6].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerCrouchSpeed * GameManager.Instance.extraSpeed)).ToString();
     }
 
     void Show()

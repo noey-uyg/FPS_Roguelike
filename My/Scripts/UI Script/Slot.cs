@@ -57,15 +57,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.isAdrenaline = true;
                 break;
             case 5:
-                GameManager.Instance.playerResur += 1;
+                GameManager.Instance.playerData.playerResur += 1;
                 break;
             case 6:
                 GameManager.Instance.isJudge = true;
                 break;
             case 7:
                 GameManager.Instance.isBloodCurse = true;
-                GameManager.Instance.playerMaxHP += GameManager.Instance.playerMaxHP * 0.5f;
-                GameManager.Instance.playerCurHP = GameManager.Instance.playerMaxHP;
+                GameManager.Instance.playerData.playerMaxHP += GameManager.Instance.playerData.playerMaxHP * 0.5f;
+                GameManager.Instance.playerData.playerCurHP = GameManager.Instance.playerData.playerMaxHP;
                 break;
             case 8:
                 GameManager.Instance.isEliteKiller = true;
@@ -76,7 +76,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 break;
             case 10:
                 GameManager.Instance.isLifeCurse = true;
-                GameManager.Instance.playerMaxHP -= GameManager.Instance.playerMaxHP * 0.5f;
+                GameManager.Instance.playerData.playerMaxHP -= GameManager.Instance.playerData.playerMaxHP * 0.5f;
                 GameManager.Instance.extraDamage += 0.5f;
                 break;
             case 11:

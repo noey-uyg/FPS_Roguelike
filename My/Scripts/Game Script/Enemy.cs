@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour
         {
             float addDam = GameManager.Instance.isBloodCurse ? attackDamage * 0.5f : 0;
             attackDamage += addDam;
-            GameManager.Instance.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.traitsReduceDam));
+            GameManager.Instance.playerData.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.playerTraitsData.traitsReduceDam));
         }
     }
 
@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour
             SetObjectScale(newScale);
         }
 
-        maxHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerLevel) / 2);
+        maxHP = (maxHP * GameManager.Instance.wave) + ((maxHP * GameManager.Instance.playerData.playerLevel) / 2);
         maxHP *= GameManager.Instance.difficultyLevel;
         attackDamage *= GameManager.Instance.difficultyLevel;
         enemyCurrentHP = maxHP;
@@ -435,7 +435,7 @@ public class Enemy : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
-                GameManager.Instance.playerCurHP -= (10 - (10 * GameManager.Instance.traitsReduceDam));
+                GameManager.Instance.playerData.playerCurHP -= (10 - (10 * GameManager.Instance.playerTraitsData.traitsReduceDam));
             }
         }
 

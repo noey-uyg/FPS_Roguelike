@@ -101,8 +101,8 @@ public class Awakening : MonoBehaviour
                 break;
             case 14:
                 GameManager.Instance.extraHP = data.damage[data.level];
-                GameManager.Instance.playerMaxHP += (GameManager.Instance.playerMaxHP * GameManager.Instance.extraHP);
-                GameManager.Instance.playerCurHP = GameManager.Instance.playerMaxHP;
+                GameManager.Instance.playerData.playerMaxHP += (GameManager.Instance.playerData.playerMaxHP * GameManager.Instance.extraHP);
+                GameManager.Instance.playerData.playerCurHP = GameManager.Instance.playerData.playerMaxHP;
                 data.level++;
                 break;
         }

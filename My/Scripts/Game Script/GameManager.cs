@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,47 +10,13 @@ public class GameManager : MonoBehaviour
 
     //JSON으로 변환할 것.
     [Header("Player Data")]
-    public float playerMaxHP = 120;
-    public float playerCurHP = 0;
-    public float playerNextEXP = 0;
-    public float playerCurEXP = 0;
-    public float playerGold=0;
-    public float playerCrystal;
-    public float playerMaxCrystal = 25000;
-    public int playerLevel = 1;
-    public float playerCriticalPer = 5;
-    public float playerCriticalDam = 1.5f;
-    public float playerCurDamage;
-    public float playerWalkSpeed = 8;
-    public float playerRunSpeed = 20;
-    public float playerCrouchSpeed = 3;
-    public float playerJumpForce = 0;
-    public int playerResur = 0;
-    public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
-        231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
-    public bool isDead = false;
+    public PlayerData playerData;
 
     [Header("Setting")]
-    public float mouseSensitivity;
-    public float soundEffectVolume;
-    public float soundBgmVolume;
+    public SettingData settingData;
 
     [Header("Traits")]
-    public int traitsCoin = 0;
-    public bool traitsShopUseAwake = false;
-    public float traitsDoubleCoinPer = 0;
-    public float traitsDiscountShop = 0;
-    public bool traitsScrollPer = false;
-    public float traitsExtraDam = 0;
-    public float traitsCriPer = 0;
-    public float traitsGunDam = 0;
-    public float traitsAxeSpeed = 0;
-    public float traitsHandRange = 0;
-    public float traitsAddDam = 0;
-    public int traitsMaxHP = 0;
-    public int traitsResur = 0;
-    public float traitsReduceDam = 0;
-    public bool traitsShopRefrsh = false;
+    public PlayerTraitsData playerTraitsData;
 
     [Header("AxeAwakening")]
     public float axeExtraDamage = 0;
@@ -160,6 +127,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        LoadPlayerDataToJson();
+        LoadPlayerSettingDataToJson();
+        LoadPlayerTraitsDataToJson();
         Instance = this;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -195,20 +165,20 @@ public class GameManager : MonoBehaviour
         EliteTime();
         EneWave();
 
-        if(playerCurHP <= 0)
+        if(playerData.playerCurHP <= 0)
         {
-            if(playerResur > 0)
+            if(playerData.playerResur > 0)
             {
                 canPlayerMove = false;
                 ResurrectPlayer();
             }
             else
             {
-                isDead = true;
+                playerData.isDead = true;
             }
         }
 
-        if (isDead)
+        if (playerData.isDead)
         {
             ClearUIShow();
         }
@@ -225,8 +195,8 @@ public class GameManager : MonoBehaviour
         if(resurrectionTimer > resurrectionTime)
         {
             canPlayerMove = true;
-            playerCurHP = playerMaxHP;
-            playerResur--;
+            playerData.playerCurHP = playerData.playerMaxHP;
+            playerData.playerResur--;
             resurrectionTimer = 0f;
             PuzzleResurDam();
         }
@@ -247,9 +217,9 @@ public class GameManager : MonoBehaviour
     {
         isOpenTab = true;
 
-        clearUiLevelText.text = string.Format("Level:" + playerLevel);
+        clearUiLevelText.text = string.Format("Level:" + playerData.playerLevel);
         clearUiWaveText.text = string.Format("Wave:" + wave);
-        deadText.gameObject.SetActive(isDead);
+        deadText.gameObject.SetActive(playerData.isDead);
         clearText.gameObject.SetActive(isClear);
 
         ClearUI.SetActive(true);
@@ -308,21 +278,21 @@ public class GameManager : MonoBehaviour
         InitSystem();
 
         //플레이어 기본 초기화
-        playerMaxHP += playerMaxHP * extraHP;
-        playerNextEXP = playerExp[0];
-        playerCurHP = playerMaxHP;
-        isDead = false;
+        playerData.playerMaxHP += playerData.playerMaxHP * extraHP;
+        playerData.playerNextEXP = playerData.playerExp[0];
+        playerData.playerCurHP = playerData.playerMaxHP;
+        playerData.isDead = false;
         isClear = false;
 
         //특성 수치 적용
-        playerMaxHP += traitsMaxHP;
-        playerGold += traitsCoin;
-        playerResur += traitsResur;
-        extraDamage += traitsExtraDam;
-        extraCriticalPer += traitsCriPer;
-        gunExtraDamage += traitsGunDam;
-        weaponAxe.attackDelay -= weaponAxe.attackDelay * traitsAxeSpeed;
-        weaponHand.range += weaponHand.range * traitsHandRange;
+        playerData.playerMaxHP += playerTraitsData.traitsMaxHP;
+        playerData.playerGold += playerTraitsData.traitsCoin;
+        playerData.playerResur += playerTraitsData.traitsResur;
+        extraDamage += playerTraitsData.traitsExtraDam;
+        extraCriticalPer += playerTraitsData.traitsCriPer;
+        gunExtraDamage += playerTraitsData.traitsGunDam;
+        weaponAxe.attackDelay -= weaponAxe.attackDelay * playerTraitsData.traitsAxeSpeed;
+        weaponHand.range += weaponHand.range * playerTraitsData.traitsHandRange;
     }
 
     public void InitSystem()
@@ -438,8 +408,8 @@ public class GameManager : MonoBehaviour
 
     void Heal()
     {
-        float healingAmount = playerMaxHP * 0.3f;
-        playerCurHP = Mathf.Min(playerCurHP + healingAmount, playerMaxHP);
+        float healingAmount = playerData.playerMaxHP * 0.3f;
+        playerData.playerCurHP = Mathf.Min(playerData.playerCurHP + healingAmount, playerData.playerMaxHP);
     }
     #endregion
 
@@ -514,7 +484,7 @@ public class GameManager : MonoBehaviour
     {
         if (enemy.isBoss || enemy.isReinforced || enemy.isElite)
         {
-            return damage * traitsAddDam;
+            return damage * playerTraitsData.traitsAddDam;
         }
         return 0;
     }
@@ -577,7 +547,7 @@ public class GameManager : MonoBehaviour
         if (puzzleHP)
         {
             extraHP += (allEnemyKill / 50) * 0.01f;
-            playerMaxHP += playerMaxHP * extraHP;
+            playerData.playerMaxHP += playerData.playerMaxHP * extraHP;
         }
     }
 
@@ -601,7 +571,7 @@ public class GameManager : MonoBehaviour
     {
         if (puzzleLevelHP)
         {
-            playerCurHP = playerMaxHP;
+            playerData.playerCurHP = playerData.playerMaxHP;
         }
     }
 
@@ -627,25 +597,25 @@ public class GameManager : MonoBehaviour
         {
             extraDamage += 0.1f;
             extraSpeed += 0.1f;
-            playerMaxHP += playerMaxHP * 0.1f;
+            playerData.playerMaxHP += playerData.playerMaxHP * 0.1f;
         }
     }
     #endregion
 
     public void LevelUP()
     {
-        playerCurEXP = 0;
-        playerNextEXP = playerExp[Mathf.Min(playerLevel, playerExp.Length)];
-        playerLevel += 1;
+        playerData.playerCurEXP = 0;
+        playerData.playerNextEXP = playerData.playerExp[Mathf.Min(playerData.playerLevel, playerData.playerExp.Length)];
+        playerData.playerLevel += 1;
         PuzzleLevelUPAblity();
         levelUpUi.Show();
     }
 
     public void GetEXP()
     {
-        playerCurEXP += 1;
+        playerData.playerCurEXP += 1;
 
-        if (playerCurEXP >= playerNextEXP)
+        if (playerData.playerCurEXP >= playerData.playerNextEXP)
         {
             LevelUP();
         }
@@ -653,11 +623,11 @@ public class GameManager : MonoBehaviour
 
     public void GetHP()
     {
-        playerCurHP += playerMaxHP * 0.3f;
+        playerData.playerCurHP += playerData.playerMaxHP * 0.3f;
 
-        if (playerCurHP > playerMaxHP)
+        if (playerData.playerCurHP > playerData.playerMaxHP)
         {
-            playerCurHP = playerMaxHP;
+            playerData.playerCurHP = playerData.playerMaxHP;
         }
     }
 
@@ -665,18 +635,18 @@ public class GameManager : MonoBehaviour
     {
         int coinRanNum = Random.Range(0, 100);
 
-        if(coinRanNum < traitsDoubleCoinPer)
+        if(coinRanNum < playerTraitsData.traitsDoubleCoinPer)
         {
-            playerGold += 2;
+            playerData.playerGold += 2;
         }
 
-        playerGold += 1;
+        playerData.playerGold += 1;
     }
 
     public void GetCrystal()
     {
-        if (playerCrystal >= playerMaxCrystal) return;
-        playerCrystal += 1;
+        if (playerData.playerCrystal >= playerData.playerMaxCrystal) return;
+        playerData.playerCrystal += 1;
     }
 
     public void GetBullet()
@@ -688,4 +658,137 @@ public class GameManager : MonoBehaviour
             currentGun.carryBulletCount = currentGun.maxBulletCount;
         }
     }
+
+    //플레이어 데이터
+    [ContextMenu("To Json Data")]
+    public void SavePlayerDataToJson()
+    {
+        string jsonData = JsonUtility.ToJson(playerData, true);
+        string path = Path.Combine(Application.persistentDataPath + "/playerData.json");
+        File.WriteAllText(path, jsonData);
+        Debug.Log("저장완료");
+    }
+
+    [ContextMenu("From Json Data")]
+    public void LoadPlayerDataToJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath + "/playerData.json");
+        if (File.Exists(path))
+        {
+            string jsonData = File.ReadAllText(path);
+            playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+            Debug.Log("불러오기 완료");
+        }
+        else
+        {
+            playerData = new PlayerData();
+            Debug.Log("파일생성 완료");
+        }
+    }
+
+    //설정 데이터
+    [ContextMenu("To Json Data")]
+    public void SavePlayerSettingDataToJson()
+    {
+        string jsonData = JsonUtility.ToJson(settingData, true);
+        string path = Path.Combine(Application.persistentDataPath + "/playerData.json");
+        File.WriteAllText(path, jsonData);
+        Debug.Log("저장완료");
+    }
+
+    [ContextMenu("From Json Data")]
+    public void LoadPlayerSettingDataToJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath + "/settingData.json");
+        if (File.Exists(path))
+        {
+            string jsonData = File.ReadAllText(path);
+            settingData = JsonUtility.FromJson<SettingData>(jsonData);
+            Debug.Log("불러오기 완료");
+        }
+        else
+        {
+            settingData = new SettingData();
+            Debug.Log("파일생성 완료");
+        }
+    }
+
+    //특성 데이터
+    [ContextMenu("To Json Data")]
+    public void SavePlayerTraitsDataToJson()
+    {
+        string jsonData = JsonUtility.ToJson(playerTraitsData, true);
+        string path = Path.Combine(Application.persistentDataPath + "/playerTraitsData.json");
+        File.WriteAllText(path, jsonData);
+        Debug.Log("저장완료");
+    }
+
+    [ContextMenu("From Json Data")]
+    public void LoadPlayerTraitsDataToJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath + "/playerTraitsData.json");
+        if (File.Exists(path))
+        {
+            string jsonData = File.ReadAllText(path);
+            playerTraitsData = JsonUtility.FromJson<PlayerTraitsData>(jsonData);
+            Debug.Log("불러오기 완료");
+        }
+        else
+        {
+            playerTraitsData = new PlayerTraitsData();
+            Debug.Log("파일생성 완료");
+        }
+    }
+}
+
+//플레이어의 데이터
+public class PlayerData
+{
+    public float playerMaxHP = 120;
+    public float playerCurHP = 0;
+    public float playerNextEXP = 0;
+    public float playerCurEXP = 0;
+    public float playerGold = 0;
+    public float playerCrystal;
+    public float playerMaxCrystal = 25000;
+    public int playerLevel = 1;
+    public float playerCriticalPer = 5;
+    public float playerCriticalDam = 1.5f;
+    public float playerCurDamage;
+    public float playerWalkSpeed = 8;
+    public float playerRunSpeed = 20;
+    public float playerCrouchSpeed = 3;
+    public float playerJumpForce = 0;
+    public int playerResur = 0;
+    public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
+        231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
+    public bool isDead = false;
+}
+
+//설정 데이터
+public class SettingData
+{
+    public float mouseSensitivity;
+    public float soundEffectVolume;
+    public float soundBgmVolume;
+}
+
+//특성 데이터
+public class PlayerTraitsData
+{
+    public int traitsCoin = 0;
+    public bool traitsShopUseAwake = false;
+    public float traitsDoubleCoinPer = 0;
+    public float traitsDiscountShop = 0;
+    public bool traitsScrollPer = false;
+    public float traitsExtraDam = 0;
+    public float traitsCriPer = 0;
+    public float traitsGunDam = 0;
+    public float traitsAxeSpeed = 0;
+    public float traitsHandRange = 0;
+    public float traitsAddDam = 0;
+    public int traitsMaxHP = 0;
+    public int traitsResur = 0;
+    public float traitsReduceDam = 0;
+    public bool traitsShopRefrsh = false;
 }

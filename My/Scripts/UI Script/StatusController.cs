@@ -24,16 +24,16 @@ public class StatusController : MonoBehaviour
 
     private float HPGauge()
     {
-        float maxHP = GameManager.Instance.playerMaxHP;
-        float currentHP = GameManager.Instance.playerCurHP;
+        float maxHP = GameManager.Instance.playerData.playerMaxHP;
+        float currentHP = GameManager.Instance.playerData.playerCurHP;
 
         return currentHP / maxHP;
     }
 
     private float EXPGauge()
     {
-        float maxEXP = GameManager.Instance.playerNextEXP;
-        float currentEXP = GameManager.Instance.playerCurEXP;
+        float maxEXP = GameManager.Instance.playerData.playerNextEXP;
+        float currentEXP = GameManager.Instance.playerData.playerCurEXP;
 
         return currentEXP / maxEXP;
     }

@@ -41,12 +41,12 @@ public class HUD : MonoBehaviour
 
     private void CheckGold()
     {
-        text_Gold.text = GameManager.Instance.playerGold.ToString();
+        text_Gold.text = GameManager.Instance.playerData.playerGold.ToString();
     }
 
     private void CheckCrystal()
     {
-        text_Crystal.text = GameManager.Instance.playerCrystal.ToString();
+        text_Crystal.text = GameManager.Instance.playerData.playerCrystal.ToString();
     }
 
     private void PressItStart()

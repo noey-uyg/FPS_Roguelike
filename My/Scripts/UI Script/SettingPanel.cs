@@ -22,13 +22,13 @@ public class SettingPanel : MonoBehaviour
 
     private void Start()
     {
-        mouseSet.value = GameManager.Instance.mouseSensitivity;
+        mouseSet.value = GameManager.Instance.settingData.mouseSensitivity;
         mouseSetInput.text = (mouseSet.value * 100).ToString();
 
-        bgmSet.value = GameManager.Instance.soundBgmVolume;
+        bgmSet.value = GameManager.Instance.settingData.soundBgmVolume;
         bgmSetInput.text = (bgmSet.value * 100).ToString();
 
-        seSet.value = GameManager.Instance.soundEffectVolume;
+        seSet.value = GameManager.Instance.settingData.soundEffectVolume;
         seSetInput.text = (seSet.value * 100).ToString();
 
         InitResolution();
@@ -39,7 +39,7 @@ public class SettingPanel : MonoBehaviour
     public void MouseSensitivityChange()
     {
         mouseSetInput.text = (mouseSet.value*100).ToString();
-        GameManager.Instance.mouseSensitivity = mouseSet.value;
+        GameManager.Instance.settingData.mouseSensitivity = mouseSet.value;
     }
 
     //text로 민감도 조절
@@ -52,32 +52,32 @@ public class SettingPanel : MonoBehaviour
     public void BgmVolumeChange()
     {
         bgmSetInput.text = (bgmSet.value * 100).ToString();
-        GameManager.Instance.soundBgmVolume = bgmSet.value;
-        SoundManager.instance.SetBGMVolume(GameManager.Instance.soundBgmVolume);
+        GameManager.Instance.settingData.soundBgmVolume = bgmSet.value;
+        SoundManager.instance.SetBGMVolume(GameManager.Instance.settingData.soundBgmVolume);
     }
 
     //text로 bgm볼륨 조절
     public void InputTextBgmVolume()
     {
         bgmSet.value = float.Parse(bgmSetInput.text) / 100;
-        GameManager.Instance.soundBgmVolume = bgmSet.value;
-        SoundManager.instance.SetBGMVolume(GameManager.Instance.soundBgmVolume);
+        GameManager.Instance.settingData.soundBgmVolume = bgmSet.value;
+        SoundManager.instance.SetBGMVolume(GameManager.Instance.settingData.soundBgmVolume);
     }
 
     //slider로 효과음 조절
     public void SeVolumeChange()
     {
         seSetInput.text = (seSet.value * 100).ToString();
-        GameManager.Instance.soundEffectVolume = seSet.value;
-        SoundManager.instance.SetEffectVolume(GameManager.Instance.soundEffectVolume);
+        GameManager.Instance.settingData.soundEffectVolume = seSet.value;
+        SoundManager.instance.SetEffectVolume(GameManager.Instance.settingData.soundEffectVolume);
     }
 
     //text로 효과음 조절
     public void InputTextSeVolume()
     {
         seSet.value = float.Parse(seSetInput.text) / 100;
-        GameManager.Instance.soundEffectVolume = seSet.value;
-        SoundManager.instance.SetEffectVolume(GameManager.Instance.soundEffectVolume);
+        GameManager.Instance.settingData.soundEffectVolume = seSet.value;
+        SoundManager.instance.SetEffectVolume(GameManager.Instance.settingData.soundEffectVolume);
     }
 
     //해상도 초기화

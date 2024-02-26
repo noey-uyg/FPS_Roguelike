@@ -42,8 +42,8 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         playSoundName = new string[audioSourceEffects.Length];
-        effectVolume = GameManager.Instance.soundEffectVolume;
-        bgmVolume = GameManager.Instance.soundBgmVolume;
+        effectVolume = GameManager.Instance.settingData.soundEffectVolume;
+        bgmVolume = GameManager.Instance.settingData.soundBgmVolume;
     }
 
     public void PlaySE(string name)

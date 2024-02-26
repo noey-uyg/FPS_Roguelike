@@ -128,9 +128,9 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (traitsdata.level >= traitsdata.damage.Length - 1) return;
 
-        if(traitsdata.cost <= GameManager.Instance.playerCrystal)
+        if(traitsdata.cost <= GameManager.Instance.playerData.playerCrystal)
         {
-            GameManager.Instance.playerCrystal -= traitsdata.cost;
+            GameManager.Instance.playerData.playerCrystal -= traitsdata.cost;
             TraitsUpgradeApply();
             traitsdata.level++;
             Debug.Log("강화완료");
@@ -148,49 +148,49 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         switch (traitsdata.traitsID)
         {
             case 0:
-                GameManager.Instance.traitsCoin = (int)(traitsdata.damage[traitsdata.level]*100);
+                GameManager.Instance.playerTraitsData.traitsCoin = (int)(traitsdata.damage[traitsdata.level]*100);
                 break;
             case 1:
-                GameManager.Instance.traitsShopUseAwake = true;
+                GameManager.Instance.playerTraitsData.traitsShopUseAwake = true;
                 break;
             case 2:
-                GameManager.Instance.traitsDoubleCoinPer = traitsdata.damage[traitsdata.level]*100;
+                GameManager.Instance.playerTraitsData.traitsDoubleCoinPer = traitsdata.damage[traitsdata.level]*100;
                 break;
             case 3:
-                GameManager.Instance.traitsDiscountShop = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsDiscountShop = traitsdata.damage[traitsdata.level];
                 break;
             case 4:
-                GameManager.Instance.traitsScrollPer = true;
+                GameManager.Instance.playerTraitsData.traitsScrollPer = true;
                 break;
             case 5:
-                GameManager.Instance.traitsExtraDam = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsExtraDam = traitsdata.damage[traitsdata.level];
                 break;
             case 6:
-                GameManager.Instance.traitsCriPer = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsCriPer = traitsdata.damage[traitsdata.level];
                 break;
             case 7:
-                GameManager.Instance.traitsGunDam = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsGunDam = traitsdata.damage[traitsdata.level];
                 break;
             case 8:
-                GameManager.Instance.traitsAxeSpeed = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsAxeSpeed = traitsdata.damage[traitsdata.level];
                 break;
             case 9:
-                GameManager.Instance.traitsHandRange = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsHandRange = traitsdata.damage[traitsdata.level];
                 break;
             case 10:
-                GameManager.Instance.traitsAddDam = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsAddDam = traitsdata.damage[traitsdata.level];
                 break;
             case 11:
-                GameManager.Instance.traitsMaxHP = (int)(traitsdata.damage[traitsdata.level] * 100);
+                GameManager.Instance.playerTraitsData.traitsMaxHP = (int)(traitsdata.damage[traitsdata.level] * 100);
                 break;
             case 12:
-                GameManager.Instance.traitsResur += 1;
+                GameManager.Instance.playerTraitsData.traitsResur += 1;
                 break;
             case 13:
-                GameManager.Instance.traitsReduceDam = traitsdata.damage[traitsdata.level];
+                GameManager.Instance.playerTraitsData.traitsReduceDam = traitsdata.damage[traitsdata.level];
                 break;
             case 14:
-                GameManager.Instance.traitsShopRefrsh = true;
+                GameManager.Instance.playerTraitsData.traitsShopRefrsh = true;
                 break;
         }
         

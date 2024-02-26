@@ -134,17 +134,17 @@ public class WeaponManager : MonoBehaviour
         if(type == "GUN")
         {
             theGunController.GunChange(gunDic[name]);
-            GameManager.Instance.playerCurDamage = gunDic[name].damage;
+            GameManager.Instance.playerData.playerCurDamage = gunDic[name].damage;
         }
         else if(type == "HAND")
         {
             theHandController.CloseWeaponChange(handDic[name]);
-            GameManager.Instance.playerCurDamage = handDic[name].damage;
+            GameManager.Instance.playerData.playerCurDamage = handDic[name].damage;
         }
         else if (type == "AXE")
         {
             theAxeController.CloseWeaponChange(axeDic[name]);
-            GameManager.Instance.playerCurDamage = axeDic[name].damage;
+            GameManager.Instance.playerData.playerCurDamage = axeDic[name].damage;
         }
             
     }

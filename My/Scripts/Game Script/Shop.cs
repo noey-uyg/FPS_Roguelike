@@ -39,7 +39,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         shopNameText = texts[0];
         shopDescText = texts[1];
-        cost = cost - (int)(cost * GameManager.Instance.traitsDiscountShop);
+        cost = cost - (int)(cost * GameManager.Instance.playerTraitsData.traitsDiscountShop);
     }
 
     private void Update()
@@ -80,7 +80,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnEnable()
     {
-        cost = (cost * GameManager.Instance.playerLevel) / GameManager.Instance.wave;
+        cost = (cost * GameManager.Instance.playerData.playerLevel) / GameManager.Instance.wave;
 
         if (shopObject == null)
         {
@@ -99,7 +99,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 count = shopObject.GetComponent<ShopObject>().scrollCount;
                 break;
             case ShopType.Awake:
-                if(!GameManager.Instance.traitsShopUseAwake) gameObject.SetActive(false);
+                if(!GameManager.Instance.playerTraitsData.traitsShopUseAwake) gameObject.SetActive(false);
                 count = shopObject.GetComponent<ShopObject>().awakeCount;
                 break;
         }
@@ -110,14 +110,14 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         switch (shopType)
         {
             case ShopType.Heal:
-                if(cost <= GameManager.Instance.playerGold)
+                if(cost <= GameManager.Instance.playerData.playerGold)
                 {
                     GameManager.Instance.GetHP();
                     count--;
                 }
                 break;
             case ShopType.Scroll:
-                if (cost <= GameManager.Instance.playerGold)
+                if (cost <= GameManager.Instance.playerData.playerGold)
                 {
                     userInfoUI.AcquireScroll(gameObject.GetComponent<Scroll>().scrollData);
                     gameObject.GetComponent<Scroll>().scrollData.haveScroll = true;
@@ -128,14 +128,14 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 break;
             case ShopType.Awake:
-                if (cost <= GameManager.Instance.playerGold)
+                if (cost <= GameManager.Instance.playerData.playerGold)
                 {
                     gameObject.GetComponent<RandomAwakening>().AwakeUpgrade();
                     count--;
                 }
                 break;
             case ShopType.Upgrade:
-                if (cost <= GameManager.Instance.playerGold)
+                if (cost <= GameManager.Instance.playerData.playerGold)
                 {
                     GameManager.Instance.extraDamage += 0.1f;
                     count--;

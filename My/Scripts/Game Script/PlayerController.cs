@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.canPlayerMove || GameManager.Instance.mainScene) return;
 
-        mouseSensitivity = GameManager.Instance.mouseSensitivity;
+        mouseSensitivity = GameManager.Instance.settingData.mouseSensitivity;
         IsGround();
         TryJump();
         TryRun();
@@ -67,10 +67,10 @@ public class PlayerController : MonoBehaviour
 
     private void InitPlayerInfo()
     {
-        walkSpeed = (GameManager.Instance.playerWalkSpeed);
-        runSpeed = (GameManager.Instance.playerRunSpeed);
-        crouchSpeed = (GameManager.Instance.playerCrouchSpeed);
-        jumpForce = GameManager.Instance.playerJumpForce;
+        walkSpeed = (GameManager.Instance.playerData.playerWalkSpeed);
+        runSpeed = (GameManager.Instance.playerData.playerRunSpeed);
+        crouchSpeed = (GameManager.Instance.playerData.playerCrouchSpeed);
+        jumpForce = GameManager.Instance.playerData.playerJumpForce;
     }
 
     private void FixedUpdate()

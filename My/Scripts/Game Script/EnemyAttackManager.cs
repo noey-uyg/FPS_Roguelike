@@ -45,7 +45,7 @@ public class EnemyAttackManager : MonoBehaviour
         {
             float addDam = GameManager.Instance.isBloodCurse ? attackDamage * 0.5f : 0;
             attackDamage += addDam;
-            GameManager.Instance.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.traitsReduceDam));
+            GameManager.Instance.playerData.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.playerTraitsData.traitsReduceDam));
             gameObject.SetActive(false);
         }
         else if (other.CompareTag("Ground"))

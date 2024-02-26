@@ -91,7 +91,7 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 break;
             case 11:
                 GameManager.Instance.puzzleResur = item.isEquip;
-                GameManager.Instance.playerResur += 1;
+                GameManager.Instance.playerData.playerResur += 1;
                 break;
             case 12:
                 GameManager.Instance.puzzleResurDam = item.isEquip;
