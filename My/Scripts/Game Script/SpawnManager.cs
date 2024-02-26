@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.isOpenTab) return;
+        if (GameManager.Instance.isOpenTab || GameManager.Instance.isOpenPause) return;
 
         if (GameManager.Instance.gameIsStart)
         {
@@ -33,11 +33,9 @@ public class SpawnManager : MonoBehaviour
             {
                 if (spawnTime >= SpawnTime())
                 {
-
                     SpawnEnemy();
                 }
             }
-            
         }
     }
 

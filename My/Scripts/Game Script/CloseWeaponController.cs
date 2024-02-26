@@ -17,6 +17,8 @@ public abstract class CloseWeaponController : MonoBehaviour
     //공격 시도
     protected void TryAttack()
     {
+        if (!GameManager.Instance.canPlayerMove || GameManager.Instance.mainScene) return;
+
         if (Input.GetButton("Fire1"))
         {
             if (!isAttack)

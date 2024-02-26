@@ -54,6 +54,7 @@ public class CanvasManager : MonoBehaviour
 
     public void OnStartBtn()
     {
+        GameManager.Instance.PlayerInit();
         GameManager.Instance.mainScene = false;
         switch (selectDifficulty.value)
         {
@@ -98,5 +99,10 @@ public class CanvasManager : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+
+    public void HomeBtn()
+    {
+        GameManager.Instance.PlayerInit();
     }
 }

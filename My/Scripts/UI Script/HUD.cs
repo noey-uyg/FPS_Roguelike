@@ -54,7 +54,7 @@ public class HUD : MonoBehaviour
         if (!GameManager.Instance.gameIsStart)
         {
             text_Start.gameObject.SetActive(true);
-            text_Start.text = "웨이브 시작하기" + "<color=red> (F) </color>" + GameManager.Instance.curGameStartPushTime + "/" + GameManager.Instance.maxGameStartPushTime;
+            text_Start.text = "웨이브 시작하기" + "<color=red> (F) </color>" + GameManager.Instance.curGameStartPushTime.ToString("F1") + "/" + GameManager.Instance.maxGameStartPushTime;
         }
         else
         {

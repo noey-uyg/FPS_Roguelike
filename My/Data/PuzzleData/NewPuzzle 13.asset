@@ -18,6 +18,6 @@ MonoBehaviour:
   puzzleDesc: "\uC801 \uCC98\uCE58 \uC2DC \uC8FC\uBCC0\uC758 \uC801\uC5D0\uAC8C \uD604
     \uC0DD\uBA85\uB825\uC758 {0}%\uC758 \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
   puzzleSize: {x: 3, y: 3}
-  isHave: 1
-  isEquip: 1
+  isHave: 0
+  isEquip: 0
   damage: 0.15

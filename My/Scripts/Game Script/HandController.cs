@@ -16,7 +16,7 @@ public class HandController : CloseWeaponController
     // Update is called once per frame
     void Update()
     {
-        if (!isActivate || GameManager.Instance.isOpenTab)
+        if (!isActivate || GameManager.Instance.isOpenTab || GameManager.Instance.isOpenPause)
             return;
         TryAttack();
     }

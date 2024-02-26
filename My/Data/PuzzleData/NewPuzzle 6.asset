@@ -17,6 +17,6 @@ MonoBehaviour:
   puzzleName: A
   puzzleDesc: "\uC8FC\uBA39 \uAE30\uBCF8 \uB370\uBBF8\uC9C0 +{0}%"
   puzzleSize: {x: 2, y: 2}
-  isHave: 1
+  isHave: 0
   isEquip: 0
   damage: 0.5

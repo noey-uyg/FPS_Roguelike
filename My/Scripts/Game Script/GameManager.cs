@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,10 +23,11 @@ public class GameManager : MonoBehaviour
     public float playerWalkSpeed = 8;
     public float playerRunSpeed = 20;
     public float playerCrouchSpeed = 3;
-    public float playerJumpForce = 7;
+    public float playerJumpForce = 0;
     public int playerResur = 0;
     public float[] playerExp = {12,19,28,42,56,63,70,81,93,109,121,136,155,166,189,190,200,210,213,217,220,228,
         231,233,235,236,245,251,274,288,297,324,356,378,403,456,484,499,518,553,9999};
+    public bool isDead = false;
 
     [Header("Setting")]
     public float mouseSensitivity;
@@ -99,6 +98,7 @@ public class GameManager : MonoBehaviour
     public int eliteSpawnCount = 3;
     public int wave = 0;
     public bool isEliteWave = false;
+    public bool isClear = false;
 
     [Header("Puzzle")]
     public bool puzzleDam = false;
@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
     [Header("ETC")]
     public bool canPlayerMove = true;
     public bool isOpenTab = false;
+    public bool isOpenPause = false;
     public bool scrollisInitialized = false;
     public int scrollCount = 0;
     public bool isCritical = false;
@@ -143,6 +144,12 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public LevelUPUI levelUpUi;
+    public GameObject PauseUI;
+    public GameObject ClearUI;
+    Text clearUiLevelText;
+    Text clearUiWaveText;
+    Text clearText;
+    Text deadText;
 
     public static event System.Action OnWaveStart;
     public static event System.Action OnBossWave;
@@ -163,13 +170,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        ClearUIInit();
         PlayerInit();
     }
 
     private void Update()
     {
         PuzzleKillAblity();
-        if (isOpenTab || mainScene)
+        PauseESC();
+        if (isOpenTab || isOpenPause || mainScene)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -181,11 +190,108 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             canPlayerMove = true;
         }
+
         GameStart();
         EliteTime();
         EneWave();
+
+        if(playerCurHP <= 0)
+        {
+            if(playerResur > 0)
+            {
+                canPlayerMove = false;
+                ResurrectPlayer();
+            }
+            else
+            {
+                isDead = true;
+            }
+        }
+
+        if (isDead)
+        {
+            ClearUIShow();
+        }
     }
 
+    //부활
+    private float resurrectionTime = 2f; // 부활까지 걸리는 시간
+    private float resurrectionTimer = 0f; // 부활까지 남은 시간
+
+    public void ResurrectPlayer()
+    {
+        resurrectionTimer += Time.deltaTime;
+
+        if(resurrectionTimer > resurrectionTime)
+        {
+            canPlayerMove = true;
+            playerCurHP = playerMaxHP;
+            playerResur--;
+            resurrectionTimer = 0f;
+            PuzzleResurDam();
+        }
+    }
+
+    //ClearUIInit
+    public void ClearUIInit()
+    {
+        Text[] texts = ClearUI.GetComponentsInChildren<Text>();
+        clearUiLevelText = texts[0];
+        clearUiWaveText = texts[1];
+        deadText = texts[2];
+        clearText = texts[3];
+    }
+
+    //사망 or 클리어 시 UI
+    public void ClearUIShow()
+    {
+        isOpenTab = true;
+
+        clearUiLevelText.text = string.Format("Level:" + playerLevel);
+        clearUiWaveText.text = string.Format("Wave:" + wave);
+        deadText.gameObject.SetActive(isDead);
+        clearText.gameObject.SetActive(isClear);
+
+        ClearUI.SetActive(true);
+    }
+
+    public void ClearUIHide()
+    {
+        isOpenTab = false;
+        ClearUI.SetActive(false);
+    }
+
+    //Esc키
+    public void PauseESC()
+    {
+        if (mainScene || isOpenTab) return;
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isOpenPause)
+            {
+                PauseShow();
+            }
+            else
+            {
+                PauseHide();
+            }
+        }
+    }
+
+    //PauseShow
+    public void PauseShow()
+    {
+        isOpenPause = true;
+        PauseUI.SetActive(true);
+    }
+
+    //PauseHide
+    public void PauseHide()
+    {
+        isOpenPause = false;
+        PauseUI.SetActive(false);
+    }
     //각성 초기화
     public void InitAwake()
     {
@@ -198,10 +304,15 @@ public class GameManager : MonoBehaviour
     //플레이어 초기화
     public void PlayerInit()
     {
+        ClearUIHide();
+        InitSystem();
+
         //플레이어 기본 초기화
         playerMaxHP += playerMaxHP * extraHP;
         playerNextEXP = playerExp[0];
         playerCurHP = playerMaxHP;
+        isDead = false;
+        isClear = false;
 
         //특성 수치 적용
         playerMaxHP += traitsMaxHP;
@@ -212,6 +323,17 @@ public class GameManager : MonoBehaviour
         gunExtraDamage += traitsGunDam;
         weaponAxe.attackDelay -= weaponAxe.attackDelay * traitsAxeSpeed;
         weaponHand.range += weaponHand.range * traitsHandRange;
+    }
+
+    public void InitSystem()
+    {
+        if (!mainScene)
+        {
+            PauseHide();
+            mainScene = true;
+            gameIsStart = false;
+            wave = 0;
+        }
     }
 
     //웨이브시작하기
@@ -267,8 +389,9 @@ public class GameManager : MonoBehaviour
             eliteEnemyKilledNum = 0;
         }
     }
+  
 
-    //스크롤
+    #region Scroll
     //치명적이지 않은 공격
     public float NoCriDam(float damage)
     {
@@ -383,8 +506,9 @@ public class GameManager : MonoBehaviour
 
         extraDamage += 0.01f;
     }
+    #endregion
 
-    //특성 
+    #region Traits
     //보스,강화,엘리트 몹 추가 데미지
     public float REBAddAttack(Enemy enemy, float damage)
     {
@@ -394,8 +518,9 @@ public class GameManager : MonoBehaviour
         }
         return 0;
     }
+    #endregion
 
-    //장착된 퍼즐
+    #region Puzzle
     public void puzzleCriExtraDam()
     {
         if (isCritical && puzzleCriEnemyDam)
@@ -494,6 +619,18 @@ public class GameManager : MonoBehaviour
         LevelUPHP();
         LevelUPSpeed();
     }
+
+    //부활시 데미지, 속도, 생명력 증가
+    public void PuzzleResurDam()
+    {
+        if (puzzleResurDam)
+        {
+            extraDamage += 0.1f;
+            extraSpeed += 0.1f;
+            playerMaxHP += playerMaxHP * 0.1f;
+        }
+    }
+    #endregion
 
     public void LevelUP()
     {

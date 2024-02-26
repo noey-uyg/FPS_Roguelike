@@ -56,7 +56,7 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isActivate || GameManager.Instance.isOpenTab)
+        if (!GameManager.Instance.canPlayerMove || GameManager.Instance.mainScene || !isActivate || GameManager.Instance.isOpenTab || GameManager.Instance.isOpenPause)
             return;
 
         GunFireRateCalc();

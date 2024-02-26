@@ -49,7 +49,13 @@ public class UserInfoUI : MonoBehaviour
             {
                 Hide();
             }
-
+        }
+        if (GameManager.Instance.isOpenTab)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Hide();
+            }
         }
     }
 

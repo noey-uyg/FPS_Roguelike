@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float maxAttackDelay = 5f;
     private float curAttackDelay = 0f;
+    [SerializeField]
+    private PuzzleItemData[] puzzleData;
 
     // Start is called before the first frame update
     void Start()
@@ -56,13 +58,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isOpenTab)
+        if (GameManager.Instance.isOpenTab || GameManager.Instance.isOpenPause)
         {
             agent.isStopped = true;
             return;
         }
 
-        if(GameManager.Instance.isEliteWave)
+        if(GameManager.Instance.isEliteWave || GameManager.Instance.mainScene)
         {
             DisableObject();
         }
@@ -220,16 +222,15 @@ public class Enemy : MonoBehaviour
     private void EnemyDie()
     {
         if (enemyCurrentHP <= 0)
-        {
+        { 
             StartCoroutine(EnemyDieCoroutine());
-            return;
         }
     }
 
     IEnumerator EnemyDieCoroutine()
     {
         agent.speed = 0;
-        
+
         yield return new WaitForSeconds(0.4f);
 
         ExpDrop();
@@ -240,6 +241,14 @@ public class Enemy : MonoBehaviour
         BulletDrop();
 
         GameManager.Instance.DestroyerScroll();
+
+        if (isBoss)
+        {
+            GameManager.Instance.isClear = true;
+            GameManager.Instance.gameIsStart = false;
+            GameManager.Instance.ClearUIShow();
+            PuzzleDrop();
+        }
         if (isElite)
         {
             GameManager.Instance.EliteKiler();
@@ -303,6 +312,33 @@ public class Enemy : MonoBehaviour
         else if(scrollRandom < 5)
         {
             ScrollObjectDrop();
+        }
+    }
+
+    void PuzzleDrop()
+    {
+        bool allHave = true;
+
+        foreach (var puzzle in puzzleData)
+        {
+            if (!puzzle.isHave)
+            {
+                allHave = false;
+                break;
+            }
+        }
+
+        if (allHave) return;
+
+        while (true)
+        {
+            int ranNum = Random.Range(0, puzzleData.Length);
+
+            if (!puzzleData[ranNum].isHave)
+            {
+                puzzleData[ranNum].isHave = true;
+                break;
+            }
         }
     }
 

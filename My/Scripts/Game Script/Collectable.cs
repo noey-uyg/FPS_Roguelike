@@ -14,7 +14,8 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Text[] texts;
     private Text puzzleNameText;
     private Text puzzleDescText;
-    private Text UsableText;
+    private Text usableText;
+    private Text haveText;
     private Image myimage;
 
     private bool isMouseOverSlot = false;
@@ -29,7 +30,8 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         puzzleNameText = texts[0];
         puzzleDescText = texts[1];
-        UsableText = texts[2];
+        usableText = texts[2];
+        haveText = texts[3];
     }
 
     private void Update()
@@ -119,8 +121,8 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         puzzleNameText.text = item.puzzleName;
         puzzleDescText.text = item.puzzleDesc;
-        UsableText.text = item.isEquip ? "착용중" : "";
-
+        usableText.text = item.isEquip ? "착용중" : "";
+        haveText.text = item.isHave ? "보유" : "미보유";
         if (isMouseOverSlot)
         {
             Vector3 mousePosition = Input.mousePosition;

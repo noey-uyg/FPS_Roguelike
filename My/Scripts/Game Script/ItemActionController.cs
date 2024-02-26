@@ -67,10 +67,6 @@ public class ItemActionController : MonoBehaviour
                     {
                         ShopAppear();
                     }
-                    else
-                    {
-                        ShopDisAppear();    
-                    }
                 }
             }
         }
@@ -131,10 +127,10 @@ public class ItemActionController : MonoBehaviour
         shopRect.SetActive(true);
     }
 
-    private void ShopDisAppear()
+    public void ShopDisAppear()
     {
-        GameManager.Instance.isOpenTab = false;
         hitInfo.transform.gameObject.SetActive(false);
         shopRect.SetActive(false);
+        GameManager.Instance.isOpenTab = false;
     }
 }

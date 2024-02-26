@@ -128,31 +128,6 @@ MonoBehaviour:
   HPBar: {fileID: 1873829829278635243}
   targetPlayer: {fileID: 0}
   animator: {fileID: 3293061916431516914}
-  bombbardPosition:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isReinforced: 0
   isElite: 0
   isBoss: 1
@@ -162,6 +137,22 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   attackCount: 10
   maxAttackDelay: 3.5
+  puzzleData:
+  - {fileID: 11400000, guid: c8c7c4a454ff5af4a9a8a5ab5620f663, type: 2}
+  - {fileID: 11400000, guid: 044164a8510b2cc44b9ca5254f9c8603, type: 2}
+  - {fileID: 11400000, guid: ca1745f764dfc2c47b90b06554e6bfb9, type: 2}
+  - {fileID: 11400000, guid: 0be2b5de323f75a409df96d867b538d6, type: 2}
+  - {fileID: 11400000, guid: a8fac72df289b7e4a8dd8d5b92d7879a, type: 2}
+  - {fileID: 11400000, guid: b9e91917607f8364bbdfb2d8a0005606, type: 2}
+  - {fileID: 11400000, guid: f482e98fd27f43e4585618b57b442b00, type: 2}
+  - {fileID: 11400000, guid: 13b4b9f395da57b41a35a2122449e894, type: 2}
+  - {fileID: 11400000, guid: b7f47ffd4892b0e4c97a1ff23251a00d, type: 2}
+  - {fileID: 11400000, guid: 38d365fe5d023d04e88cd8adb90d11f7, type: 2}
+  - {fileID: 11400000, guid: c0e9c5b38383b2a4cb3ef0c51a5bcf2a, type: 2}
+  - {fileID: 11400000, guid: f94750ed6e781604f8fd79749eb81a38, type: 2}
+  - {fileID: 11400000, guid: 69c6b346870395b41839e59abdf7fa05, type: 2}
+  - {fileID: 11400000, guid: b9ad3e9c36a1c6640b5ee71986f7f7e4, type: 2}
+  - {fileID: 11400000, guid: f8089de9e85f33340b94c7ca8c8e9d3f, type: 2}
 --- !u!195 &6012435736913603909
 NavMeshAgent:
   m_ObjectHideFlags: 0
