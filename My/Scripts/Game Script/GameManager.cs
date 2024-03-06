@@ -216,7 +216,6 @@ public class GameManager : MonoBehaviour
     public void ClearUIShow()
     {
         isOpenTab = true;
-
         clearUiLevelText.text = string.Format("Level:" + playerData.playerLevel);
         clearUiWaveText.text = string.Format("Wave:" + wave);
         deadText.gameObject.SetActive(playerData.isDead);
@@ -262,6 +261,7 @@ public class GameManager : MonoBehaviour
         isOpenPause = false;
         PauseUI.SetActive(false);
     }
+
     //각성 초기화
     public void InitAwake()
     {
@@ -278,10 +278,7 @@ public class GameManager : MonoBehaviour
         InitSystem();
 
         //플레이어 기본 초기화
-        playerData.playerMaxHP += playerData.playerMaxHP * extraHP;
-        playerData.playerNextEXP = playerData.playerExp[0];
-        playerData.playerCurHP = playerData.playerMaxHP;
-        playerData.isDead = false;
+        InitPlayerBasic();
         isClear = false;
 
         //특성 수치 적용
@@ -295,6 +292,25 @@ public class GameManager : MonoBehaviour
         weaponHand.range += weaponHand.range * playerTraitsData.traitsHandRange;
     }
 
+    //플레이어 기본 스탯 초기화
+    public void InitPlayerBasic()
+    {
+        playerData.playerMaxHP = 120;
+        playerData.playerCurHP = playerData.playerMaxHP;
+        playerData.playerNextEXP = playerData.playerExp[0];
+        playerData.playerCurEXP = 0;
+        playerData.playerGold = 0;
+        playerData.playerLevel = 1;
+        playerData.playerCriticalPer = 5;
+        playerData.playerCriticalDam = 1.5f;
+        playerData.playerWalkSpeed = 8;
+        playerData.playerRunSpeed = 20;
+        playerData.playerCrouchSpeed = 3;
+        playerData.playerJumpForce = 0;
+        playerData.playerResur = 0;
+        playerData.isDead = false;
+}
+
     public void InitSystem()
     {
         if (!mainScene)
@@ -303,6 +319,7 @@ public class GameManager : MonoBehaviour
             mainScene = true;
             gameIsStart = false;
             wave = 0;
+            SoundManager.instance.PlayBGM("BGM_Main");
         }
     }
 
@@ -663,6 +680,8 @@ public class GameManager : MonoBehaviour
     [ContextMenu("To Json Data")]
     public void SavePlayerDataToJson()
     {
+        InitPlayerBasic();
+        if (playerData.playerCrystal >= playerData.playerMaxCrystal) playerData.playerCrystal = playerData.playerMaxCrystal;
         string jsonData = JsonUtility.ToJson(playerData, true);
         string path = Path.Combine(Application.persistentDataPath + "/playerData.json");
         File.WriteAllText(path, jsonData);
@@ -691,7 +710,7 @@ public class GameManager : MonoBehaviour
     public void SavePlayerSettingDataToJson()
     {
         string jsonData = JsonUtility.ToJson(settingData, true);
-        string path = Path.Combine(Application.persistentDataPath + "/playerData.json");
+        string path = Path.Combine(Application.persistentDataPath + "/settingData.json");
         File.WriteAllText(path, jsonData);
         Debug.Log("저장완료");
     }
@@ -768,9 +787,9 @@ public class PlayerData
 //설정 데이터
 public class SettingData
 {
-    public float mouseSensitivity;
-    public float soundEffectVolume;
-    public float soundBgmVolume;
+    public float mouseSensitivity = 1;
+    public float soundEffectVolume = 1;
+    public float soundBgmVolume = 1;
 }
 
 //특성 데이터

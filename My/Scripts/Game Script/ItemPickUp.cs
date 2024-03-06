@@ -46,6 +46,7 @@ public class ItemPickUp : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            SoundManager.instance.PlaySE("Item_PickUp");
             switch (item.itemType)
             {
                 case Item.ItemType.EXP:

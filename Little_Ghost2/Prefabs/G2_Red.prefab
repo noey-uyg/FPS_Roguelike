@@ -136,7 +136,7 @@ MonoBehaviour:
   attackDamage: 1
   attackPoint: {fileID: 0}
   attackCount: 10
-  maxAttackDelay: 3.5
+  maxAttackDelay: 4.5
   puzzleData:
   - {fileID: 11400000, guid: c8c7c4a454ff5af4a9a8a5ab5620f663, type: 2}
   - {fileID: 11400000, guid: 044164a8510b2cc44b9ca5254f9c8603, type: 2}

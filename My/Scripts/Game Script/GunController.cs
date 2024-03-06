@@ -35,8 +35,6 @@ public class GunController : MonoBehaviour
     private GameObject hitEffect_Prefab;
 
     [SerializeField]
-    private string Fire_Sound;
-    [SerializeField]
     private PlayerController playerController;
 
     private Enemy enemy;
@@ -114,7 +112,7 @@ public class GunController : MonoBehaviour
         theCrosshair.FireAnim();
         currentGun.currentBulletCount--;
         currentFireRate = (currentGun.fireRate)-(currentGun.fireRate * gunShootingSpeed);
-        SoundManager.instance.PlaySE(Fire_Sound);
+        SoundManager.instance.PlaySE("SubMachineGun_Fire");
         currentGun.muzzleFlash.Play();
 
         Hit();

@@ -134,6 +134,8 @@ public class Traits : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             TraitsUpgradeApply();
             traitsdata.level++;
             Debug.Log("강화완료");
+
+            GameManager.Instance.SavePlayerTraitsDataToJson();
         }
         else
         {

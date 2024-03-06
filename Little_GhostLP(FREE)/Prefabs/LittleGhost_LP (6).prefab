@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0796c4cfcd5a684abc0071ab2e24028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 80
   enemyCurrentHP: 0
   HPBar: {fileID: 5712938000635975408}
   targetPlayer: {fileID: 0}
@@ -327,6 +327,7 @@ MonoBehaviour:
   attackPoint: {fileID: 3964774825968168685}
   attackCount: 2
   maxAttackDelay: 5
+  puzzleData: []
 --- !u!195 &9049537667880467696
 NavMeshAgent:
   m_ObjectHideFlags: 0

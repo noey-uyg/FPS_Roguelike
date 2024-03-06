@@ -222,7 +222,7 @@ public class Enemy : MonoBehaviour
     private void EnemyDie()
     {
         if (enemyCurrentHP <= 0)
-        { 
+        {
             StartCoroutine(EnemyDieCoroutine());
         }
     }
@@ -301,7 +301,8 @@ public class Enemy : MonoBehaviour
 
     void ScrollDrop()
     {
-        int scrollRandom = Random.Range(0, 5);
+        int scrollRandom = Random.Range(0, 1000);
+
         if(isReinforced || isElite)
         {
             if (scrollRandom < 15)
@@ -429,12 +430,15 @@ public class Enemy : MonoBehaviour
 
         float explosionRadius = 3.5f;
 
+        SoundManager.instance.PlaySE("Boss_Bomb");
+
         Collider[] colliders = Physics.OverlapSphere(position, explosionRadius);
 
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
+                SoundManager.instance.PlaySE("Player_Hit");
                 GameManager.Instance.playerData.playerCurHP -= (10 - (10 * GameManager.Instance.playerTraitsData.traitsReduceDam));
             }
         }

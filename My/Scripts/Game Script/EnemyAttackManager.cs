@@ -14,6 +14,7 @@ public class EnemyAttackManager : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.instance.PlaySE("Enemy_Attack");
         destroyAttack = maxDestroyAttack;
     }
     // Update is called once per frame
@@ -43,6 +44,7 @@ public class EnemyAttackManager : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            SoundManager.instance.PlaySE("Player_Hit");
             float addDam = GameManager.Instance.isBloodCurse ? attackDamage * 0.5f : 0;
             attackDamage += addDam;
             GameManager.Instance.playerData.playerCurHP -= (attackDamage - (attackDamage * GameManager.Instance.playerTraitsData.traitsReduceDam));

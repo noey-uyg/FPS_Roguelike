@@ -64,10 +64,10 @@ public class UserInfoUI : MonoBehaviour
         levelText.text = string.Format("Lv." + GameManager.Instance.playerData.playerLevel);
         userInfoTexts[0].text = GameManager.Instance.playerData.playerMaxHP.ToString();
         userInfoTexts[1].text = GameManager.Instance.playerData.playerCurDamage.ToString();
-        userInfoTexts[2].text = GameManager.Instance.playerData.playerCriticalPer.ToString();
-        userInfoTexts[3].text = GameManager.Instance.playerData.playerCriticalDam.ToString();
-        userInfoTexts[4].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerWalkSpeed * GameManager.Instance.extraSpeed)).ToString();
-        userInfoTexts[5].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerRunSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[2].text = (GameManager.Instance.playerData.playerCriticalPer + (GameManager.Instance.extraCriticalPer * 100)).ToString();
+        userInfoTexts[3].text = (GameManager.Instance.playerData.playerCriticalDam + GameManager.Instance.extraCriticalDamage).ToString();
+        userInfoTexts[4].text = (GameManager.Instance.playerData.playerWalkSpeed + (GameManager.Instance.playerData.playerWalkSpeed * GameManager.Instance.extraSpeed)).ToString();
+        userInfoTexts[5].text = (GameManager.Instance.playerData.playerRunSpeed + (GameManager.Instance.playerData.playerRunSpeed * GameManager.Instance.extraSpeed)).ToString();
         userInfoTexts[6].text = (GameManager.Instance.playerData.playerCrouchSpeed + (GameManager.Instance.playerData.playerCrouchSpeed * GameManager.Instance.extraSpeed)).ToString();
     }
 
@@ -106,6 +106,7 @@ public class UserInfoUI : MonoBehaviour
 
     public void NextPage()
     {
+        SoundManager.instance.PlaySE("Button_Click");
         userInfoRect.SetActive(false);
         scrollInfoRect.SetActive(false);
         nextBtn.SetActive(false);
@@ -116,6 +117,7 @@ public class UserInfoUI : MonoBehaviour
 
     public void PrevPage()
     {
+        SoundManager.instance.PlaySE("Button_Click");
         userInfoRect.SetActive(true);
         scrollInfoRect.SetActive(true);
         nextBtn.SetActive(true);

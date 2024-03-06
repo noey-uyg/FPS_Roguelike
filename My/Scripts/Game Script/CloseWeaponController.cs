@@ -37,6 +37,9 @@ public abstract class CloseWeaponController : MonoBehaviour
         yield return new WaitForSeconds(currentCloseWeapon.attackDelayA);
         isSwing = true;
 
+        if (currentCloseWeapon.isHand) SoundManager.instance.PlaySE("Hand_Swing");
+        else if (currentCloseWeapon.isAxe) SoundManager.instance.PlaySE("Axe_Swing");
+
         //공격 활성화
         StartCoroutine(HitCoroutine());
 

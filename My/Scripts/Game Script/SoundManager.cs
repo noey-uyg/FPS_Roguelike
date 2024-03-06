@@ -44,6 +44,8 @@ public class SoundManager : MonoBehaviour
         playSoundName = new string[audioSourceEffects.Length];
         effectVolume = GameManager.Instance.settingData.soundEffectVolume;
         bgmVolume = GameManager.Instance.settingData.soundBgmVolume;
+
+        PlayBGM("BGM_Main");
     }
 
     public void PlaySE(string name)
@@ -63,6 +65,20 @@ public class SoundManager : MonoBehaviour
                         return;
                     }
                 }
+                return;
+            }
+        }
+    }
+
+    public void PlayBGM(string name)
+    {
+        for (int i = 0; i < bgmSound.Length; i++)
+        {
+            if (name == bgmSound[i].name)
+            {
+                audioSourceBGM.clip = bgmSound[i].clip;
+                audioSourceBGM.volume = bgmVolume;
+                audioSourceBGM.Play();
                 return;
             }
         }

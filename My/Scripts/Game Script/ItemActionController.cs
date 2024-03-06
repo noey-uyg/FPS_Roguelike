@@ -81,7 +81,7 @@ public class ItemActionController : MonoBehaviour
             {
                 Scroll scroll = hitInfo.transform.GetComponent<Scroll>();
                 scrollNameText.text = scroll.scrollData.scrollName;
-                scrollDescText.text = string.Format(scroll.scrollData.scrollDesc, scroll.scrollData.baseDamage * 10);
+                scrollDescText.text = string.Format(scroll.scrollData.scrollDesc, scroll.scrollData.baseDamage * 100);
                 ItemInfoAppear();
             }
             if (hitInfo.transform.tag == "Shop")
