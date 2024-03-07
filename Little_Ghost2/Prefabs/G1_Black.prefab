@@ -888,11 +888,11 @@ MonoBehaviour:
   isBoss: 0
   monsterRange: 8
   monsterAdditionalRange: 5
-  attackDamage: 1
+  attackDamage: 15
   attackPoint: {fileID: 0}
-  bossAttackPoint: []
   attackCount: 0
   maxAttackDelay: 3
+  puzzleData: []
 --- !u!1 &6522192083670243270
 GameObject:
   m_ObjectHideFlags: 0

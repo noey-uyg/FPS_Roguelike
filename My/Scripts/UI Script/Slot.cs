@@ -107,7 +107,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void UpdateDescPosition()
     {
         scrollNameText.text = scroll.scrollName;
-        scrollDescText.text = string.Format(scroll.scrollDesc, scroll.baseDamage * 10);
+        scrollDescText.text = string.Format(scroll.scrollDesc, scroll.baseDamage * 100);
         if (isMouseOverSlot)
         {
             Vector3 mousePosition = Input.mousePosition;

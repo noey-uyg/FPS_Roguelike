@@ -1,9 +1,5 @@
-using NUnit.Framework.Constraints;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.Services.Analytics.Internal;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -42,11 +38,13 @@ public class Enemy : MonoBehaviour
     private float curAttackDelay = 0f;
     [SerializeField]
     private PuzzleItemData[] puzzleData;
+    private Vector3 initialPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();        
+        agent = GetComponent<NavMeshAgent>();
+        initialPosition = transform.position;
     }
 
     private void OnEnable()
@@ -76,7 +74,10 @@ public class Enemy : MonoBehaviour
 
     private void FollowTarget()
     {
-        if (!agent.isOnNavMesh) return;
+        if (!agent.isOnNavMesh)
+        {
+            ReturnToInitialPosition();
+        }
 
         if(targetPlayer != null)
         {
@@ -125,6 +126,13 @@ public class Enemy : MonoBehaviour
                 agent.isStopped = false;
             }
         }
+    }
+
+    // 초기 위치로 이동하는 함수
+    private void ReturnToInitialPosition()
+    {
+        agent.Warp(initialPosition); // 에이전트를 초기 위치로 순간 이동
+        // 다른 초기화 작업이 필요한 경우 여기에 추가
     }
 
     private void SmoothLookAt(Vector3 targetPosition)
@@ -193,7 +201,7 @@ public class Enemy : MonoBehaviour
         }
         else if (isElite)
         {
-            maxHP *= 1;
+            maxHP *= 10;
         }
         else if (isBoss)
         {

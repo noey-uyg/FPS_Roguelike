@@ -120,9 +120,10 @@ public class Collectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private void UpdateDescPosition()
     {
         puzzleNameText.text = item.puzzleName;
-        puzzleDescText.text = item.puzzleDesc;
+        puzzleDescText.text = string.Format(item.puzzleDesc, (item.damage * 100));
         usableText.text = item.isEquip ? "착용중" : "";
         haveText.text = item.isHave ? "보유" : "미보유";
+
         if (isMouseOverSlot)
         {
             Vector3 mousePosition = Input.mousePosition;

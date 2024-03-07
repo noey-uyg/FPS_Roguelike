@@ -17,9 +17,12 @@ public class EnemyAttackManager : MonoBehaviour
         SoundManager.instance.PlaySE("Enemy_Attack");
         destroyAttack = maxDestroyAttack;
     }
+
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isOpenTab || GameManager.Instance.isOpenPause) return;
+
         destroyAttack -= Time.deltaTime;
 
         AttackMove();

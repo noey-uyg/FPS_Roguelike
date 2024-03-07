@@ -40,7 +40,7 @@ public class HandController : CloseWeaponController
 
                 if (enemy != null && enemy.enemyCurrentHP > 0)
                 {
-                    GameManager.Instance.puzzleCriExtraDam();
+                    GameManager.Instance.PuzzleCriExtraDam();
                     int cri = Random.Range(0, 100);
                     int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                     float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
@@ -56,7 +56,7 @@ public class HandController : CloseWeaponController
                     {
                         CriticalNearbyEnemyAttack();
                         GameManager.Instance.isCritical = true;
-                        GameManager.Instance.puzzleCriExtraDam();
+                        GameManager.Instance.PuzzleCriExtraDam();
                         enemy.enemyCurrentHP -= (damage + (damage * cridam)) + ((damage + (damage * cridam)) * GameManager.Instance.extraFinalDamage) + GameManager.Instance.REBAddAttack(enemy, damage);
                     }
                     else

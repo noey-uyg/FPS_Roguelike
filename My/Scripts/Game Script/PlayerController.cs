@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody myRigid;
     private CapsuleCollider capsuleCollider;
-    private GunController theGunController;
     private Crosshair theCrosshair;
 
     private bool isWalk = false;
@@ -42,7 +41,6 @@ public class PlayerController : MonoBehaviour
 
         myRigid = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        theGunController = FindAnyObjectByType<GunController>();
         theCrosshair = FindAnyObjectByType<Crosshair>();
 
         currentSpeed = walkSpeed;
@@ -202,7 +200,44 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (moveHorizontal + moveVertical).normalized * FinalSpeed;
 
+        if (CheckHitWall(velocity))
+        {
+            velocity = Vector3.zero;
+            Debug.Log("충돌충돌");
+        }
+
         myRigid.MovePosition(transform.position + velocity * Time.deltaTime);
+    }
+
+    bool CheckHitWall(Vector3 movement)
+    {
+        // 움직임에 대한 로컬 벡터를 월드 벡터로 변환해준다.
+        movement = transform.TransformDirection(movement);
+        // scope로 ray 충돌을 확인할 범위를 지정할 수 있다.
+        float scope = 2.5f;
+
+        // 플레이어의 머리, 가슴, 발 총 3군데에서 ray를 쏜다.
+        List<Vector3> rayPositions = new List<Vector3>();
+        rayPositions.Add(transform.position + Vector3.up * 0.1f);
+        rayPositions.Add(transform.position + Vector3.up * capsuleCollider.height * 0.5f);
+        rayPositions.Add(transform.position + Vector3.up * capsuleCollider.height);
+        
+        // 디버깅을 위해 ray를 화면에 그린다.
+        foreach (Vector3 pos in rayPositions)
+        {
+            Debug.DrawRay(pos, movement * scope, Color.red);
+        }
+
+        // ray와 벽의 충돌을 확인한다.
+        foreach (Vector3 pos in rayPositions)
+        {
+            if (Physics.Raycast(pos, movement, out RaycastHit hit, scope))
+            {
+                if (hit.collider.CompareTag("Ground"))
+                    return true;
+            }
+        }
+        return false;
     }
 
     //움직임 체크

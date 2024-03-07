@@ -44,7 +44,7 @@ public class AxeController : CloseWeaponController
 
             if (enemy != null && enemy.enemyCurrentHP > 0)
             {
-                GameManager.Instance.puzzleCriExtraDam();
+                GameManager.Instance.PuzzleCriExtraDam();
                 int cri = Random.Range(0, 100);
                 int criPer = (int)(currentCloseWeapon.criticalPer + (GameManager.Instance.extraCriticalPer * 100));
                 float cridam = currentCloseWeapon.criticalDamage + (GameManager.Instance.extraCriticalDamage);
@@ -58,7 +58,7 @@ public class AxeController : CloseWeaponController
                 GameManager.Instance.Judge(enemy);
                 if (GameManager.Instance.axeFear)
                 {
-                    damage = damage + (damage * GameManager.Instance.axeFearDamage);
+                    damage += (damage * GameManager.Instance.axeFearDamage);
                 }
 
                 if (cri < criPer)

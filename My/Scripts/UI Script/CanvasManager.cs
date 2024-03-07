@@ -100,14 +100,8 @@ public class CanvasManager : MonoBehaviour
     {
         SoundManager.instance.PlaySE("Button_Click");
         GameManager.Instance.SavePlayerDataToJson();
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+
+        Application.Quit();
     }
 
     public void HomeBtn()

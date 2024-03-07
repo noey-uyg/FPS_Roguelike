@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -39,7 +38,7 @@ public class Shop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         texts = descRect.GetComponentsInChildren<Text>();
         shopNameText = texts[0];
         shopDescText = texts[1];
-        cost = cost - (int)(cost * GameManager.Instance.playerTraitsData.traitsDiscountShop);
+        cost -= (int)(cost * GameManager.Instance.playerTraitsData.traitsDiscountShop);
     }
 
     private void Update()

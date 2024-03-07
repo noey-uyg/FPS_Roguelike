@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
         playerData.playerCriticalPer = 5;
         playerData.playerCriticalDam = 1.5f;
         playerData.playerWalkSpeed = 8;
-        playerData.playerRunSpeed = 20;
+        playerData.playerRunSpeed = 13;
         playerData.playerCrouchSpeed = 3;
         playerData.playerJumpForce = 0;
         playerData.playerResur = 0;
@@ -508,7 +508,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Puzzle
-    public void puzzleCriExtraDam()
+    public void PuzzleCriExtraDam()
     {
         if (isCritical && puzzleCriEnemyDam)
         {
@@ -775,7 +775,7 @@ public class PlayerData
     public float playerCriticalDam = 1.5f;
     public float playerCurDamage;
     public float playerWalkSpeed = 8;
-    public float playerRunSpeed = 20;
+    public float playerRunSpeed = 13;
     public float playerCrouchSpeed = 3;
     public float playerJumpForce = 0;
     public int playerResur = 0;

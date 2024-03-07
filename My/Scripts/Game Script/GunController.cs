@@ -139,7 +139,7 @@ public class GunController : MonoBehaviour
 
                 if(enemy != null && enemy.enemyCurrentHP > 0)
                 {
-                    GameManager.Instance.puzzleCriExtraDam();
+                    GameManager.Instance.PuzzleCriExtraDam();
                     int cri = Random.Range(0, 100);
                     float damage = currentGun.damage + (currentGun.damage * GameManager.Instance.extraDamage) +(currentGun.damage * GameManager.Instance.gunExtraDamage);
                     GameManager.Instance.playerData.playerCurDamage = damage;
