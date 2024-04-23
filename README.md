@@ -65,18 +65,57 @@ https://youtu.be/2ajD1GDbEzA?si=6s5_AzwgS0cY_FeU
 </details>  
 
 # 시연영상
-<details markdown="1">
-  <summary></summary>
-  <ul>
-    <li>  
-    </li>
-    <li>기본 이동속도 : 8</li>
-    <li>달리기 속도 : 20</li>
-    <li>앉은 상태 속도 : 3</li>
-    <li>레벨업에 필요한 경험치 : [12, 19, 28, 42, 56, 63, 70, 81, 93, 109, 121, 136, 155, 166, 189, 190, 200, 201, 213, 217, 220, 228, 231, 233, 235, 236, 245, 251, 274, 288, 297, 324, 356, 378, 403, 456, 484, 499, 518, 553]</li>
-    <li>기본 치명타 데미지는 무기 기본 데미지의 150%입니다.</li>
-  </ul>
-</details>
+### 특성 스킬트리
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/d66eda72-6dfb-4a41-89fe-178e3a6ccbbb"/>     
+
+- ScriptableObject로 특성 데이터 구성
+- 전의 특성을 배열로 저장하여 전의 모든 특성이 레벨업이 모두 완료되어야 레벨업 가능
+
+### 퍼즐 인벤토리
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/95e46c8b-5417-4916-a66b-2eef6ed6827f"/>     
+
+- Grid를 생성하여 그리드의 최대 크기와 한 슬롯의 셀 크기를 지정하여 인벤토리 생성
+- 착용시 아이템 크기를 체크하여 인벤토리에 장착할 수 있는지 체크
+- 착용하여 활성화된 퍼즐은 플레이어 데이터 수치 값 적용
+- 드래그 앤 드랍 적용
+
+### 설정
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/c719b329-ba2d-41d0-831e-72e3986610a7"/>     
+
+- 배경음, 효과음, 마우스 민감도 해상도 조절 가능
+- [배경음,효과음] InputText의 Value값을 AudioSource의 volume값에 저장하여 조절
+- [마우스 민감도] InputText의 Value값을 마우스를 통한 카메라 회전 시 곱해주는 값에 저장
+
+### 무기의 공격
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/94707474-1c4e-40c2-aee1-17928a8d0950"/>     
+
+- 주먹과 도끼는 공격 패턴이 비슷해 CloseWeaponController.cs 클래스에 공용으로 묶어 상속받아 사용
+- 총을 쏠 때 RayCast를 쏘아 적의 피격여부 판별
+
+### 상점
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/0e5402b9-880f-4a8a-82b2-b981b35a2155"/>   
+
+- 클릭 시 해당하는 아이템의 ID를 가져와서 구매처리
+- 스크롤과 각성 구매 시 가지고 있지 않은 랜덤한 아이템이 구매되도록 처리
+
+### 사용자 정보창
+<img width="50%" src="https://github.com/noey-uyg/FPS_Roguelike/assets/105009308/54d99f01-5dbd-4176-ac91-302727cae59a"/>    
+
+- 현재 가지고 있는 스크롤과 각성을 확인할 수 있도록 구현
+
+### 전체 시연영상
+[![Video Label](http://img.youtube.com/vi/mkPjvURYMHk/0.jpg)](https://youtu.be/mkPjvURYMHk)
+
+### 다양한 무기 전용 각성
+- 주먹 – 파동공격 : OverlapSphere를 통해 뒤에 있는 적을 판별하고 데미지 입힘
+- 도끼 – 출혈공격 : 피격즉시 Coroutine을 통해 초당 일정한 데미지 부여
+- 총 – 연쇄번개 : 공격 시 OverlapSphere를 통해 주위의 적 판별하고 이어질 번개 개수만큼 연쇄공격 부여
+
+### 보스 패턴
+- 2가지 보스 패턴 존재
+- 1.일반 몬스터의 공격이 플레이어 주위로 무작위 생성되어 폭격
+- 2.플레이어의 발 밑으로 5초 뒤 터지는 폭탄 생성
+---
 
 # 플레이어
 <details markdown="1">
